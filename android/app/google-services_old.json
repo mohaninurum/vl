@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634661164827",
+    "project_id": "visual-learning-b1abf",
+    "storage_bucket": "visual-learning-b1abf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634661164827:android:bd9f5290361c249280a5be",
+        "android_client_info": {
+          "package_name": "com.example.visual_learning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVRH-GmHe5UAGoeDKlXIOLg7CbGxZJ2ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

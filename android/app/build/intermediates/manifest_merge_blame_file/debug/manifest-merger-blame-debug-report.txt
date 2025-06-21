@@ -1,0 +1,326 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.visual_learning"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="35" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:2:5-66
+15-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:2:22-64
+16    <!--
+17     Required to query activities that can process text, see:
+18         https://developer.android.com/training/package-visibility and
+19         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+20
+21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+22    -->
+23    <queries>
+23-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:40:5-45:15
+24        <intent>
+24-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:41:9-44:18
+25            <action android:name="android.intent.action.PROCESS_TEXT" />
+25-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:42:13-72
+25-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:42:21-70
+26
+27            <data android:mimeType="text/plain" />
+27-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:43:13-50
+27-->D:\InurumFlutter\visual_learning\visual_learning\visual_learning\android\app\src\main\AndroidManifest.xml:43:19-48
+28        </intent>
+29        <intent>
+29-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-10:18
+30            <action android:name="android.support.customtabs.action.CustomTabsService" />
+30-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-90
+30-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:21-87
+31        </intent>
+32    </queries>
+33
+34    <permission
+34-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+35        android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+35-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+36        android:protectionLevel="signature" />
+36-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+37
+38    <uses-permission android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+38-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+38-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+39
+40    <application
+41        android:name="android.app.Application"
+42        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+42-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+43        android:debuggable="true"
+44        android:extractNativeLibs="false"
+45        android:icon="@mipmap/ic_launcher"
+46        android:label="visual_learning" >
+47        <activity
+48            android:name="com.example.visual_learning.MainActivity"
+49            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+50            android:exported="true"
+51            android:hardwareAccelerated="true"
+52            android:launchMode="singleTop"
+53            android:taskAffinity=""
+54            android:theme="@style/LaunchTheme"
+55            android:windowSoftInputMode="adjustResize" >
+56
+57            <!--
+58                 Specifies an Android theme to apply to this Activity as soon as
+59                 the Android process has started. This theme is visible to the user
+60                 while the Flutter UI initializes. After that, this theme continues
+61                 to determine the Window background behind the Flutter UI.
+62            -->
+63            <meta-data
+64                android:name="io.flutter.embedding.android.NormalTheme"
+65                android:resource="@style/NormalTheme" />
+66
+67            <intent-filter>
+68                <action android:name="android.intent.action.MAIN" />
+69
+70                <category android:name="android.intent.category.LAUNCHER" />
+71            </intent-filter>
+72        </activity>
+73        <!--
+74             Don't delete the meta-data below.
+75             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+76        -->
+77        <meta-data
+78            android:name="flutterEmbedding"
+79            android:value="2" />
+80
+81        <activity
+81-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-18:47
+82            android:name="com.pichillilorenzo.flutter_inappwebview_android.in_app_browser.InAppBrowserActivity"
+82-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-112
+83            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+83-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-137
+84            android:exported="false"
+84-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-37
+85            android:theme="@style/AppTheme" />
+85-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-44
+86        <activity
+86-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-22:55
+87            android:name="com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ChromeCustomTabsActivity"
+87-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-120
+88            android:exported="false"
+88-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+89            android:theme="@style/ThemeTransparent" />
+89-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-52
+90        <activity
+90-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-26:55
+91            android:name="com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.TrustedWebActivity"
+91-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-114
+92            android:exported="false"
+92-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-37
+93            android:theme="@style/ThemeTransparent" />
+93-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-52
+94        <activity
+94-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:9-31:55
+95            android:name="com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance"
+95-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-134
+96            android:exported="false"
+96-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-37
+97            android:launchMode="singleInstance"
+97-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-48
+98            android:theme="@style/ThemeTransparent" />
+98-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-52
+99        <activity
+99-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:9-36:55
+100            android:name="com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.TrustedWebActivitySingleInstance"
+100-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-128
+101            android:exported="false"
+101-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-37
+102            android:launchMode="singleInstance"
+102-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-48
+103            android:theme="@style/ThemeTransparent" />
+103-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-52
+104
+105        <receiver
+105-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:9-41:40
+106            android:name="com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ActionBroadcastReceiver"
+106-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:13-119
+107            android:enabled="true"
+107-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-35
+108            android:exported="false" />
+108-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:13-37
+109
+110        <meta-data
+110-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:43:9-45:36
+111            android:name="io.flutter.embedded_views_preview"
+111-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-61
+112            android:value="true" />
+112-->[:flutter_inappwebview_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:45:13-33
+113
+114        <activity
+114-->[:url_launcher_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.16\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-11:74
+115            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+115-->[:url_launcher_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.16\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-74
+116            android:exported="false"
+116-->[:url_launcher_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.16\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-37
+117            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+117-->[:url_launcher_android] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.16\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-71
+118
+119        <service
+119-->[:firebase_core] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.14.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-12:19
+120            android:name="com.google.firebase.components.ComponentDiscoveryService"
+120-->[:firebase_core] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.14.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:18-89
+121            android:directBootAware="true"
+121-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+122            android:exported="false" >
+122-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:33:13-37
+123            <meta-data
+123-->[:firebase_core] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.14.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+124                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+124-->[:firebase_core] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.14.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
+125                android:value="com.google.firebase.components.ComponentRegistrar" />
+125-->[:firebase_core] C:\Users\Inurum_Four\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.14.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+126            <meta-data
+126-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+127                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+127-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+128                android:value="com.google.firebase.components.ComponentRegistrar" />
+128-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+129        </service>
+130
+131        <uses-library
+131-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+132            android:name="androidx.window.extensions"
+132-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+133            android:required="false" />
+133-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+134        <uses-library
+134-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+135            android:name="androidx.window.sidecar"
+135-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+136            android:required="false" />
+136-->[androidx.window:window:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\e36b1c6bc630e4bb58fa68ebbe0a6f8f\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+137
+138        <provider
+138-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+139            android:name="androidx.startup.InitializationProvider"
+139-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+140            android:authorities="com.example.visual_learning.androidx-startup"
+140-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+141            android:exported="false" >
+141-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+142            <meta-data
+142-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+143                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+143-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+144                android:value="androidx.startup" />
+144-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+145            <meta-data
+145-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\76b689ada717b0a31f9c14488ea4debe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+146                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+146-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\76b689ada717b0a31f9c14488ea4debe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+147                android:value="androidx.startup" />
+147-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\76b689ada717b0a31f9c14488ea4debe\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+148            <meta-data
+148-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+149                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+149-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+150                android:value="androidx.startup" />
+150-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+151        </provider>
+152
+153        <activity
+153-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:23:9-27:75
+154            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+154-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:24:13-93
+155            android:excludeFromRecents="true"
+155-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:25:13-46
+156            android:exported="false"
+156-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:26:13-37
+157            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+157-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:27:13-72
+158        <!--
+159            Service handling Google Sign-In user revocation. For apps that do not integrate with
+160            Google Sign-In, this service will never be started.
+161        -->
+162        <service
+162-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:33:9-37:51
+163            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+163-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:34:13-89
+164            android:exported="true"
+164-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:35:13-36
+165            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+165-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:36:13-107
+166            android:visibleToInstantApps="true" />
+166-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\16ef9f3f60775c19ac7e41a339deb9ac\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:37:13-48
+167
+168        <activity
+168-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\f7a472388ae587605b18330cc5730c28\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+169            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+169-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\f7a472388ae587605b18330cc5730c28\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+170            android:exported="false"
+170-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\f7a472388ae587605b18330cc5730c28\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+171            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+171-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\f7a472388ae587605b18330cc5730c28\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+172
+173        <provider
+173-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+174            android:name="com.google.firebase.provider.FirebaseInitProvider"
+174-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+175            android:authorities="com.example.visual_learning.firebaseinitprovider"
+175-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+176            android:directBootAware="true"
+176-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+177            android:exported="false"
+177-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+178            android:initOrder="100" />
+178-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+179
+180        <meta-data
+180-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\0c54f620ed2a43aa5cb32b5fb0d7b81f\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+181            android:name="com.google.android.gms.version"
+181-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\0c54f620ed2a43aa5cb32b5fb0d7b81f\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+182            android:value="@integer/google_play_services_version" />
+182-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\0c54f620ed2a43aa5cb32b5fb0d7b81f\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+183
+184        <receiver
+184-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+185            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+185-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+186            android:directBootAware="false"
+186-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+187            android:enabled="true"
+187-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+188            android:exported="true"
+188-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+189            android:permission="android.permission.DUMP" >
+189-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+190            <intent-filter>
+190-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+191                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+191-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+191-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+192            </intent-filter>
+193            <intent-filter>
+193-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+194                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+194-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+194-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+195            </intent-filter>
+196            <intent-filter>
+196-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+197                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+197-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+197-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+198            </intent-filter>
+199            <intent-filter>
+199-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+200                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+200-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+200-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\06632c19ad1f9059cac45f3a590c0e23\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+201            </intent-filter>
+202        </receiver>
+203    </application>
+204
+205</manifest>

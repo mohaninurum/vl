@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "634661164827",
+    "project_id": "visual-learning-b1abf",
+    "storage_bucket": "visual-learning-b1abf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634661164827:android:bd9f5290361c249280a5be",
+        "android_client_info": {
+          "package_name": "com.example.visual_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634661164827-dulf10soiskhv581q89621li84rolsv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.visual_learning",
+            "certificate_hash": "62b71f7c43a94290ad8e4cfd777bcf9ca8cb3a1a"
+          }
+        },
+        {
+          "client_id": "634661164827-5vs1nfllifngmepsrch2e3mfhavi3ibb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVRH-GmHe5UAGoeDKlXIOLg7CbGxZJ2ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634661164827-5vs1nfllifngmepsrch2e3mfhavi3ibb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "634661164827-fsdob3fifvk9vvb4e5q33tn1hmnq64hf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.visualLearning"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

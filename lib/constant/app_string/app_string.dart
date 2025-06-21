@@ -1,0 +1,31 @@
+class AppString {
+  static const appName = 'Visual Learning';
+  static const revolutionizedText = 'Revolutionized learning app';
+  static const enterYourEMailText = 'Enter your e-mail';
+  static const enterMobileNumberText = 'Enter mobile number';
+  static const passwordText = 'Password';
+  static const confirmPasswordText = 'Confirm Password';
+  static const loginText = 'Login';
+  static const fullNameText = 'Full Name';
+  static const loginWithGoogleText = 'Login with google';
+  static const forgotPasswordText = 'Forgot password?';
+  static const resetPasswordText = 'Reset Password';
+  static const donHaveAnAccountText = "Don't have an account?";
+  static const signUpText = "SignUp";
+  static const signInText = "SignIn";
+  static const goToLoginText = "Go to login";
+  static const haveAccountAlready = "Have account already?";
+  static const welcomeToText = "Welcome to";
+  static const exploreCategoriesText = "Explore Categories";
+  static const visualLearningText = "Visual Learning";
+  static const bannerLeartTodayText = "What would you like to learn today?";
+  static const animationText = "Animation";
+  static const videoAllClassesText = "Videos for all classes";
+  static const animatedVideoText = "Animated Videos";
+  static const chooseClassesText = "Choose Classes";
+  static const chooseChapterText = "Choose Chapter";
+  static const AllContentText = "All Content";
+  static const descriptionText = "Description";
+  static const referralCodeText = " Referral Code";
+  static const quetionForPracticeText = "Multiple choice quetion for practice";
+}

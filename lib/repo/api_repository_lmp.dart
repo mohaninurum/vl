@@ -1,0 +1,48 @@
+import 'package:http/http.dart' as http;
+import 'package:visual_learning/constant/api_url/ApiUrls.dart';
+
+import 'api_repository.dart';
+import 'api_service.dart';
+
+class ApiRepositoryImpl implements ApiRepository {
+  final http.Client _client;
+  final String _baseUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+
+  ApiRepositoryImpl({http.Client? client}) : _client = client ?? http.Client();
+
+  @override
+  Future<Map<String, dynamic>> login({body}) {
+    final response = ApiService().post(ApiUrls.loginUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> googleLogin({body}) {
+    final response = ApiService().post(ApiUrls.googleLoginUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> forgotPassword({body}) {
+    final response = ApiService().post(ApiUrls.forgotPasswordUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> signUp({body}) {
+    final response = ApiService().post(ApiUrls.registerUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getCategory({body}) {
+    final response = ApiService().get(ApiUrls.categoryUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getClassListByCategory({id, body}) {
+    final response = ApiService().get("${ApiUrls.classListBycategoryUrl}$id", body);
+    return response;
+  }
+}

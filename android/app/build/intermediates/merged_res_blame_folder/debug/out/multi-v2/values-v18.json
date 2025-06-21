@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.visual_learning.app-mergeDebugResources-38:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Inurum_Four\\.gradle\\caches\\transforms-3\\0760c996c09c4a53c7de87b8d3868809\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}
