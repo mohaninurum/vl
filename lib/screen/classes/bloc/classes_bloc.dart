@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repo/api_repository_lmp.dart';
 import '../../auth/login_screen/blocs/login_bloc.dart';
+import '../models/class_list_model.dart';
 import 'classes_event.dart';
 import 'classes_state.dart';
 
@@ -12,12 +13,13 @@ class ClassListBloc extends Bloc<ClassListEvent, ClassListState> {
   ClassListBloc() : super(InitailClassList()) {
     on<LoadClassList>((event, emit) async {
       try {
-        emit(LoadedClassList());
+        print("load class");
+        emit(IsLoadingClassList());
         Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};
         final loginresponce = await ApiRepositoryImpl().getClassListByCategory(body: body, id: event.id);
         if (loginresponce["status"] == true) {
-          // CategoryResponseModel loginResponse = CategoryResponseModel.fromJson(loginresponce);
-          // emit(LoadedClassList(categoryResponseModel: loginResponse));
+          ClassListResponse loginResponse = ClassListResponse.fromJson(loginresponce);
+          emit(LoadedClassList(classListResponse: loginResponse));
         } else {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
           emit(FailClassList());

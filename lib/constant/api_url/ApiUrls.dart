@@ -5,5 +5,6 @@ class ApiUrls {
   static const String registerUrl = '${baseUrl}users/register';
   static const String forgotPasswordUrl = '${baseUrl}users/forgot-password';
   static const String categoryUrl = '${baseUrl}category';
-  static const String classListBycategoryUrl = '$baseUrl/class/';
+  static const String classListBycategoryUrl = '${baseUrl}class/';
+  static const String classDetailUrl = '${baseUrl}class/class-detail/';
 }

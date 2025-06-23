@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/constant/app_colors/app_colors.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 
+import '../about/about_screen.dart';
 import '../auth/login_screen/blocs/login_event.dart';
 import '../contact/contact_screen/contact_screen.dart';
 import '../feedback/feedback_screen/feedback_screen.dart';
+import '../language/Language_sheet_screen.dart';
 import '../profile/blocs/logout/logout_bloc.dart';
 import '../profile/profile_screen/profile_screen.dart';
 import '../profile/widgets/logout_dailog.dart';
@@ -14,6 +16,9 @@ import '../subcriptions/subcriptions_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   AppDrawer();
+  String toClassName(String input) {
+    return input.split(RegExp(r'[_\s]+')).map((word) => word[0].toUpperCase() + word.substring(1)).join();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,7 @@ class AppDrawer extends StatelessWidget {
                   'https://i.pravatar.cc/300', // Replace with user profile image URL
                 ),
               ),
-              title: Text("$username", style: TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(toClassName(username), style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('$email', overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.grey)),
               trailing: Icon(Icons.arrow_forward_ios, size: height * 0.019),
               onTap: () {
@@ -72,6 +77,7 @@ class AppDrawer extends StatelessWidget {
               title: Text('Language', style: TextStyle(fontWeight: FontWeight.normal)),
               onTap: () {
                 Navigator.pop(context);
+                showLanguageBottomSheet(context);
                 // Navigate to profile screen
               },
               trailing: Text("English", style: TextStyle(color: Colors.grey)),
@@ -104,6 +110,8 @@ class AppDrawer extends StatelessWidget {
               title: Text('About us', style: TextStyle(fontWeight: FontWeight.normal)),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsScreen()));
+
                 // Navigate to support screen
               },
             ),

@@ -5,13 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/all_content/block/all_content_bloc.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 import 'package:visual_learning/screen/auth/singup_screen/blocs/signup_bloc.dart';
+import 'package:visual_learning/screen/chapter/blocs/chapter_bloc.dart';
 import 'package:visual_learning/screen/chapter/blocs/subjecttab_bloc.dart';
+import 'package:visual_learning/screen/classes/bloc/classes_bloc.dart';
 import 'package:visual_learning/screen/contact/blocs/contact_bloc.dart';
 import 'package:visual_learning/screen/drawer/blocs/drawer_logout/drawer_logout_bloc.dart';
 import 'package:visual_learning/screen/feedback/blocs/feedback_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/BottomNav/bottom_nav_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_bloc.dart';
+import 'package:visual_learning/screen/language/blocs/language_bloc.dart';
 import 'package:visual_learning/screen/notes/blocs/notes_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/logout/logout_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/profile_bloc.dart';
@@ -29,7 +32,28 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => ShareBloc()), BlocProvider(create: (_) => SubscriptionBloc()), BlocProvider(create: (_) => DrawerLogoutBloc()), BlocProvider(create: (_) => LoginBloc()), BlocProvider(create: (_) => ProfileBloc()), BlocProvider(create: (_) => ChapterContentBloc()), BlocProvider(create: (_) => LogoutBloc()), BlocProvider(create: (_) => ContactBloc()), BlocProvider(create: (_) => TestPaperBloc()), BlocProvider(create: (_) => FeedbackBloc()), BlocProvider(create: (_) => NotesBloc()), BlocProvider(create: (_) => QuizBloc()), BlocProvider(create: (_) => SubjectTabBloc()), BlocProvider(create: (_) => BottomNavBloc()), BlocProvider(create: (_) => CategorySelectedBloc()), BlocProvider(create: (_) => CategoryBloc()), BlocProvider(create: (_) => SignUpBloc())],
+      providers: [
+        BlocProvider(create: (_) => ClassListBloc()),
+        BlocProvider(create: (_) => ShareBloc()),
+        BlocProvider(create: (_) => SubscriptionBloc()),
+        BlocProvider(create: (_) => DrawerLogoutBloc()),
+        BlocProvider(create: (_) => LoginBloc()),
+        BlocProvider(create: (_) => ProfileBloc()),
+        BlocProvider(create: (_) => ChapterContentBloc()),
+        BlocProvider(create: (_) => LogoutBloc()),
+        BlocProvider(create: (_) => ContactBloc()),
+        BlocProvider(create: (_) => TestPaperBloc()),
+        BlocProvider(create: (_) => FeedbackBloc()),
+        BlocProvider(create: (_) => NotesBloc()),
+        BlocProvider(create: (_) => QuizBloc()),
+        BlocProvider(create: (_) => SubjectTabBloc()),
+        BlocProvider(create: (_) => BottomNavBloc()),
+        BlocProvider(create: (_) => CategorySelectedBloc()),
+        BlocProvider(create: (_) => CategoryBloc()),
+        BlocProvider(create: (_) => SignUpBloc()),
+        BlocProvider(create: (_) => ChapterListBloc()),
+        BlocProvider(create: (_) => LanguageBloc()),
+      ],
       child: MyApp(),
     ),
   );

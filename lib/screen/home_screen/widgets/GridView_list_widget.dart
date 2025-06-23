@@ -22,8 +22,8 @@ class GridviewListWidget extends StatelessWidget {
     return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state is CategoryInitial) {
-          return Center(child: Text("Data Not Load"));
-          // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+          return Center(child: Text("No categories"));
+          //  return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
         }
         if (state is IsLoadingCategory) {
           return Center(child: CircularProgressIndicator());

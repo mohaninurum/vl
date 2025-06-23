@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 
-import '../auth/login_screen/blocs/login_event.dart';
 import '../auth/login_screen/login_screen.dart';
-import '../home_screen/home_screen/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -28,32 +26,34 @@ class _SplashScreenState extends State<SplashScreen> {
     print("google current user:-$currentUser");
     final loginBloc = BlocProvider.of<LoginBloc>(context);
     // loginBloc.add(GoogleLogOutEvent(context));
-
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) {
-        print('User is signed in!');
-        print("User Name:-${user.displayName}");
-        print("User Email:-${user.email}");
-        print("User providerID:-${user.providerData[0].providerId}");
-        loginBloc.add(GoogleIsLoginEvent(context: context, displayName: "${user.displayName}", email: "${user.email}", providerId: user.providerData[0].providerId, signInMethod: user.providerData[0].providerId));
-
-        Timer(const Duration(seconds: 4), () {
-          if (loginBloc.isLogin) {
-            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
-          }
-        });
-      } else {
-        print('User is signed out!');
-        loginBloc.isLogin = false;
-        Timer(const Duration(seconds: 4), () {
-          if (loginBloc.isLogin) {
-            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
-          } else {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-          }
-        });
-      }
+    Timer(const Duration(seconds: 4), () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
     });
+    // FirebaseAuth.instance.authStateChanges().listen((user) {
+    //   if (user != null) {
+    //     print('User is signed in!');
+    //     print("User Name:-${user.displayName}");
+    //     print("User Email:-${user.email}");
+    //     print("User providerID:-${user.providerData[0].providerId}");
+    //     loginBloc.add(GoogleIsLoginEvent(context: context, displayName: "${user.displayName}", email: "${user.email}", providerId: user.providerData[0].providerId, signInMethod: user.providerData[0].providerId));
+    //
+    //     Timer(const Duration(seconds: 4), () {
+    //       if (loginBloc.isLogin) {
+    //         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+    //       }
+    //     });
+    //   } else {
+    //     print('User is signed out!');
+    //     loginBloc.isLogin = false;
+    //     Timer(const Duration(seconds: 4), () {
+    //       if (loginBloc.isLogin) {
+    //         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+    //       } else {
+    //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   @override

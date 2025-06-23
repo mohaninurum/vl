@@ -45,4 +45,10 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().get("${ApiUrls.classListBycategoryUrl}$id", body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> getClassDetail({id, body}) {
+    final response = ApiService().get("${ApiUrls.classDetailUrl}$id", body);
+    return response;
+  }
 }

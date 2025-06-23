@@ -151,7 +151,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
           listener: (context, state) {
             print(state.selectedCategory);
             if (state.selectedCategory == "1") {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "1")));
             }
           },
           child: Expanded(

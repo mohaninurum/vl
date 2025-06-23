@@ -27,6 +27,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
+  String toClassName(String input) {
+    return input.split(RegExp(r'[_\s]+')).map((word) => word[0].toUpperCase() + word.substring(1)).join();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildProfileCard(Size size, ProfileState state) {
     final username = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? 'Test User';
     final email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? 'Test@gmail.com';
-    return Container(width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 24), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)]), child: Column(children: [Container(decoration: BoxDecoration(border: Border.all(width: 4, color: AppColors.pramarycolor), borderRadius: BorderRadius.circular(50)), child: CircleAvatar(radius: size.width * 0.06, backgroundColor: Colors.purple.shade50, child: const Icon(Icons.person_pin, size: 40, color: AppColors.pramarycolor))), const SizedBox(height: 10), Text(username, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), Text(email, style: const TextStyle(color: Colors.grey))]));
+    return Container(width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 24), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)]), child: Column(children: [Container(decoration: BoxDecoration(border: Border.all(width: 4, color: AppColors.pramarycolor), borderRadius: BorderRadius.circular(50)), child: CircleAvatar(radius: size.width * 0.06, backgroundColor: Colors.purple.shade50, child: const Icon(Icons.person_pin, size: 40, color: AppColors.pramarycolor))), const SizedBox(height: 10), Text(toClassName(username), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), Text(email, style: const TextStyle(color: Colors.grey))]));
   }
 
   Widget _buildSubscriptionCard(Size size, ProfileState state) {

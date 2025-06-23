@@ -20,13 +20,16 @@ import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_categ
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../chapter/chapter_screen/chapter_screen.dart';
-import '../../home_screen/widgets/GridView_list_widget.dart';
+import '../../home_screen/blocs/CategorySelected/_category_selected_event.dart';
 import '../../home_screen/widgets/banner_widget.dart';
+import '../../home_screen/widgets/category_item_widget.dart';
 import '../../widgets/appBarWidget.dart';
+import '../bloc/classes_event.dart';
 
 class ClassesScreen extends StatefulWidget {
   final String selectClassesName;
-  const ClassesScreen({required this.selectClassesName, super.key});
+  final id;
+  const ClassesScreen({required this.id, required this.selectClassesName, super.key});
 
   @override
   State<ClassesScreen> createState() => _ClassesScreenState();
@@ -39,6 +42,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) return; // Ignore during animation
 
@@ -47,10 +51,15 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
       language = selectedTabLabel;
       // 🟣 You can now call BLoC, setState, or print
       print("Selected tab: $selectedTabLabel");
-
+      if (selectedTabLabel == "English") {
+        print("tab english");
+        context.read<ClassListBloc>().add(LoadClassList(id: widget.id, context: context));
+      } else {
+        context.read<ClassListBloc>().add(LoadClassList(id: widget.id, context: context));
+      }
       // Example: Call BLoC Event
-      // context.read<MyBloc>().add(TabChangedEvent(language: selectedTabLabel));
     });
+    context.read<ClassListBloc>().add(LoadClassList(id: widget.id, context: context));
     super.initState();
   }
 
@@ -63,7 +72,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-
+    final crossAxisCount = media.width > 600 ? 4 : 2;
     return Scaffold(
       appBar: AppBarWidget(),
       backgroundColor: const Color(0xFFF2F5FA),
@@ -85,7 +94,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
               // TabBarView for GridView content
               BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterScreen(selectClassName: state.selectedCategory, language: language)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterScreen(selectClassName: state.selectedCategory, language: language, id: widget.id)));
                 },
                 child: SizedBox(
                   height: media.height * 0.6, // Adjust based on your grid height
@@ -102,24 +111,57 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                             return Center(child: CircularProgressIndicator());
                           }
                           if (state is LoadedClassList) {
-                            return SizedBox();
-                            // return state.categoryResponseModel.categories.isNotEmpty
-                            // ? GridView.builder(
-                            // itemCount: state.categoryResponseModel.categories.length,
-                            // shrinkWrap: true,
-                            // physics: const NeverScrollableScrollPhysics(),
-                            // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            // crossAxisCount: crossAxisCount, // number of columns
-                            // mainAxisSpacing: 16,
-                            // crossAxisSpacing: 16,
-                            // childAspectRatio: 1, // adjust height/width ratio
-                            // ),
-                            // itemBuilder: (context, index) {
-                            // final item = state.categoryResponseModel.categories[index];
-                            // return CategoryItem(language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(item.categoryName)));
-                            // },
-                            // )
-                            //     : Center(child: Text("No Record"));
+                            return state.classListResponse!.data.isNotEmpty
+                                ? GridView.builder(
+                                  itemCount: state.classListResponse?.data.length,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: crossAxisCount, // number of columns
+                                    mainAxisSpacing: 16,
+                                    crossAxisSpacing: 16,
+                                    childAspectRatio: 1, // adjust height/width ratio
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    final item = state.classListResponse?.data[index];
+                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected("${item?.className}th" ?? '')));
+                                  },
+                                )
+                                : Center(child: Text("No Record"));
+                          }
+                          if (state is FailClassList) {
+                            return Center(child: Text("Data Not Load"));
+                          }
+                          return SizedBox();
+                        },
+                      ),
+                      BlocBuilder<ClassListBloc, ClassListState>(
+                        builder: (context, state) {
+                          if (state is InitailClassList) {
+                            return Center(child: Text("Data Not Load"));
+                            // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+                          }
+                          if (state is IsLoadingClassList) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          if (state is LoadedClassList) {
+                            return state.classListResponse!.data.isNotEmpty
+                                ? GridView.builder(
+                                  itemCount: state.classListResponse?.data.length,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: crossAxisCount, // number of columns
+                                    mainAxisSpacing: 16,
+                                    crossAxisSpacing: 16,
+                                    childAspectRatio: 1, // adjust height/width ratio
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    final item = state.classListResponse?.data[index];
+                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected("${item?.className}th" ?? '')));
+                                  },
+                                )
+                                : Center(child: Text("No Record"));
                           }
                           if (state is FailClassList) {
                             return Center(child: Text("Data Not Load"));
@@ -128,7 +170,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                         },
                       ),
                       // GridviewListWidget(language: 'English', screenName: "Classes_English"), //
-                      GridviewListWidget(language: 'Hindi', screenName: "Classes_Hindi"), //
+                      // GridviewListWidget(language: 'Hindi', screenName: "Classes_Hindi"), //
                     ],
                   ),
                 ),

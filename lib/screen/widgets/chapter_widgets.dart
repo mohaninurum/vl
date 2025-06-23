@@ -20,8 +20,6 @@ import '../../constant/app_string/app_string.dart';
 import '../../constant/app_text_colors/app_text_colors.dart';
 import '../chapter/blocs/subjecttab_bloc.dart';
 import '../chapter/blocs/subjecttab_event.dart';
-import '../chapter/blocs/subjecttab_state.dart';
-import '../chapter/widgets/chapter_list_widget.dart';
 import '../classes/classes_screen/classes_screen.dart';
 
 class ChapterWidgets extends StatefulWidget {
@@ -97,28 +95,28 @@ class _ClassesScreenState extends State<ChapterWidgets> with SingleTickerProvide
             listener: (context, state) {
               print(state.selectedCategory);
               if (state.selectedCategory == "1") {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "1")));
               }
             },
             child: Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  BlocBuilder<SubjectTabBloc, SubjectTabState>(
-                    builder: (context, state) {
-                      return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
-                    },
-                  ),
-                  BlocBuilder<SubjectTabBloc, SubjectTabState>(
-                    builder: (context, state) {
-                      return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
-                    },
-                  ),
-                  BlocBuilder<SubjectTabBloc, SubjectTabState>(
-                    builder: (context, state) {
-                      return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
-                    },
-                  ),
+                  // BlocBuilder<SubjectTabBloc, SubjectTabState>(
+                  //   builder: (context, state) {
+                  //     return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
+                  //   },
+                  // ),
+                  // BlocBuilder<SubjectTabBloc, SubjectTabState>(
+                  //   builder: (context, state) {
+                  //     return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
+                  //   },
+                  // ),
+                  // BlocBuilder<SubjectTabBloc, SubjectTabState>(
+                  //   builder: (context, state) {
+                  //     return ChapterListWidget(chapterAll: state.chapters, language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
+                  //   },
+                  // ),
                 ],
               ),
             ),

@@ -29,7 +29,7 @@ class _MainScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // context.read<CategoryBloc>().add(LoadCategory(context));
+    context.read<CategoryBloc>().add(LoadCategory(context));
     super.initState();
   }
 
