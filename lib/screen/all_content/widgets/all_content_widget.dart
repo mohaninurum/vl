@@ -19,10 +19,10 @@ import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_categ
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
+import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../chapter/blocs/subjecttab_bloc.dart';
 import '../../chapter/blocs/subjecttab_event.dart';
 import '../../chapter/blocs/subjecttab_state.dart';
-import '../../classes/classes_screen/classes_screen.dart';
 import '../../notes_content/notes_content_screen/notes_content_screen.dart';
 import '../../quiz/quiz_screen/quize_screen.dart';
 import '../../test_content/test_content_screen/test_content_screen.dart';
@@ -36,8 +36,8 @@ class AllContentWidget extends StatefulWidget {
   final String selectClassesName;
   final String language;
   final String selectChapterName;
-
-  const AllContentWidget({required this.language, required this.selectClassesName, super.key, required this.selectChapterName});
+  final String id;
+  const AllContentWidget({required this.id, required this.language, required this.selectClassesName, super.key, required this.selectChapterName});
 
   @override
   State<AllContentWidget> createState() => _ClassesScreenState();
@@ -49,9 +49,17 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
   String language = 'English';
   @override
   void initState() {
+    super.initState();
+
     _tabController = TabController(length: 4, vsync: this);
     language = widget.language;
-    super.initState();
+
+    // Correct usage
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString();
+      final bloc = context.read<ChapterContentBloc>();
+      bloc.add(LoadChaptersContent(token: token, id: widget.id, context: context));
+    });
   }
 
   @override
@@ -150,43 +158,48 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
         BlocListener<CategorySelectedBloc, CategorySelectedState>(
           listener: (context, state) {
             print(state.selectedCategory);
-            if (state.selectedCategory == "1") {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "1")));
-            }
+            // if (state.selectedCategory == "1") {
+            //   Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "1")));
+            // }
           },
           child: Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
-                BlocProvider(
-                  create: (_) => ChapterContentBloc()..add(LoadChaptersContent()),
-                  child: BlocBuilder<ChapterContentBloc, ChapterContentState>(
-                    builder: (context, state) {
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state?.chapters.length,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) {
-                                final item = state.chapters[index];
-                                final gradeLang = state.isEnglishSelected ? item.gradeLangEn : item.gradeLangHi;
-                                return ChapterItemCard(
-                                  item: item,
-                                  onTap: () {
-                                    context.read<ChapterContentBloc>().add(ChapterTapped(item!));
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: "https://www.youtube.com/watch?v=nqye02H_H6I", language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}')));
-                                  },
-                                  gradeLang: "${widget.selectClassesName} $language",
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                BlocBuilder<ChapterContentBloc, ChapterContentState>(
+                  builder: (context, state) {
+                    print("video..list${state.chapters}");
+                    print("video..list${state.isLoading}");
+                    if (state.isLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    return Column(
+                      children: [
+                        state.chapters.isNotEmpty
+                            ? Expanded(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: state.chapters.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  final item = state.chapters[index];
+                                  final gradeLang = state.isEnglishSelected ? item.gradeLangEn : item.gradeLangHi;
+                                  return ChapterItemCard(
+                                    selectChapterName: widget.selectChapterName,
+                                    item: item,
+                                    onTap: () {
+                                      context.read<ChapterContentBloc>().add(ChapterTapped(item!));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl, language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                    },
+                                    gradeLang: "${widget.selectClassesName} $language",
+                                  );
+                                },
+                              ),
+                            )
+                            : Center(child: Text("No Record")),
+                      ],
+                    );
+                  },
                 ),
                 // BlocBuilder<SubjectTabBloc, SubjectTabState>(
                 //   builder: (context, state) {
@@ -201,7 +214,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         CustomButton(
                           onPressed: () {
                             print("click notes");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Notes', selectChapterName: widget.selectChapterName, language: widget.language)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Notes', selectChapterName: widget.selectChapterName, language: widget.language, id: widget.id)));
                           },
                           text: "View Notes",
                           color: AppColors.buttonColorBlue1,

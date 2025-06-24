@@ -16,6 +16,7 @@ import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_categ
 import 'package:visual_learning/screen/home_screen/blocs/category/category_bloc.dart';
 import 'package:visual_learning/screen/language/blocs/language_bloc.dart';
 import 'package:visual_learning/screen/notes/blocs/notes_bloc.dart';
+import 'package:visual_learning/screen/notes_content/blocs/notes_content_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/logout/logout_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/profile_bloc.dart';
 import 'package:visual_learning/screen/quiz/bloc/quiz_bloc.dart';
@@ -53,6 +54,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => SignUpBloc()),
         BlocProvider(create: (_) => ChapterListBloc()),
         BlocProvider(create: (_) => LanguageBloc()),
+        BlocProvider(create: (_) => NotesContentBloc()),
       ],
       child: MyApp(),
     ),

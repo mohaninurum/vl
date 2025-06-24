@@ -6,4 +6,7 @@ abstract class ApiRepository {
   Future<Map<String, dynamic>> getCategory();
   Future<Map<String, dynamic>> getClassListByCategory();
   Future<Map<String, dynamic>> getClassDetail();
+  Future<Map<String, dynamic>> getChapterVideo();
+  Future<Map<String, dynamic>> getSubject();
+  Future<Map<String, dynamic>> getNotesContentPdf();
 }

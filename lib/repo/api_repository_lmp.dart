@@ -51,4 +51,22 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().get("${ApiUrls.classDetailUrl}$id", body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> getChapterVideo({id, body}) {
+    final response = ApiService().get("${ApiUrls.videoChaperUrl}$id", body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getSubject({id, body}) {
+    final response = ApiService().get("${ApiUrls.getSubjectUrl}$id", body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getNotesContentPdf({id, body}) {
+    final response = ApiService().get("${ApiUrls.getNotesPdfUrl}$id", body);
+    return response;
+  }
 }

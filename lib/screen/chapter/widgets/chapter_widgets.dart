@@ -182,7 +182,6 @@ import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_categ
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
-import '../../classes/classes_screen/classes_screen.dart';
 import '../blocs/chapter_bloc.dart';
 import '../blocs/chapter_event.dart';
 import '../blocs/chapter_state.dart';
@@ -266,7 +265,7 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
                 BlocListener<CategorySelectedBloc, CategorySelectedState>(
                   listener: (context, state) {
                     if (state.selectedCategory == "1") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "9")));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "9")));
                     }
                   },
                   child: Expanded(

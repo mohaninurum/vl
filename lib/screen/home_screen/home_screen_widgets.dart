@@ -85,21 +85,24 @@ class HomeScreenWidget extends StatelessWidget {
                 BlocListener<CategorySelectedBloc, CategorySelectedState>(
                   listener: (context, state) {
                     print(state.selectedCategory);
-                    if (state.selectedCategory == "video") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: state.selectedCategory, id: "1")));
+                    if (state.selectedCategory == "Animation") {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: "video", id: state.id)));
                     }
-                    if (state.selectedCategory == "notes") {
+                    if (state.selectedCategory == "video") {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: state.selectedCategory, id: state.id)));
+                    }
+                    if (state.selectedCategory == "Notes") {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen(selectsName: "Notes")));
                     }
-                    if (state.selectedCategory == "test paper") {
+                    if (state.selectedCategory == "Test Paper") {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => TestPaperScreen(selectsName: "Test Paper")));
                     }
-                    if (state.selectedCategory == "quiz") {
+                    if (state.selectedCategory == "Quiz") {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
                     }
-                    if (state.selectedCategory == "Animation") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
-                    }
+                    // if (state.selectedCategory == "Animation") {
+                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
+                    // }
                   },
                   child: GridviewListWidget(screenName: "home", language: ''),
                 ),

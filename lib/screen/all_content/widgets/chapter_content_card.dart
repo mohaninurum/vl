@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:visual_learning/screen/all_content/model/all_content_model.dart';
 
+import '../../../constant/api_url/ApiUrls.dart';
+
 class ChapterItemCard extends StatelessWidget {
   final ChapterContentModel? item;
   final VoidCallback onTap;
   final String gradeLang;
-  const ChapterItemCard({required this.item, required this.onTap, super.key, required this.gradeLang});
+  final selectChapterName;
+  const ChapterItemCard({required this.item, required this.onTap, super.key, required this.gradeLang, this.selectChapterName});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class ChapterItemCard extends StatelessWidget {
                   fit: StackFit.expand,
                   children: [
                     Image.network(
-                      item?.imageUrl ?? '',
+                      "${ApiUrls.ImagebaseUrl}${item?.imageUrl}",
                       fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
@@ -43,7 +46,7 @@ class ChapterItemCard extends StatelessWidget {
             ),
 
             // Container(width: width * 0.3, height: width * 0.2, decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)), image: DecorationImage(image:  NetworkImage(item?.imageUrl ?? ''), fit: BoxFit.cover)), child: const Center(child: Icon(Icons.play_circle, color: Colors.white, size: 32))),
-            Expanded(child: Padding(padding: const EdgeInsets.all(10), child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item?.title ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), const SizedBox(height: 4), Text(item?.subtitle ?? '', style: const TextStyle(color: Colors.black87, fontSize: 13)), const SizedBox(height: 4), Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12))]))),
+            Expanded(child: Padding(padding: const EdgeInsets.all(10), child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item?.title ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), const SizedBox(height: 4), Text("Chapter:$selectChapterName" ?? '', style: const TextStyle(color: Colors.black87, fontSize: 13)), const SizedBox(height: 4), Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12))]))),
           ],
         ),
       ),

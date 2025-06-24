@@ -124,7 +124,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                                   ),
                                   itemBuilder: (context, index) {
                                     final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected("${item?.className}th" ?? '')));
+                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}th" ?? '')));
                                   },
                                 )
                                 : Center(child: Text("No Record"));
@@ -158,7 +158,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                                   ),
                                   itemBuilder: (context, index) {
                                     final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected("${item?.className}th" ?? '')));
+                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}th" ?? '')));
                                   },
                                 )
                                 : Center(child: Text("No Record"));

@@ -2,5 +2,6 @@ abstract class CategorySelectedEvent {}
 
 class CategorySelected extends CategorySelectedEvent {
   final String category;
-  CategorySelected(this.category);
+  final String id;
+  CategorySelected({required this.category, required this.id});
 }

@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../repo/api_repository_lmp.dart';
+import '../../../home_screen/home_screen/home_screen.dart';
 import '../../models/login_model.dart';
 import '../googe_auth_service.dart';
 import '../login_screen.dart';
@@ -14,6 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   bool isLogin = false;
   LoginResponse? loginResponse;
   bool isGoogleLogin = false;
+
   LoginBloc() : super(LoginState()) {
     on<EmailChanged>((event, emit) {
       emit(state.copyWith(email: event.email, emailError: null));
@@ -25,6 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
     });
     on<LoginSubmitted>((event, emit) async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       bool emailValid = state.email.contains('@');
       bool passwordValid = state.password.length >= 3;
       emit(state.copyWith(emailError: emailValid ? null : 'Invalid email', passwordError: passwordValid ? null : 'Password too short'));
@@ -37,8 +41,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             emailValid = false;
             passwordValid = false;
             isGoogleLogin = false;
+            await prefs.setString('email', state.email);
+            await prefs.setString('password', state.password);
             loginResponse = LoginResponse.fromJson(loginresponce);
             emit(state.copyWith(isSubmitting: false, isSuccess: true));
+            Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
             ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
             emit(state.copyWith(isSubmitting: false, isSuccess: false));
@@ -56,6 +63,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<GoogleSignInEvent>((event, emit) async {
       emit(state.copyWith(isSubmitGoogle: true, isSuccess: false));
       final auth = await GoogeAuthService().signInWithGoogle();
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       print("google auth login responce:-$auth");
       try {
         if (auth != null) {
@@ -68,8 +76,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           if (loginresponce["status"] == true) {
             print('Welcome ${loginResponse?.user?.fullName}');
             isGoogleLogin = true;
+            await prefs.setString('email', state.email);
+            await prefs.setString('password', state.password);
             loginResponse = LoginResponse.fromJson(loginresponce);
             emit(state.copyWith(isSubmitGoogle: true, isSuccess: true));
+            Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
             ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
             emit(state.copyWith(isSubmitGoogle: false, isSuccess: false));
@@ -104,8 +115,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             print('Welcome ${loginResponse?.user?.fullName}');
             isGoogleLogin = true;
             isLogin = true;
+
             loginResponse = LoginResponse.fromJson(loginresponce);
             emit(state.copyWith(isSubmitGoogle: true, isSuccess: true));
+            Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
             isGoogleLogin = false;
             isLogin = false;
@@ -134,10 +147,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
     on<GoogleLogOutEvent>((event, emit) async {
       print("GoogleLogOutEvent...................");
+
       final auth = await GoogeAuthService().signOut();
-      Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-      isGoogleLogin = false;
-      isLogin = false;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('email');
+      await prefs.remove('password');
+      final String? email = prefs.getString('email');
+      final String? password = prefs.getString('password');
+      if (email == null && password == null) {
+        Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+        isGoogleLogin = false;
+        isLogin = false;
+      }
       // Navigator.push(event.context, MaterialPageRoute(builder: (context) => LoginScreen()));
       // emit(state.copyWith(isLogin: false));
     });

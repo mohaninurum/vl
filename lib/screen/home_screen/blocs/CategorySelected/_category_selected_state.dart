@@ -1,4 +1,5 @@
 class CategorySelectedState {
   final String selectedCategory;
-  CategorySelectedState({required this.selectedCategory});
+  final String id;
+  CategorySelectedState({required this.selectedCategory, required this.id});
 }

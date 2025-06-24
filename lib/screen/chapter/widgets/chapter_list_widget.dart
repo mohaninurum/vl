@@ -25,7 +25,7 @@ class ChapterListWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(2.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AllContentScreen(language: language, selectClassName: selectClassName, selectChapterName: '${chapterAll[index].chapterName}')));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AllContentScreen(id: "${chapterAll[index].chapterId}", language: language, selectClassName: selectClassName, selectChapterName: '${chapterAll[index].chapterName}')));
                   },
                   child: Container(color: AppColors.lightpurplecolor, child: ListTile(leading: Icon(Icons.play_circle_fill), title: Text("${index + 1}.${chapterAll[index].chapterName}", style: TextStyle(fontSize: 13)))),
                 ),

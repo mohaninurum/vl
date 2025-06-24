@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
+import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../widgets/appBarWidget.dart';
 import '../blocs/notes_bloc.dart';
 import '../blocs/notes_event.dart';
@@ -18,13 +19,15 @@ class NotesScreen extends StatefulWidget {
 }
 
 class _NotesScreenState extends State<NotesScreen> {
-  final List<String> classes = ['9th', '10th'];
-  final List<String> subjects = ['Science', 'Biology'];
+  List<String> classes = ['9th', '10th'];
+  List<String> subjects = ['Science', 'Biology'];
 
   @override
   void initState() {
     super.initState();
+    final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
     context.read<NotesBloc>().add(LoadNotes());
+    context.read<NotesBloc>().add(GetSubject(id: '9', token: token));
   }
 
   @override
@@ -40,6 +43,8 @@ class _NotesScreenState extends State<NotesScreen> {
         padding: EdgeInsets.symmetric(vertical: 2, horizontal: width * 0.02),
         child: BlocBuilder<NotesBloc, NotesState>(
           builder: (context, state) {
+            subjects = state?.subject ?? [];
+            print("get subject list ${state.subject}");
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,18 +94,21 @@ class _NotesScreenState extends State<NotesScreen> {
                         child: Container(
                           padding: EdgeInsets.all(6),
                           decoration: BoxDecoration(color: AppColors.appWhiteColor, border: Border.all(width: 1, color: Colors.grey), borderRadius: BorderRadius.circular(10)),
-                          child: DropdownButton<String>(
-                            value: state.selectedSubject,
-                            underline: SizedBox(),
-                            isDense: true,
-                            isExpanded: true,
-                            items: subjects.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                            onChanged: (value) {
-                              if (value != null) {
-                                context.read<NotesBloc>().add(SelectSubject(value));
-                              }
-                            },
-                          ),
+                          child:
+                              state.isLoadingSubject
+                                  ? CircularProgressIndicator()
+                                  : DropdownButton<String>(
+                                    value: state.selectedSubject,
+                                    underline: SizedBox(),
+                                    isDense: true,
+                                    isExpanded: true,
+                                    items: state?.subject?.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        context.read<NotesBloc>().add(SelectSubject(value));
+                                      }
+                                    },
+                                  ),
                         ),
                       ),
                       SizedBox(width: width * 0.02),

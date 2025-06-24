@@ -5,7 +5,6 @@ import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
 import '../../../constant/app_text_style/app_text_style.dart';
-import '../../home_screen/home_screen/home_screen.dart';
 import '../login_screen/blocs/login_bloc.dart';
 import '../login_screen/blocs/login_event.dart';
 import '../login_screen/blocs/login_state.dart';
@@ -27,7 +26,7 @@ class SignUpScreen extends StatelessWidget {
         body: BlocConsumer<SignUpBloc, SignUpState>(
           listener: (context, state) {
             if (state.isSuccess.toString() == "true") {
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+              // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
             } else if (state.generalError != null) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.generalError!)));
             }

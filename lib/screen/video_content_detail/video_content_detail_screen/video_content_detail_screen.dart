@@ -9,12 +9,13 @@ import '../../home_screen/model/buttomBar_model.dart';
 import '../../widgets/appBarWidget.dart';
 
 class VideoContentDetailScreen extends StatefulWidget {
-  VideoContentDetailScreen({required this.language, required this.selectClassName, required this.selectChapterName, super.key, required this.selectTopicName, required this.videoUrl});
+  VideoContentDetailScreen({required this.language, required this.selectClassName, required this.selectChapterName, super.key, required this.selectTopicName, required this.videoUrl, required this.descriptions});
   final String language;
   final String selectClassName;
   final String selectChapterName;
   final String selectTopicName;
   final String videoUrl;
+  final String descriptions;
 
   @override
   State<VideoContentDetailScreen> createState() => _VideoContentDetailScreenState();
@@ -125,7 +126,7 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
                       SizedBox(height: media.height * 0.035),
                       Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
                       SizedBox(height: media.height * 0.02),
-                      SizedBox(width: double.infinity, child: Text('Motion refers to the change in position of an object with respect to a reference point over time...', overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+                      SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
                     ],
                   );
                 },

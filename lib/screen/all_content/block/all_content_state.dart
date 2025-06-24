@@ -4,9 +4,10 @@ class ChapterContentState {
   final List<ChapterContentModel> chapters;
   final ChapterContentModel? selectedChapter;
   final bool isEnglishSelected;
-  ChapterContentState({required this.isEnglishSelected, required this.chapters, this.selectedChapter});
+  final bool isLoading;
+  ChapterContentState({required this.isEnglishSelected, required this.isLoading, required this.chapters, this.selectedChapter});
 
-  ChapterContentState copyWith({bool? isEnglishSelected, List<ChapterContentModel>? chapters, ChapterContentModel? selectedChapter}) {
-    return ChapterContentState(isEnglishSelected: isEnglishSelected ?? this.isEnglishSelected, chapters: chapters ?? this.chapters, selectedChapter: selectedChapter ?? this.selectedChapter);
+  ChapterContentState copyWith({bool? isLoading, bool? isEnglishSelected, List<ChapterContentModel>? chapters, ChapterContentModel? selectedChapter}) {
+    return ChapterContentState(isLoading: isLoading ?? this.isLoading, isEnglishSelected: isEnglishSelected ?? this.isEnglishSelected, chapters: chapters ?? this.chapters, selectedChapter: selectedChapter ?? this.selectedChapter);
   }
 }

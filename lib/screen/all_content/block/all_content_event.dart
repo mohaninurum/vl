@@ -2,7 +2,12 @@ import '../model/all_content_model.dart';
 
 abstract class ChapterContentEvent {}
 
-class LoadChaptersContent extends ChapterContentEvent {}
+class LoadChaptersContent extends ChapterContentEvent {
+  final context;
+  final id;
+  final token;
+  LoadChaptersContent({this.token, this.context, this.id});
+}
 
 class ChapterTapped extends ChapterContentEvent {
   final ChapterContentModel selected;

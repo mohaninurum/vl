@@ -5,7 +5,6 @@ import 'package:visual_learning/constant/app_string/app_string.dart';
 
 import '../../../constant/app_text_colors/app_text_colors.dart';
 import '../../../constant/app_text_style/app_text_style.dart';
-import '../../home_screen/home_screen/home_screen.dart';
 import '../forget_password/forget_password_screen.dart';
 import '../singup_screen/signup_screen.dart';
 import '../widgets/gradient_button.dart';
@@ -24,7 +23,7 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state.isSuccess) {
           // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
         }
       },
       child: SafeArea(

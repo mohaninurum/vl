@@ -15,8 +15,8 @@ class GridviewListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var gridItemHome = [CategoryItem(language: '', title: AppString.animationText, image: 'assets/appicons/3d animattion.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('1'))), CategoryItem(language: '', title: 'My Teachers', image: 'assets/appicons/icon12Asset 12.png', comingSoon: true, onTap: () {}), CategoryItem(language: '', title: 'Notes', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('3'))), CategoryItem(language: '', title: 'Test Paper', image: 'assets/appicons/icon23Asset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('4')))];
-    var gridItemClasses = [CategoryItem(language: language, title: '9th Class', image: 'assets/appicons/3d animattion.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('9th Class'))), CategoryItem(language: language, title: '10th Class', image: 'assets/appicons/icon12Asset 12.png', comingSoon: true, onTap: () {}), CategoryItem(language: language, title: '11th Class', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('11th Class'))), CategoryItem(language: language, title: '12th Class', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('12th Class')))];
+    // var gridItemHome = [CategoryItem(language: '', title: AppString.animationText, image: 'assets/appicons/3d animattion.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('1'))), CategoryItem(language: '', title: 'My Teachers', image: 'assets/appicons/icon12Asset 12.png', comingSoon: true, onTap: () {}), CategoryItem(language: '', title: 'Notes', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('3'))), CategoryItem(language: '', title: 'Test Paper', image: 'assets/appicons/icon23Asset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('4')))];
+    // var gridItemClasses = [CategoryItem(language: language, title: '9th Class', image: 'assets/appicons/3d animattion.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('9th Class'))), CategoryItem(language: language, title: '10th Class', image: 'assets/appicons/icon12Asset 12.png', comingSoon: true, onTap: () {}), CategoryItem(language: language, title: '11th Class', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('11th Class'))), CategoryItem(language: language, title: '12th Class', image: 'assets/appicons/digital notesAsset 1.png', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected('12th Class')))];
     final media = MediaQuery.of(context).size;
     final crossAxisCount = media.width > 600 ? 4 : 2;
     return BlocBuilder<CategoryBloc, CategoryState>(
@@ -42,7 +42,7 @@ class GridviewListWidget extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = state.categoryResponseModel.categories[index];
-                  return CategoryItem(language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(item.categoryName)));
+                  return CategoryItem(language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: item.categoryName, id: item.categoryId.toString())));
                 },
               )
               : Center(child: Text("No Record"));
