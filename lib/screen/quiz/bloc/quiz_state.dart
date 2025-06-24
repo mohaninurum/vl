@@ -30,18 +30,7 @@ class QuizState {
   QuizState({required this.isLoading, required this.isSelectAnswer, required this.showExplanation, required this.questions, required this.currentIndex, required this.selectedIndex, required this.showResult});
 
   factory QuizState.initial() {
-    return QuizState(
-      questions: [
-        QuestionModel(question: 'What is the unit of force?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], correctIndex: 0, explanation: 'The SI unit of force is Newton (N).'),
-        QuestionModel(question: 'Which planet is known as the Red Planet?', options: ['Earth', 'Mars', 'Jupiter', 'Venus'], correctIndex: 1, explanation: 'Mars is known as the Red Planet due to iron oxide.'),
-      ],
-      currentIndex: 0,
-      selectedIndex: -1,
-      showResult: false,
-      showExplanation: false,
-      isSelectAnswer: false,
-      isLoading: false,
-    );
+    return QuizState(questions: [], currentIndex: 0, selectedIndex: -1, showResult: false, showExplanation: false, isSelectAnswer: false, isLoading: false);
   }
 
   QuizState copyWith({bool? isLoading, bool? isSelectAnswer, bool? showExplanation, List<QuestionModel>? questions, int? currentIndex, int? selectedIndex, bool? showResult}) {

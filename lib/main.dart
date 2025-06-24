@@ -23,6 +23,7 @@ import 'package:visual_learning/screen/quiz/bloc/quiz_bloc.dart';
 import 'package:visual_learning/screen/share_learn/blocs/share_learn_bloc.dart';
 import 'package:visual_learning/screen/splash/splash_screen.dart';
 import 'package:visual_learning/screen/subcriptions/blocs/subcription_bloc.dart';
+import 'package:visual_learning/screen/test_content/blocs/test_paper_content_bloc.dart';
 import 'package:visual_learning/screen/test_paper/blocs/test_paper_bloc.dart';
 
 import 'firebase_options.dart';
@@ -55,6 +56,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => ChapterListBloc()),
         BlocProvider(create: (_) => LanguageBloc()),
         BlocProvider(create: (_) => NotesContentBloc()),
+        BlocProvider(create: (_) => TestPaperContentBloc()),
       ],
       child: MyApp(),
     ),

@@ -25,3 +25,5 @@ class GetSubject extends NotesEvent {
   final token;
   GetSubject({required this.id, required this.token, this.context});
 }
+
+class GetClasses extends NotesEvent {}

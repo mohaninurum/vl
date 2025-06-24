@@ -58,6 +58,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString();
       final bloc = context.read<ChapterContentBloc>();
+      print("LoadChaptersContent ;-ID ${widget.id}");
       bloc.add(LoadChaptersContent(token: token, id: widget.id, context: context));
     });
   }
@@ -231,8 +232,8 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         SizedBox(height: media.height * 0.035),
                         CustomButton(
                           onPressed: () {
-                            print("click notes");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => TestContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Question Paper', selectChapterName: widget.selectChapterName, language: widget.language)));
+                            print("click test");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TestContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Question Paper', selectChapterName: widget.selectChapterName, language: widget.language, id: widget.id)));
                           },
                           text: "View Question Paper",
                           color: AppColors.buttonColorBlue1,
@@ -250,8 +251,8 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         SizedBox(height: media.height * 0.015),
                         CustomButton(
                           onPressed: () {
-                            print("click notes");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
+                            print("click quiz");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
                           },
                           text: "Start Quiz",
                           color: AppColors.buttonColorBlue1,

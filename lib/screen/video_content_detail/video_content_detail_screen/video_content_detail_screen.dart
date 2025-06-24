@@ -97,45 +97,60 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
               SizedBox(height: media.height * 0.03),
 
               //     YoutubePlayer(controller: _controller, onEnded: (_) => _exitFullscreen(), showVideoProgressIndicator: true),
-              YoutubePlayerBuilder(
-                onExitFullScreen: () {
-                  // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-                  SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-                },
-                onEnterFullScreen: () async {
-                  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                  //
-                  // // Hide status/navigation bars for immersive portrait fullscreen
-                  // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                  // _controller.toggleFullScreenMode();
-                },
-                player: YoutubePlayer(
-                  controller: _controller,
-                  showVideoProgressIndicator: true,
-                  onReady: () async {
-                    // Lock to portrait when ready
-                    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                  },
-                  onEnded: (_) => _exitFullscreen(),
-                  bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+              ClipRRect(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(15)),
+                  child: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                    onReady: () async {
+                      // Lock to portrait when ready
+                      // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                    },
+                    onEnded: (_) => _exitFullscreen(),
+                    // bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+                  ),
+                  // YoutubePlayerBuilder(
+                  //   onExitFullScreen: () {
+                  //     // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
+                  //     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+                  //   },
+                  //   onEnterFullScreen: () async {
+                  //     // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                  //     //
+                  //     // // Hide status/navigation bars for immersive portrait fullscreen
+                  //     // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                  //     // _controller.toggleFullScreenMode();
+                  //   },
+                  //   player: YoutubePlayer(
+                  //     controller: _controller,
+                  //     showVideoProgressIndicator: true,
+                  //     onReady: () async {
+                  //       // Lock to portrait when ready
+                  //       await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                  //     },
+                  //     onEnded: (_) => _exitFullscreen(),
+                  //     bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+                  //   ),
+                  //   builder: (context, player) {
+                  //     return SizedBox();
+                  //   },
+                  // ),
                 ),
-                builder: (context, player) {
-                  return Column(
-                    children: [
-                      player,
-                      SizedBox(height: media.height * 0.035),
-                      Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-                      SizedBox(height: media.height * 0.02),
-                      SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-                    ],
-                  );
-                },
               ),
-
+              // Column(
+              //   children: [
+              //     SizedBox(height: media.height * 0.035),
+              //     Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+              //     SizedBox(height: media.height * 0.02),
+              //     SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+              //   ],
+              // ),
               SizedBox(height: media.height * 0.035),
               Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
               SizedBox(height: media.height * 0.02),
-              SizedBox(width: double.infinity, child: Text('Motion refers to the change in position of an object with respect to a reference point over time. It is a fundamentalconcept in physics and is essential for understanding howobjects interact with their environment.', overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+              SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
             ],
           ),
         ),

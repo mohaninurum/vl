@@ -10,8 +10,8 @@ import 'notes_event.dart';
 import 'notes_state.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
+  List<String> subjectsbloc = ['Science', 'Biology'];
   NotesBloc() : super(NotesState(allNotes: [], selectedClass: '9th', selectedSubject: 'Science', filteredNotes: [], classes: [], isLoadingSubject: true)) {
-    List<String>? subject = [];
     on<LoadNotes>(_onLoadNotes);
     on<SelectClass>(_onSelectClass);
     on<SelectSubject>(_onSelectSubject);
@@ -71,36 +71,34 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   Future<void> _onGetSubject(GetSubject event, Emitter<NotesState> emit) async {
     try {
       print("Loading subjects...");
-      emit(state.copyWith(isLoadingSubject: true, classes: [], subject: []));
+      // emit(state.copyWith(isLoadingSubject: true, classes: []));
 
       Map<String, dynamic> body = {'auth': event.token};
       final loginResponse = await ApiRepositoryImpl().getSubject(body: body, id: event.id);
 
       if (loginResponse["status"] == true) {
         SubjectResponse subjectList = SubjectResponse.fromJson(loginResponse);
-
         // This is now a list of SubjectData (not just subjectName strings)
         List<String> subjectModels = subjectList.data.map((e) => e.subjectName).toList();
+        // emit(LoadedNotes(subjectsbloc: subjectModels));
+        //  emit(state.copyWith(isLoadingSubject: false, classes: [], subject: subjectModels));
 
-        emit(state.copyWith(isLoadingSubject: false, classes: [], subject: subjectModels));
-
-        print("Subjects loaded: ${subjectModels.map((e) => e).toList()}");
+        //print("Subjects loaded: ${state.subject}");
       } else {
         ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginResponse["message"] ?? "Failed to load subjects.")));
-        emit(state.copyWith(isLoadingSubject: false, classes: []));
+        // emit(state.copyWith(isLoadingSubject: false, classes: []));
       }
     } on TimeoutException {
-      emit(state.copyWith(isLoadingSubject: false, classes: []));
+      //emit(state.copyWith(isLoadingSubject: false, classes: []));
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Request timed out. Please try again later.')));
     } catch (e) {
       print("Error loading subjects: $e");
-      emit(state.copyWith(isLoadingSubject: false, classes: []));
+      //  emit(state.copyWith(isLoadingSubject: false, classes: []));
     }
   }
 
   // Future<void> _onGetSubject(GetSubject event, Emitter<NotesState> emit) async {
   //   try {
-  //
   //     print("load class");
   //     // emit(IsLoadingClassList());
   //     emit(state.copyWith(isLoadingSubject: true, classes: [], subject: []));

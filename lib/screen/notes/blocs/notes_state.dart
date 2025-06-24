@@ -1,3 +1,5 @@
+//
+
 import '../models/notes_model.dart';
 
 class NotesState {
@@ -8,6 +10,7 @@ class NotesState {
   final String selectedClass;
   final String selectedSubject;
   final List<NoteModel> filteredNotes;
+
   NotesState({required this.isLoadingSubject, required this.classes, this.subject, required this.allNotes, required this.selectedClass, required this.selectedSubject, required this.filteredNotes});
 
   NotesState copyWith({required bool isLoadingSubject, required List<String> classes, List<String>? subject, List<NoteModel>? allNotes, String? selectedClass, String? selectedSubject, List<NoteModel>? filteredNotes}) {

@@ -6,7 +6,12 @@ class SelectAnswer extends QuizEvent {
   SelectAnswer(this.index);
 }
 
-class IsLoadingQuiz extends QuizEvent {}
+class IsLoadingQuiz extends QuizEvent {
+  final id;
+  final context;
+  final token;
+  IsLoadingQuiz({this.id, this.context, this.token});
+}
 
 class SuccessQuiz extends QuizEvent {}
 

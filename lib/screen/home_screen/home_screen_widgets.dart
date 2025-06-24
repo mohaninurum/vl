@@ -9,6 +9,7 @@ import '../../constant/app_string/app_string.dart';
 import '../classes/classes_screen/classes_screen.dart';
 import '../drawer/drawer_screen.dart';
 import '../notes/notes_screen/notes_screen.dart';
+import '../notifications/notifications_screen/notifications_screen.dart';
 import '../quiz_screen/quiz_main_screen.dart';
 import '../test_paper/test_paper_screen/test_paper_screen.dart';
 import 'blocs/CategorySelected/_category_selected_bloc.dart';
@@ -72,7 +73,12 @@ class HomeScreenWidget extends StatelessWidget {
                     ),
 
                     Spacer(),
-                    Icon(Icons.circle_notifications, size: 40, color: AppColors.pramarycolor), //  Badge(smallSize: 20, label: Text('1'), child: IconButton(padding: EdgeInsets.zero, onPressed: () {}, icon: Icon(Icons.circle_notifications), iconSize: 50)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+                      },
+                      child: Icon(Icons.circle_notifications, size: 40, color: AppColors.pramarycolor),
+                    ), //  Badge(smallSize: 20, label: Text('1'), child: IconButton(padding: EdgeInsets.zero, onPressed: () {}, icon: Icon(Icons.circle_notifications), iconSize: 50)),
                   ],
                 ),
                 SizedBox(height: media.height * 0.02),
@@ -86,7 +92,7 @@ class HomeScreenWidget extends StatelessWidget {
                   listener: (context, state) {
                     print(state.selectedCategory);
                     if (state.selectedCategory == "Animation") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: "video", id: state.id)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: state.selectedCategory, id: state.id)));
                     }
                     if (state.selectedCategory == "video") {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: state.selectedCategory, id: state.id)));

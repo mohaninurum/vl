@@ -11,4 +11,8 @@ class ApiUrls {
   static const String videoChaperUrl = '${baseUrl}video/';
   static const String getSubjectUrl = '${baseUrl}subject/';
   static const String getNotesPdfUrl = '${baseUrl}notes-pdf/';
+  static const String getTestPaperPdfUrl = '${baseUrl}test-paper/';
+  static const String getQuizfUrl = '${baseUrl}quiz/';
+  static const String postFeedbackUrl = '${baseUrl}feedback';
+  static const String getFeedbackListUrl = '${baseUrl}feedback';
 }

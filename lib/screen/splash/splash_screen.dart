@@ -74,7 +74,18 @@ class _SplashScreenState extends State<SplashScreen> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Image.asset('assets/appicons/Visuallearning trans.png', height: size.width * 0.3), const SizedBox(height: 20), Text("Visual Learning", style: TextStyle(color: AppColors.pramarycolor, fontSize: size.width * 0.08, fontWeight: FontWeight.bold)), const SizedBox(height: 8), const CircularProgressIndicator(color: AppColors.pramarycolor)]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //
+            Image.asset('assets/appicons/Visuallearning trans.png', height: size.width * 0.3),
+            SizedBox(height: size.height * 0.1),
+            const SizedBox(height: 20), Text("Visual Learning", style: TextStyle(color: AppColors.pramarycolor, fontSize: size.width * 0.08, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const CircularProgressIndicator(color: AppColors.pramarycolor),
+          ],
+        ),
       ),
     );
   }

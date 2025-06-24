@@ -6,8 +6,8 @@ import 'package:visual_learning/constant/app_text_colors/app_text_colors.dart';
 import 'package:visual_learning/screen/profile/blocs/profile_event.dart';
 
 import '../../auth/login_screen/blocs/login_bloc.dart';
+import '../../auth/login_screen/blocs/login_event.dart';
 import '../../widgets/appBarWidget.dart';
-import '../blocs/logout/logout_bloc.dart';
 import '../blocs/profile_bloc.dart';
 import '../blocs/profile_state.dart';
 import '../widgets/logout_dailog.dart';
@@ -86,8 +86,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {
+                // showLogoutDialog(context, () {
+                //   context.read<LogoutBloc>().add(UserLogoutEvent(context));
+                // });
                 showLogoutDialog(context, () {
-                  context.read<LogoutBloc>().add(UserLogoutEvent(context));
+                  // context.read<DrawerLogoutBloc>().add(UserLogoutEvent(context));
+                  context.read<LoginBloc>().add(GoogleLogOutEvent(context));
                 });
               },
               icon: Icon(Icons.logout, color: AppColors.appWhiteColor),
