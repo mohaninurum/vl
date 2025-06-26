@@ -12,7 +12,6 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:visual_learning/screen/all_content/block/all_content_state.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_state.dart';
 
@@ -27,8 +26,9 @@ import '../../notes_content/notes_content_screen/notes_content_screen.dart';
 import '../../quiz/quiz_screen/quize_screen.dart';
 import '../../test_content/test_content_screen/test_content_screen.dart';
 import '../../video_content_detail/video_content_detail_screen/video_content_detail_screen.dart';
-import '../block/all_content_bloc.dart';
-import '../block/all_content_event.dart';
+import '../bloc/all_content_bloc.dart';
+import '../bloc/all_content_event.dart';
+import '../bloc/all_content_state.dart';
 import 'chapter_content_card.dart';
 import 'custome_button.dart';
 
@@ -189,8 +189,17 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                                     selectChapterName: widget.selectChapterName,
                                     item: item,
                                     onTap: () {
-                                      context.read<ChapterContentBloc>().add(ChapterTapped(item!));
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl, language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                      if (item.VideoUrl != null) {
+                                        if (item.isPaid == "1") {
+                                          if (item.isPurchase == '1') {
+                                            context.read<ChapterContentBloc>().add(ChapterTapped(item));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                          } else if (item.isPurchase == "2") {}
+                                        } else if (item.isPaid == "2") {
+                                          context.read<ChapterContentBloc>().add(ChapterTapped(item));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                        }
+                                      }
                                     },
                                     gradeLang: "${widget.selectClassesName} $language",
                                   );

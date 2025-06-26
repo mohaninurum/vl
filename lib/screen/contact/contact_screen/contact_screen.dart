@@ -2,14 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/constant/app_colors/app_colors.dart';
 
+import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../widgets/appBarWidget.dart';
 import '../blocs/contact_bloc.dart';
 import '../blocs/contact_event.dart';
 import '../blocs/contact_state.dart';
 import '../models/contact_model.dart';
 
-class ContactUsScreen extends StatelessWidget {
+class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
+
+  @override
+  State<ContactUsScreen> createState() => _ContactUsScreenState();
+}
+
+class _ContactUsScreenState extends State<ContactUsScreen> {
+  @override
+  void initState() {
+    final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+    context.read<ContactBloc>().add(LoadContactInfo(token: token));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +32,19 @@ class ContactUsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F9),
       appBar: AppBarWidget(appTitle: 'Contact Us'),
-      body: BlocProvider(
-        create: (_) => ContactBloc()..add(LoadContactInfo()),
-        child: BlocBuilder<ContactBloc, ContactState>(
-          builder: (context, state) {
-            return ListView.builder(
-              padding: EdgeInsets.all(width * 0.05),
-              itemCount: state.infoList.length,
-              itemBuilder: (context, index) {
-                final info = state.infoList[index];
-                return _buildContactCard(info, width, height);
-              },
-            );
-          },
-        ),
+      body: BlocBuilder<ContactBloc, ContactState>(
+        builder: (context, state) {
+          return state.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                padding: EdgeInsets.all(width * 0.05),
+                itemCount: state.infoList.length,
+                itemBuilder: (context, index) {
+                  final info = state.infoList[index];
+                  return _buildContactCard(info, width, height);
+                },
+              );
+        },
       ),
     );
   }

@@ -6,7 +6,7 @@ class ApiUrls {
   static const String registerUrl = '${baseUrl}users/register';
   static const String forgotPasswordUrl = '${baseUrl}users/forgot-password';
   static const String categoryUrl = '${baseUrl}category';
-  static const String classListBycategoryUrl = '${baseUrl}class/';
+  static const String classListBycategoryUrl = '${baseUrl}class';
   static const String classDetailUrl = '${baseUrl}class/class-detail/';
   static const String videoChaperUrl = '${baseUrl}video/';
   static const String getSubjectUrl = '${baseUrl}subject/';
@@ -15,4 +15,5 @@ class ApiUrls {
   static const String getQuizfUrl = '${baseUrl}quiz/';
   static const String postFeedbackUrl = '${baseUrl}feedback';
   static const String getFeedbackListUrl = '${baseUrl}feedback';
+  static const String getOrganizationtUrl = '${baseUrl}organization';
 }

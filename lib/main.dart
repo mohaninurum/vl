@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:visual_learning/screen/all_content/block/all_content_bloc.dart';
+import 'package:visual_learning/screen/all_content/bloc/all_content_bloc.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 import 'package:visual_learning/screen/auth/singup_screen/blocs/signup_bloc.dart';
 import 'package:visual_learning/screen/chapter/blocs/chapter_bloc.dart';
@@ -15,7 +15,9 @@ import 'package:visual_learning/screen/home_screen/blocs/BottomNav/bottom_nav_bl
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_bloc.dart';
 import 'package:visual_learning/screen/language/blocs/language_bloc.dart';
-import 'package:visual_learning/screen/notes/blocs/notes_bloc.dart';
+import 'package:visual_learning/screen/notes/blocs/get_notes/get_notes_list_bloc.dart';
+import 'package:visual_learning/screen/notes/blocs/get_subject/get_subject_bloc.dart';
+import 'package:visual_learning/screen/notes/blocs/notes_bloc/notes_bloc.dart';
 import 'package:visual_learning/screen/notes_content/blocs/notes_content_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/logout/logout_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/profile_bloc.dart';
@@ -47,6 +49,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => TestPaperBloc()),
         BlocProvider(create: (_) => FeedbackBloc()),
         BlocProvider(create: (_) => NotesBloc()),
+        BlocProvider(create: (_) => GetSubjectBloc()),
+        BlocProvider(create: (_) => GetNotesListBloc()),
         BlocProvider(create: (_) => QuizBloc()),
         BlocProvider(create: (_) => SubjectTabBloc()),
         BlocProvider(create: (_) => BottomNavBloc()),
@@ -56,6 +60,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => ChapterListBloc()),
         BlocProvider(create: (_) => LanguageBloc()),
         BlocProvider(create: (_) => NotesContentBloc()),
+        BlocProvider(create: (_) => TestPaperContentBloc()),
         BlocProvider(create: (_) => TestPaperContentBloc()),
       ],
       child: MyApp(),

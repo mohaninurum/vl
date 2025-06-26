@@ -98,10 +98,10 @@ class HomeScreenWidget extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: state.selectedCategory, id: state.id)));
                     }
                     if (state.selectedCategory == "Notes") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen(selectsName: "Notes")));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen(selectsName: "Notes", id: state.id)));
                     }
                     if (state.selectedCategory == "Test Paper") {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TestPaperScreen(selectsName: "Test Paper")));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TestPaperScreen(selectsName: "Test Paper", id: state.id)));
                     }
                     if (state.selectedCategory == "Quiz") {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));

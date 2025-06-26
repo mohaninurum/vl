@@ -1,4 +1,4 @@
-import '../models/subject_model.dart';
+import '../../models/subject_model.dart';
 
 abstract class NotesEvent {}
 
@@ -19,11 +19,16 @@ class SelectSubject extends NotesEvent {
   SelectSubject(this.subject);
 }
 
-class GetSubject extends NotesEvent {
+// class GetSubject extends NotesEvent {
+//   final context;
+//   final String id;
+//   final token;
+//   GetSubject({required this.id, required this.token, this.context});
+// }
+
+class GetClasses extends NotesEvent {
   final context;
   final String id;
   final token;
-  GetSubject({required this.id, required this.token, this.context});
+  GetClasses({required this.id, required this.token, this.context});
 }
-
-class GetClasses extends NotesEvent {}

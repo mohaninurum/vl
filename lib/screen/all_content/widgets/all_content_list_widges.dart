@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../block/all_content_bloc.dart';
-import '../block/all_content_state.dart';
+import '../bloc/all_content_bloc.dart';
+import '../bloc/all_content_state.dart';
 import 'chapter_content_card.dart';
 
 class AllContentListWidges extends StatelessWidget {

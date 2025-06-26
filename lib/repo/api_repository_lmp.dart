@@ -41,8 +41,8 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> getClassListByCategory({id, body}) {
-    final response = ApiService().get("${ApiUrls.classListBycategoryUrl}$id", body);
+  Future<Map<String, dynamic>> getClassListByCategory({body}) {
+    final response = ApiService().get(ApiUrls.classListBycategoryUrl, body);
     return response;
   }
 
@@ -60,7 +60,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Map<String, dynamic>> getSubject({id, body}) {
-    final response = ApiService().get("${ApiUrls.getSubjectUrl}$id", body);
+    final response = ApiService().get("${ApiUrls.classDetailUrl}$id", body);
     return response;
   }
 
@@ -91,6 +91,12 @@ class ApiRepositoryImpl implements ApiRepository {
   @override
   Future<Map<String, dynamic>> getFeedbackList({body}) {
     final response = ApiService().get(ApiUrls.getFeedbackListUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getOrganization({body}) {
+    final response = ApiService().get(ApiUrls.getOrganizationtUrl, body);
     return response;
   }
 }

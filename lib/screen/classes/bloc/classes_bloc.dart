@@ -16,7 +16,7 @@ class ClassListBloc extends Bloc<ClassListEvent, ClassListState> {
         print("load class");
         emit(IsLoadingClassList());
         Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};
-        final loginresponce = await ApiRepositoryImpl().getClassListByCategory(body: body, id: event.id);
+        final loginresponce = await ApiRepositoryImpl().getClassListByCategory(body: body);
         if (loginresponce["status"] == true) {
           ClassListResponse loginResponse = ClassListResponse.fromJson(loginresponce);
           emit(LoadedClassList(classListResponse: loginResponse));

@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:visual_learning/screen/all_content/block/all_content_event.dart';
 
 import '../../../repo/api_repository_lmp.dart';
 import '../model/all_content_model.dart';
+import 'all_content_event.dart';
 import 'all_content_state.dart';
 
 class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> {
@@ -16,11 +16,11 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
   //   ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/3.jpg', title: '4. Basic terms use in motion', subtitle: 'Chapter: Motion', gradeLang: '9th English', bgColor: Colors.grey.shade300),
   // ];
   final chapters = [
-    ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/0.jpg', title: 'Motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
-    ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/1.jpg', title: 'Motion along a straight line', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
-    ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/2.jpg', title: 'Uniform and non uniform motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
-    ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/3.jpg', title: '.Basic terms use in motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
-    ChapterContentModel(imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/0.jpg', title: 'Motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
+    ChapterContentModel(isPaid: '1', imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/0.jpg', title: 'Motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
+    ChapterContentModel(isPaid: '1', imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/1.jpg', title: 'Motion along a straight line', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
+    ChapterContentModel(isPaid: '1', imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/2.jpg', title: 'Uniform and non uniform motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
+    ChapterContentModel(isPaid: '1', imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/3.jpg', title: '.Basic terms use in motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
+    ChapterContentModel(isPaid: '1', imageUrl: 'https://img.youtube.com/vi/fq4N0hgOWzU/0.jpg', title: 'Motion', subtitle: 'Chapter: Motion', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200, VideoUrl: ''),
     // Add more...
   ];
 
@@ -51,7 +51,7 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
           VideoListResponse Response = VideoListResponse.fromJson(loginresponce);
           chapters.clear();
           for (var video in Response.data) {
-            chapters.add(ChapterContentModel(VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: '9th English', gradeLangHi: '9th hindi', bgColor: Colors.grey.shade200));
+            chapters.add(ChapterContentModel(isPurchase: video.isPurchase, isPaid: video.isPaid, VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: 'English', gradeLangHi: 'hindi', bgColor: Colors.grey.shade200));
             print(chapters.length);
           }
           emit(state.copyWith(isLoading: false));
