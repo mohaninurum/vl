@@ -2,18 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../home_screen/model/category_model.dart';
 import '../widgets/appBarWidget.dart';
 import 'blocs/subcription_bloc.dart';
 import 'blocs/subcription_event.dart';
 import 'blocs/subcription_state.dart';
 
 class SubscriptionScreen extends StatelessWidget {
-  const SubscriptionScreen({super.key});
+  BannerImageModel? bannerImageModel;
+  SubscriptionScreen({super.key, this.bannerImageModel});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    var selected;
     return Scaffold(
       appBar: AppBarWidget(appTitle: 'Subscription'),
       body: SafeArea(
@@ -35,7 +37,7 @@ class SubscriptionScreen extends StatelessWidget {
                         fit: StackFit.expand,
                         alignment: Alignment.center,
                         children: [
-                          CachedNetworkImage(imageUrl: 'https://img.freepik.com/free-photo/invoice-billing-information-form-graphic-concept_53876-120943.jpg?ga=GA1.1.885131105.1747305905&semt=ais_hybrid&w=740', fit: BoxFit.cover, placeholder: (context, url) => const Center(child: CircularProgressIndicator()), errorWidget: (context, url, error) => const Center(child: Icon(Icons.error))),
+                          Hero(tag: bannerImageModel?.imageUrl ?? '', child: bannerImageModel?.imageUrl == null ? Image.asset("assets/images/images.png") : CachedNetworkImage(imageUrl: bannerImageModel?.imageUrl ?? '', fit: BoxFit.cover, placeholder: (context, url) => const Center(child: CircularProgressIndicator()), errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)))),
                           Align(alignment: Alignment.bottomRight, child: Text("-50%", style: TextStyle(fontSize: size.width * 0.1, fontWeight: FontWeight.bold, color: Colors.redAccent, shadows: [Shadow(blurRadius: 5, color: Colors.black45, offset: Offset(1, 1))]))),
                         ],
                       ),
@@ -54,7 +56,7 @@ class SubscriptionScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(4, (index) {
-                        final selected = state.selectedPlanIndex == index;
+                        selected = index; //state.selectedPlanIndex ==
                         return GestureDetector(
                           onTap: () => context.read<SubscriptionBloc>().add(SelectPlan(index)),
                           child: Container(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_event.dart';
 
+import '../../../constant/app_colors/app_colors.dart';
 import '../blocs/BottomNav/bottom_nav_bloc.dart';
 import '../blocs/BottomNav/bottom_nav_state.dart';
 import '../home_screen_widgets.dart';
@@ -29,6 +31,12 @@ class _MainScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: AppColors.pramarycolor, // Set your desired color
+        statusBarIconBrightness: Brightness.light, // For dark icons (use Brightness.light for white icons)
+      ),
+    );
     context.read<CategoryBloc>().add(LoadCategory(context));
     super.initState();
   }
@@ -48,7 +56,7 @@ class _MainScreenState extends State<HomeScreen> {
             }
             return true;
           },
-          child: Scaffold(body: HomeScreenWidget()),
+          child: SafeArea(child: Scaffold(body: HomeScreenWidget())),
         );
       },
     );

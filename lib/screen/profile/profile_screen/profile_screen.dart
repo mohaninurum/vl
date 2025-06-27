@@ -23,7 +23,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     print("init call profile");
-    BlocProvider.of<ProfileBloc>(context).add(LoadProfileData());
+    var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+    var id = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString() ?? '';
+    BlocProvider.of<ProfileBloc>(context).add(LoadProfileData(context: context, id: id, token: token));
     super.initState();
   }
 
@@ -57,18 +59,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text("Subscription Details", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: size.height * 0.03),
-          _buildDetailRow("Plan Name", state.planName, valueColor: AppColors.pramarycolor),
-          _buildDetailRow("Plan Price", "₹ ${state.planPrice.toStringAsFixed(1)}", valueColor: Colors.green),
-          _buildDetailRow("Start Date", "${state.startDate.day}/${state.startDate.month}/${state.startDate.year}"),
-          _buildDetailRow("End Date", "${state.endDate.day}/${state.endDate.month}/${state.endDate.year}"),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text("Status", style: TextStyle(color: Colors.grey)), Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), decoration: BoxDecoration(color: state.isActive ? Colors.green.shade100 : Colors.red.shade100, borderRadius: BorderRadius.circular(12)), child: Text(state.isActive ? "Active" : "Inactive", style: TextStyle(color: state.isActive ? Colors.green : Colors.red, fontWeight: FontWeight.bold)))]),
-        ],
-      ),
+      child:
+          state.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text("Subscription Details", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  SizedBox(height: size.height * 0.03),
+                  _buildDetailRow("Plan Name", state.planName, valueColor: AppColors.pramarycolor),
+                  _buildDetailRow("Plan Price", "₹ ${state.planPrice}", valueColor: Colors.green),
+                  _buildDetailRow("Start Date", "${state.startDate}"),
+                  _buildDetailRow("End Date", "${state.endDate}"),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text("Status", style: TextStyle(color: Colors.grey)), Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), decoration: BoxDecoration(color: state.isActive == "2" ? Colors.green.shade100 : Colors.red.shade100, borderRadius: BorderRadius.circular(12)), child: Text(state.isActive == "2" ? "Active" : "Inactive", style: TextStyle(color: state.isActive == "2" ? Colors.green : Colors.red, fontWeight: FontWeight.bold)))]),
+                ],
+              ),
     );
   }
 

@@ -16,4 +16,6 @@ class ApiUrls {
   static const String postFeedbackUrl = '${baseUrl}feedback';
   static const String getFeedbackListUrl = '${baseUrl}feedback';
   static const String getOrganizationtUrl = '${baseUrl}organization';
+  static const String getUserSubcriptionUrl = '${baseUrl}subscription-plan/user-subcription/';
+  static const String getSubscriptionPlanUrl = '${baseUrl}subscription-plan';
 }

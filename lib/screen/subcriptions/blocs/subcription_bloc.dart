@@ -3,9 +3,9 @@ import 'package:visual_learning/screen/subcriptions/blocs/subcription_event.dart
 import 'package:visual_learning/screen/subcriptions/blocs/subcription_state.dart';
 
 class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
-  SubscriptionBloc() : super(SubscriptionState()) {
+  SubscriptionBloc() : super(InitialSubscriptionState()) {
     on<SelectPlan>((event, emit) {
-      emit(SubscriptionState(selectedPlanIndex: event.planIndex));
+      emit(SelectSubscriptionState(selectedPlanIndex: event.planIndex));
     });
   }
 }

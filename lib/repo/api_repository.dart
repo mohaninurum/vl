@@ -14,4 +14,6 @@ abstract class ApiRepository {
   Future<Map<String, dynamic>> postFeedback();
   Future<Map<String, dynamic>> getFeedbackList();
   Future<Map<String, dynamic>> getOrganization();
+  Future<Map<String, dynamic>> getUserSubscription();
+  Future<Map<String, dynamic>> getSubscriptionPlan();
 }

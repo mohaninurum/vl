@@ -99,4 +99,16 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().get(ApiUrls.getOrganizationtUrl, body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> getUserSubscription({id, body}) {
+    final response = ApiService().get("${ApiUrls.getUserSubcriptionUrl}$id", body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getSubscriptionPlan({body}) {
+    final response = ApiService().get(ApiUrls.getUserSubcriptionUrl, body);
+    return response;
+  }
 }

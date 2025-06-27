@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:visual_learning/constant/app_string/app_string.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_state.dart';
 
 import '../blocs/CategorySelected/_category_selected_bloc.dart';
@@ -42,7 +41,7 @@ class GridviewListWidget extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = state.categoryResponseModel.categories[index];
-                  return CategoryItem(language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: item.categoryName, id: item.categoryId.toString())));
+                  return CategoryItem(comingSoon: index == 1 ? true : false, language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: item.categoryName, id: item.categoryId.toString())));
                 },
               )
               : Center(child: Text("No Record"));
