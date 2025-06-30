@@ -4,3 +4,9 @@ class SelectPlan extends SubscriptionEvent {
   final int planIndex;
   SelectPlan(this.planIndex);
 }
+
+class GetSubscriptions extends SubscriptionEvent {
+  final context;
+  final token;
+  GetSubscriptions({this.context, this.token});
+}

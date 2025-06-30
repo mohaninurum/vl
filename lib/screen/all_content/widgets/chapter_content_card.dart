@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visual_learning/screen/all_content/model/all_content_model.dart';
 
-import '../../../constant/api_url/ApiUrls.dart';
-
 class ChapterItemCard extends StatelessWidget {
   final ChapterContentModel? item;
   final VoidCallback onTap;
@@ -31,7 +29,7 @@ class ChapterItemCard extends StatelessWidget {
                   fit: StackFit.expand,
                   children: [
                     Image.network(
-                      "${ApiUrls.ImagebaseUrl}${item?.imageUrl}",
+                      "${item?.imageUrl}",
                       fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
@@ -71,11 +69,14 @@ class ChapterItemCard extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child:
-                    item?.isPurchase == "1"
-                        ? Icon(Icons.lock_open, color: Colors.green)
-                        : item?.isPaid == "1"
-                        ? Icon(Icons.lock, color: Colors.green)
-                        : SizedBox(),
+                    item?.isPaid == "1"
+                        ? item?.isPurchase == "2"
+                            ? SizedBox()
+                            : Icon(Icons.lock, color: Colors.redAccent.shade200)
+                        : SizedBox(), //item?.isPaid == "1"
+                // : item?.isPurchase == "2"
+                // ? Icon(Icons.lock_open, color: Colors.green)
+                // : SizedBox(),
               ),
             ),
           ],

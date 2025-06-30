@@ -15,13 +15,41 @@ import '../share_learn/share_learn+screen.dart';
 import '../subcriptions/subcriptions_screen.dart';
 
 class AppDrawer extends StatelessWidget {
+  bool isExpired = false;
+  bool isafter = false;
+
   AppDrawer();
   String toClassName(String input) {
     return input.split(RegExp(r'[_\s]+')).map((word) => word[0].toUpperCase() + word.substring(1)).join();
   }
 
+  isDateExpired(String inputDate) {
+    // Parse the input date string (ensure it's in a valid format)
+    DateTime expiryDate = DateTime.parse(inputDate);
+
+    // Get the current date and time
+    DateTime currentDate = DateTime.now();
+
+    // Compare
+    isExpired = expiryDate.isAfter(currentDate);
+    print("Expire:-$isExpired");
+  }
+
+  int getDaysUntilExpiry(String endDateStr) {
+    DateTime endDate = DateTime.parse(endDateStr);
+    DateTime today = DateTime.now();
+
+    // Only compare date (ignore time)
+    DateTime cleanToday = DateTime(today.year, today.month, today.day);
+    DateTime cleanEnd = DateTime(endDate.year, endDate.month, endDate.day);
+
+    return cleanEnd.difference(cleanToday).inDays;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var endDate = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.expiryDate ?? "2025-06-20 23:59:59";
+    isDateExpired(endDate);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final username = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
@@ -39,12 +67,29 @@ class AppDrawer extends StatelessWidget {
               width: double.infinity,
               child: Column(
                 children: [
-                  SizedBox(height: height * 0.02),
+                  SizedBox(height: height * 0.05),
                   // App Logo
-                  Image.asset('assets/appicons/Visuallearning trans.png', height: height * 0.13),
-                  SizedBox(height: height * 0.01),
+                  Image.asset('assets/appicons/Visuallearning trans.png', height: height * 0.12),
+
                   // Expired Badge
-                  Container(padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: 4), decoration: BoxDecoration(color: Colors.red[100], borderRadius: BorderRadius.circular(8)), child: const Text('expired', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold))),
+                  isExpired
+                      ? SizedBox.shrink()
+                      : Container(
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: 4),
+                        decoration: BoxDecoration(color: isExpired ? Colors.deepPurpleAccent : Colors.red[100], borderRadius: BorderRadius.circular(8)), //
+                        child: isExpired ? Text("Active", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)) : const Text('expired', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                      ),
+
+                  isExpired
+                      ? Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: width * 0.03, vertical: 4),
+                          decoration: BoxDecoration(color: isExpired ? Colors.deepPurpleAccent : Colors.red[100], borderRadius: BorderRadius.circular(8)), //
+                          child: Text(getDaysUntilExpiry(endDate) == 0 ? "Today Expire" : "${getDaysUntilExpiry(endDate)} days left", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                        ),
+                      )
+                      : SizedBox(),
                   SizedBox(height: height * 0.02),
                 ],
               ),
@@ -110,7 +155,7 @@ class AppDrawer extends StatelessWidget {
               title: Text('About us', style: TextStyle(fontWeight: FontWeight.normal)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsWebView())); // AboutUsScreen
 
                 // Navigate to support screen
               },

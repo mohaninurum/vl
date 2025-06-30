@@ -12,6 +12,6 @@ class ChapterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
     print("height Screen chapter screen ${media.height}");
-    return Scaffold(appBar: AppBarWidget(), backgroundColor: const Color(0xFFF2F5FA), body: SafeArea(child: Padding(padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01), child: ChapterWidgets(id: selectClassName, language: language, selectClassesName: selectClassName))));
+    return Scaffold(appBar: AppBarWidget(), backgroundColor: const Color(0xFFF2F5FA), body: SafeArea(child: Padding(padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01), child: ChapterWidgets(id: id, language: language, selectClassesName: selectClassName))));
   }
 }

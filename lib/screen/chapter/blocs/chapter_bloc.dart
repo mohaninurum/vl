@@ -12,14 +12,12 @@ import 'chapter_state.dart';
 class ChapterListBloc extends Bloc<ChapterListEvent, ChapterListState> {
   ChapterListBloc() : super(InitailChapterList()) {
     on<LoadChapterList>((event, emit) async {
-      var indexget = event.id.indexOf('t');
-      var id = event.id.substring(0, indexget);
       try {
         print("load class");
-        print(id);
+        print("Class ID----------${event.id}");
         emit(IsLoadingChapterList());
         Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};
-        final loginresponce = await ApiRepositoryImpl().getClassDetail(body: body, id: id);
+        final loginresponce = await ApiRepositoryImpl().getClassDetail(body: body, id: event.id);
         if (loginresponce["status"] == true) {
           ClassDetailResponse loginResponse = ClassDetailResponse.fromJson(loginresponce);
           emit(LoadedChapterList(classDetailResponse: loginResponse));

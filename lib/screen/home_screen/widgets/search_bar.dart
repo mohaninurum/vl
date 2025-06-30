@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:visual_learning/constant/app_colors/app_colors.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   // Demo list to show querying
   // List<String> searchTerms = ["Apple", "Banana", "Mango", "Pear", "Watermelons", "Blueberries", "Pineapples", "Strawberries"];
   List<String> searchTerms = [];
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context).copyWith(
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none), //
+        isDense: true,
+        hintStyle: TextStyle(color: Colors.white),
+      ),
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(color: AppColors.pramarycolor),
+    );
+  }
 
+  @override
+  TextStyle? get searchFieldStyle => const TextStyle(
+    decorationColor: Colors.white,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    decorationThickness: 0, //this hides the text underline
+  );
   // First overwrite to clear the search text
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -13,7 +33,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: Icon(Icons.clear),
+        icon: Icon(Icons.clear, color: Colors.white),
       ),
     ];
   }
@@ -25,7 +45,7 @@ class CustomSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back, color: Colors.white),
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repo/api_repository_lmp.dart';
+import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../model/all_content_model.dart';
 import 'all_content_event.dart';
 import 'all_content_state.dart';
@@ -51,7 +52,7 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
           VideoListResponse Response = VideoListResponse.fromJson(loginresponce);
           chapters.clear();
           for (var video in Response.data) {
-            chapters.add(ChapterContentModel(isPurchase: video.isPurchase, isPaid: video.isPaid, VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: 'English', gradeLangHi: 'hindi', bgColor: Colors.grey.shade200));
+            chapters.add(ChapterContentModel(isPurchase: BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.isSubscribe.toString(), isPaid: video.isPaid, VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: 'English', gradeLangHi: 'hindi', bgColor: Colors.grey.shade200));
             print(chapters.length);
           }
           emit(state.copyWith(isLoading: false));

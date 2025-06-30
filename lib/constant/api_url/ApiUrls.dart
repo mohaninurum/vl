@@ -18,4 +18,6 @@ class ApiUrls {
   static const String getOrganizationtUrl = '${baseUrl}organization';
   static const String getUserSubcriptionUrl = '${baseUrl}subscription-plan/user-subcription/';
   static const String getSubscriptionPlanUrl = '${baseUrl}subscription-plan';
+  static const String PurchasePlanUrl = '${baseUrl}subscription-plan/purchase-plan';
+  static const String usersLogoutUrl = '${baseUrl}users/logout';
 }

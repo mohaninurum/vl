@@ -51,11 +51,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   @override
   void initState() {
-    SystemUiOverlayStyle(
-      statusBarColor: AppColors.pramarycolor, // Set your desired color
-      statusBarIconBrightness: Brightness.light, // For dark icons (use Brightness.light for white icons)
-    );
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: AppColors.pramarycolor, statusBarIconBrightness: Brightness.light));
   }
 
   @override
@@ -66,12 +63,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       drawer: AppDrawer(),
       backgroundColor: const Color(0xFFF2F5FA),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              color: AppColors.pramarycolor, // Purple top bar
+              height: media.height * 0.05,
+            ),
+            Container(
+              color: Colors.white, // App bar background
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -101,10 +103,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   ), //  Badge(smallSize: 20, label: Text('1'), child: IconButton(padding: EdgeInsets.zero, onPressed: () {}, icon: Icon(Icons.circle_notifications), iconSize: 50)),
                 ],
               ),
-              SizedBox(height: media.height * 0.02),
-              // BannerWidget(categoryName: AppString.bannerLeartTodayText, screenName: ''),
-              // AutoImageSliderWidget(imagePaths: ['assets/appicons/digital notesAsset 1.png', 'assets/appicons/icon4Asset 4.png', 'assets/appicons/animationAsset 2.png'], categoryName: ["Learn Today", "video learn", "subscriptions"], screenName: ["video", "all notes", "subscription"], cardColor: [Colors.brown, Colors.blueGrey, Colors.deepPurpleAccent.shade200]),
-              BlocBuilder<CategoryBloc, CategoryState>(
+            ),
+            SizedBox(height: media.height * 0.02),
+            // BannerWidget(categoryName: AppString.bannerLeartTodayText, screenName: ''),
+            // AutoImageSliderWidget(imagePaths: ['assets/appicons/digital notesAsset 1.png', 'assets/appicons/icon4Asset 4.png', 'assets/appicons/animationAsset 2.png'], categoryName: ["Learn Today", "video learn", "subscriptions"], screenName: ["video", "all notes", "subscription"], cardColor: [Colors.brown, Colors.blueGrey, Colors.deepPurpleAccent.shade200]),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: BlocBuilder<CategoryBloc, CategoryState>(
                 builder: (context, state) {
                   if (state is LoadedCategoryState) {
                     return AdvancedAutoBannerSlider(banners: state.categoryResponseModel.bannerImages);
@@ -112,10 +117,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   return AdvancedAutoBannerSlider(banners: banners);
                 },
               ),
-              SizedBox(height: media.height * 0.035),
-              Text(AppString.exploreCategoriesText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
-              SizedBox(height: media.height * 0.025),
-              BlocListener<CategorySelectedBloc, CategorySelectedState>(
+            ),
+            SizedBox(height: media.height * 0.035),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text(AppString.exploreCategoriesText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+            SizedBox(height: media.height * 0.025),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
                   print(state.selectedCategory);
                   if (state.selectedCategory == "Animation") {
@@ -139,8 +147,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 },
                 child: GridviewListWidget(screenName: "home", language: ''),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

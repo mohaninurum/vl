@@ -18,6 +18,7 @@ import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_categ
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
+import '../../../constant/widgets/subscription_dialog.dart';
 import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../chapter/blocs/subjecttab_bloc.dart';
 import '../../chapter/blocs/subjecttab_event.dart';
@@ -192,9 +193,11 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                                       if (item.VideoUrl != null) {
                                         if (item.isPaid == "1") {
                                           if (item.isPurchase == '1') {
+                                            SubscriptionDialog.show(context);
+                                          } else if (item.isPurchase == "2") {
                                             context.read<ChapterContentBloc>().add(ChapterTapped(item));
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
-                                          } else if (item.isPurchase == "2") {}
+                                          }
                                         } else if (item.isPaid == "2") {
                                           context.read<ChapterContentBloc>().add(ChapterTapped(item));
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));

@@ -146,19 +146,34 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
     on<GoogleLogOutEvent>((event, emit) async {
-      print("GoogleLogOutEvent...................");
-
       final auth = await GoogeAuthService().signOut();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.remove('email');
-      await prefs.remove('password');
-      final String? email = prefs.getString('email');
-      final String? password = prefs.getString('password');
-      if (email == null && password == null) {
-        Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-        isGoogleLogin = false;
-        isLogin = false;
+
+      try {
+        Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};
+        final loginresponce = await ApiRepositoryImpl().userLogout(body: body);
+        if (loginresponce["status"] == true) {
+          await prefs.remove('email');
+          await prefs.remove('password');
+          final String? email = prefs.getString('email');
+          final String? password = prefs.getString('password');
+          if (email == null && password == null) {
+            Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+            isGoogleLogin = false;
+            isLogin = false;
+          }
+        } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
+        }
+      } on TimeoutException {
+        emit(state.copyWith(isSubmitGoogle: false, isSuccess: false));
+        ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Request timed out. Please try again later.')));
+      } catch (e) {
+        emit(state.copyWith(isSubmitGoogle: false, isSuccess: false));
+        print("error :-$e");
+        // emit(state.copyWith(isSubmitting: false, emailError: 'Something went wrong, try again.'));
       }
+
       // Navigator.push(event.context, MaterialPageRoute(builder: (context) => LoginScreen()));
       // emit(state.copyWith(isLogin: false));
     });

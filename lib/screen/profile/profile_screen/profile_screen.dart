@@ -68,10 +68,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Text("Subscription Details", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   SizedBox(height: size.height * 0.03),
                   _buildDetailRow("Plan Name", state.planName, valueColor: AppColors.pramarycolor),
-                  _buildDetailRow("Plan Price", "₹ ${state.planPrice}", valueColor: Colors.green),
+                  _buildDetailRow("Plan Price", state.planPrice.isNotEmpty ? "₹ ${state.planPrice}" : '', valueColor: Colors.green),
                   _buildDetailRow("Start Date", "${state.startDate}"),
                   _buildDetailRow("End Date", "${state.endDate}"),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text("Status", style: TextStyle(color: Colors.grey)), Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), decoration: BoxDecoration(color: state.isActive == "2" ? Colors.green.shade100 : Colors.red.shade100, borderRadius: BorderRadius.circular(12)), child: Text(state.isActive == "2" ? "Active" : "Inactive", style: TextStyle(color: state.isActive == "2" ? Colors.green : Colors.red, fontWeight: FontWeight.bold)))]),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text("Status", style: TextStyle(color: Colors.grey)), Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), decoration: BoxDecoration(color: state.isActive == "1" ? Colors.green.shade100 : Colors.red.shade100, borderRadius: BorderRadius.circular(12)), child: Text(state.isActive == "1" ? "Active" : "Inactive", style: TextStyle(color: state.isActive == "1" ? Colors.green : Colors.red, fontWeight: FontWeight.bold)))]),
                 ],
               ),
     );

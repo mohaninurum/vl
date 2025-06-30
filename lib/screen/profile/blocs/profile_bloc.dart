@@ -19,7 +19,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         if (responce["status"] == true) {
           SubscriptionResponse Response = SubscriptionResponse.fromJson(responce);
 
-          emit(ProfileState(isLoading: false, name: '', email: '', planName: "${Response.data?.planName ?? ''}", planPrice: "${Response.data?.price ?? ''}", startDate: "${Response.data?.startDate ?? ''}", endDate: "${Response.data?.endDate ?? ''}", isActive: "${Response.data?.isActive ?? ''}"));
+          emit(ProfileState(isLoading: false, name: '', email: '', planName: "${Response.data?.planName ?? ''}", planPrice: "${Response.data?.price}", startDate: "${Response.data?.startDate ?? ''}", endDate: "${Response.data?.endDate ?? ''}", isActive: "${Response.data?.isActive ?? ''}"));
         } else {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
           emit(ProfileState(isLoading: false, name: '', email: '', planName: '', planPrice: '', startDate: '', endDate: '', isActive: ''));

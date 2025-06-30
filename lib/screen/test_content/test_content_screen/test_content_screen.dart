@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:visual_learning/constant/app_colors/app_colors.dart';
 
+import '../../../constant/widgets/subscriptions_button_widgets.dart';
 import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../widgets/appBarWidget.dart';
 import '../blocs/test_paper_content_bloc.dart';
@@ -22,9 +23,11 @@ class TestContentDetialScreen extends StatefulWidget {
 }
 
 class _VideoContentDetailScreenState extends State<TestContentDetialScreen> {
+  String subscription = '1';
   @override
   void initState() {
     final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+    subscription = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.isSubscribe.toString() ?? '';
     context.read<TestPaperContentBloc>().add(LoadTestPaperContent(id: widget.id, context: context, token: token));
     super.initState();
   }
@@ -32,6 +35,7 @@ class _VideoContentDetailScreenState extends State<TestContentDetialScreen> {
   @override
   Widget build(BuildContext context) {
     var indexget = widget.selectClassName.indexOf('h');
+    final screenWidth = MediaQuery.of(context).size.width;
     print(indexget);
     final media = MediaQuery.of(context).size;
     return Scaffold(
@@ -49,8 +53,15 @@ class _VideoContentDetailScreenState extends State<TestContentDetialScreen> {
                   return Center(child: CircularProgressIndicator());
                 }
                 if (state is LoadedTestPaperContent) {
-                  return state.testPaperResponse?.data.length != 0 ? SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '') : Center(child: Text("No Record"));
+                  return state.testPaperResponse?.data.length != 0
+                      ? state.testPaperResponse?.data[0].isPaid.toString() == "1"
+                          ? subscription == "1"
+                              ? SubscriptionsButtonWidgets()
+                              : SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '')
+                          : SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '') //
+                      : Center(child: Text("No Record"));
                 }
+
                 if (state is FailTestPaperContent) {
                   return Center(child: Text("Not Found"));
                 }

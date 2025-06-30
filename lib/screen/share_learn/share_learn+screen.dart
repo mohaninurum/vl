@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:visual_learning/constant/app_colors/app_colors.dart';
 import 'package:visual_learning/screen/share_learn/widgets/helpOptionTile.dart';
 import 'package:visual_learning/screen/share_learn/widgets/share_step_widgets.dart';
 
 import '../widgets/appBarWidget.dart';
 import 'blocs/share_learn_bloc.dart';
-import 'blocs/share_learn_event.dart';
 
 class ShareScreen extends StatelessWidget {
   const ShareScreen({super.key});
+  void shareApp() {
+    Share.share('Check out this awesome app: https://play.google.com/store/apps/details?id=com.yourcompany.yourapp', subject: 'Download the Visual Learning app!');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,13 @@ class ShareScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.all(16),
                 decoration: BoxDecoration(color: Colors.blue.shade50, borderRadius: BorderRadius.circular(16)),
-                child: Column(children: [const Text("Share & Learn More", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)), const SizedBox(height: 5), const Text("Get your subscription extended whenever a friend installs the app and purchases a subscription.", textAlign: TextAlign.center, style: TextStyle(fontSize: 13)), const SizedBox(height: 8), ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(AppColors.pramarycolor)), onPressed: () => context.read<ShareBloc>().add(ShareNowPressed()), child: const Text("Share Now", style: TextStyle(color: AppColors.appWhiteColor)))]),
+                child: Column(
+                  children: [
+                    const Text("Share & Learn More", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)), const SizedBox(height: 5), const Text("Get your subscription extended whenever a friend installs the app and purchases a subscription.", textAlign: TextAlign.center, style: TextStyle(fontSize: 13)), const SizedBox(height: 8), //
+                    //  context.read<ShareBloc>().add(ShareNowPressed())
+                    ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(AppColors.pramarycolor)), onPressed: shareApp, child: const Text("Share Now", style: TextStyle(color: AppColors.appWhiteColor))),
+                  ],
+                ),
               ),
 
               const Text("How it Works?", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),

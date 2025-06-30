@@ -108,7 +108,19 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Map<String, dynamic>> getSubscriptionPlan({body}) {
-    final response = ApiService().get(ApiUrls.getUserSubcriptionUrl, body);
+    final response = ApiService().get(ApiUrls.getSubscriptionPlanUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> purchasePlan({body}) {
+    final response = ApiService().post(ApiUrls.PurchasePlanUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> userLogout({body}) {
+    final response = ApiService().post(ApiUrls.usersLogoutUrl, body);
     return response;
   }
 }

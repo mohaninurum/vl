@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../../constant/widgets/subscriptions_button_widgets.dart';
 import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../notes_content/blocs/notes_content_bloc.dart';
 import '../../notes_content/blocs/notes_content_event.dart';
@@ -21,9 +22,12 @@ class NotesViewsScreen extends StatefulWidget {
 }
 
 class _NotesViewsScreenState extends State<NotesViewsScreen> {
+  String subscription = '1';
   @override
   void initState() {
     final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+    subscription = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.isSubscribe.toString() ?? '';
+    print("is active :-$subscription");
     if (widget.selectName == "Test Paper") {
       context.read<TestPaperContentBloc>().add(LoadTestPaperContent(id: widget.id, context: context, token: token));
     } else {
@@ -48,7 +52,13 @@ class _NotesViewsScreenState extends State<NotesViewsScreen> {
                       return Center(child: CircularProgressIndicator());
                     }
                     if (state is LoadedTestPaperContent) {
-                      return state.testPaperResponse?.data.length != 0 ? SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '') : Center(child: Text("No Record"));
+                      return state.testPaperResponse?.data.length != 0
+                          ? state.testPaperResponse?.data[0].isPaid.toString() == '1'
+                              ? subscription == '2'
+                                  ? SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '')
+                                  : SubscriptionsButtonWidgets()
+                              : SfPdfViewer.network(state.testPaperResponse?.data[0].pdfUrl ?? '')
+                          : Center(child: Text("No Record"));
                     }
                     if (state is FailTestPaperContent) {
                       return Center(child: Text("Not Found"));
@@ -62,7 +72,13 @@ class _NotesViewsScreenState extends State<NotesViewsScreen> {
                       return Center(child: CircularProgressIndicator());
                     }
                     if (state is LoadedNotesContent) {
-                      return state.notesPdfResponse?.data.length != 0 ? SfPdfViewer.network(state.notesPdfResponse?.data[0].pdfUrl ?? '') : Center(child: Text("No Record"));
+                      return state.notesPdfResponse?.data.length != 0
+                          ? state.notesPdfResponse?.data[0].isPaid.toString() == '1'
+                              ? subscription == '2'
+                                  ? SfPdfViewer.network(state.notesPdfResponse?.data[0].pdfUrl ?? '')
+                                  : SubscriptionsButtonWidgets()
+                              : SfPdfViewer.network(state.notesPdfResponse?.data[0].pdfUrl ?? '')
+                          : Center(child: Text("No Record"));
                     }
                     if (state is FailNotesContent) {
                       return Center(child: Text("Not Found"));

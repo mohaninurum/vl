@@ -177,7 +177,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         classListResponse = ClassListResponse.fromJson(Response);
 
         // This is now a list of SubjectData (not just subjectName strings)
-        List<String>? cModels = classListResponse?.data.map((e) => "${e.className}th").toList();
+        List<String>? cModels = classListResponse?.data.map((e) => "${e.className}").toList();
         emit(LoadedNotesClass(Classbloc: cModels));
         //  emit(state.copyWith(isLoadingSubject: false, classes: [], subject: subjectModels));
 

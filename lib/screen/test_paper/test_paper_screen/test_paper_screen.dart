@@ -104,12 +104,9 @@ class _TestPaperScreenState extends State<TestPaperScreen> {
                                     if (value != null) {
                                       selectClass = value;
 
-                                      var indexget = value.indexOf('t');
-                                      var getclass = value.substring(0, indexget);
-                                      print("get:- $getclass");
                                       selectSubject = "Select Subject";
                                       setState(() {});
-                                      var classId = BlocProvider.of<NotesBloc>(context).classListResponse?.data.firstWhere((element) => element.className == getclass).classId;
+                                      var classId = BlocProvider.of<NotesBloc>(context).classListResponse?.data.firstWhere((element) => element.className == value).classId;
                                       context.read<GetSubjectBloc>().add(GetSubject(token: token, id: "$classId", context: context));
                                       context.read<GetNotesListBloc>().add(GetNotesList(id: value, token: token, context: context, selectSubject: selectSubject));
 

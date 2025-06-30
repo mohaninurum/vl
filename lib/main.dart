@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:visual_learning/constant/app_colors/app_colors.dart';
 import 'package:visual_learning/screen/all_content/bloc/all_content_bloc.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 import 'package:visual_learning/screen/auth/singup_screen/blocs/signup_bloc.dart';
@@ -34,14 +33,12 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: AppColors.pramarycolor, // Set your desired color
       statusBarIconBrightness: Brightness.light, // For dark icons (use Brightness.light for white icons)
     ),
   );
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   runApp(
     MultiBlocProvider(
       providers: [

@@ -9,8 +9,12 @@ class SelectSubscriptionState extends SubscriptionState {
   SelectSubscriptionState({this.selectedPlanIndex = 0});
 }
 
+class IsLoadingSubscriptionState extends SubscriptionState {}
+
 class SubscriptionPlanListState extends SubscriptionState {
-  final bool isloading;
+  final int selectedPlanIndex;
   final SubscriptionPlanResponse? subscriptionPlanResponse;
-  SubscriptionPlanListState({required this.isloading, this.subscriptionPlanResponse});
+  SubscriptionPlanListState({this.subscriptionPlanResponse, this.selectedPlanIndex = -1});
 }
+
+class FailSubscriptionState extends SubscriptionState {}

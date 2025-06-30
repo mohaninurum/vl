@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   userCheckIsLogin() async {
     final User? currentUser = FirebaseAuth.instance.currentUser;
-    print("google current user:-$currentUser");
     final loginBloc = BlocProvider.of<LoginBloc>(context);
     // loginBloc.add(GoogleLogOutEvent(context));
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -36,15 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
         Timer(const Duration(seconds: 3), () {
-          print('User is signed in!');
-          print("User Name:-${user.displayName}");
-          print("User Email:-${user.email}");
-          print("User providerID:-${user.providerData[0].providerId}");
           loginBloc.add(GoogleIsLoginEvent(context: context, displayName: "${user.displayName}", email: "${user.email}", providerId: user.providerData[0].providerId, signInMethod: user.providerData[0].providerId));
         });
       } else if (email != null) {
         Timer(const Duration(seconds: 3), () {
-          loginBloc.add(EmailChanged("$email"));
+          loginBloc.add(EmailChanged(email));
           loginBloc.add(PasswordChanged("$password"));
           loginBloc.add(LoginSubmitted(context));
         });

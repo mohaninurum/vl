@@ -94,7 +94,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
               // TabBarView for GridView content
               BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterScreen(selectClassName: state.selectedCategory, language: language, id: widget.id)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterScreen(selectClassName: state.selectedCategory, language: language, id: state.id)));
                 },
                 child: SizedBox(
                   height: media.height * 0.6, // Adjust based on your grid height
@@ -124,7 +124,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                                   ),
                                   itemBuilder: (context, index) {
                                     final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}th" ?? '')));
+                                    return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
                                   },
                                 )
                                 : Center(child: Text("No Record"));
@@ -158,7 +158,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                                   ),
                                   itemBuilder: (context, index) {
                                     final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}th" ?? '', image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}th" ?? '')));
+                                    return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
                                   },
                                 )
                                 : Center(child: Text("No Record"));
