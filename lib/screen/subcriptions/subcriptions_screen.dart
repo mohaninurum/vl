@@ -122,27 +122,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
               ),
 
-              // Plan Cards
-              // Row(
-              //   children: List.generate(2, (index) {
-              //     final selected = state.selectedPlanIndex == index;
-              //     return Expanded(
-              //       child: GestureDetector(
-              //         onTap: () => context.read<SubscriptionBloc>().add(SelectPlan(index)),
-              //         child: Container(
-              //           margin: EdgeInsets.symmetric(horizontal: 8),
-              //           padding: const EdgeInsets.all(12),
-              //           decoration: BoxDecoration(color: Colors.white, border: Border.all(color: selected ? Colors.green : Colors.grey.shade300, width: selected ? 2 : 1), borderRadius: BorderRadius.circular(16), boxShadow: [if (selected) BoxShadow(color: Colors.green.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 4))]),
-              //           child: Column(children: [CachedNetworkImage(imageUrl: 'https://img.freepik.com/free-vector/accounting-app-illustration_74855-4359.jpg?ga=GA1.1.885131105.1747305905&semt=ais_hybrid&w=740', height: 70), const SizedBox(height: 12), const Text("All answers, no ads"), const Text("All answers, no ads"), const Text("All answers, no ads"), const SizedBox(height: 12), Text("\$100.99", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)), const Text("Billed every year"), const Text("12 month at \$8.00/month")]),
-              //         ),
-              //       ),
-              //     );
-              //   }),
-              // ),
               SizedBox(height: size.height * 0.01),
-
-              // Buttons
-              // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [OutlinedButton(onPressed: () {}, child: const Text("Skip")), ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade800, padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16)), onPressed: () {}, child: const Text("Start Free Trial"))]),
               const Text("What is Brainly Tutor?"),
             ],
           ),

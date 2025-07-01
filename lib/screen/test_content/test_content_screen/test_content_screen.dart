@@ -35,9 +35,7 @@ class _VideoContentDetailScreenState extends State<TestContentDetialScreen> {
   @override
   Widget build(BuildContext context) {
     var indexget = widget.selectClassName.indexOf('h');
-    final screenWidth = MediaQuery.of(context).size.width;
     print(indexget);
-    final media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBarWidget(appTitle: '${widget.selectClassName.substring(0, indexget + 1)} ${widget.tabtype}'),
       backgroundColor: const Color(0xFFF2F5FA),

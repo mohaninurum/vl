@@ -13,41 +13,10 @@ class TestPaperBloc extends Bloc<TestPaperEvent, TestPaperState> {
 
   Future<void> _onLoadNotes(LoadTestPaper event, Emitter<TestPaperState> emit) async {
     emit(TestPaperLoading());
-
     await Future.delayed(Duration(seconds: 1));
     final notes = [
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Is Matter around us pure', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '10th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Is Matter around us pure', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Atoms And Molecules', className: '9th', subject: 'Science'),
-      TestPaperModel(title: 'Structure Of The Atom', className: '9th', subject: 'Science'),
+      TestPaperModel(title: 'Matter In Our Surroundings', className: '9th', subject: 'Science'), //
       TestPaperModel(title: 'The Fundamental Unit Of Life', className: '9th', subject: 'Biology'),
-      TestPaperModel(title: 'Tissues', className: '9th', subject: 'Biology'),
     ];
 
     emit(state.copyWith(allNotes: notes, filteredNotes: _filterTestPaper(notes, state.selectedClass, state.selectedSubject)));

@@ -85,7 +85,6 @@ class _QuizScreenState extends State<QuizScreen> {
         },
         child: BlocBuilder<QuizBloc, QuizState>(
           builder: (context, state) {
-            print("is loading value chack UI ${state.isLoading}");
             return state.isLoading
                 ? state.questions.isNotEmpty
                     ? SingleChildScrollView(
@@ -137,7 +136,20 @@ class _QuizScreenState extends State<QuizScreen> {
 
                                       decoration: BoxDecoration(color: getOptionColor(state, index), borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.shade300)),
                                       height: media.height * 0.085,
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [if (state.showResult && index == state.currentQuestion.correctIndex) SizedBox(width: media.width * 0.0), SizedBox(width: media.width * 0.3), Text(state.currentQuestion.options[index], style: const TextStyle(fontSize: 16)), Spacer(), if (!state.isSelectAnswer && state.showResult && index == state.selectedIndex && index == state.currentQuestion.correctIndex) const Icon(Icons.check, color: Colors.white)]),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          if (state.showResult && index == state.currentQuestion.correctIndex) SizedBox(width: media.width * 0.0),
+                                          SizedBox(width: media.width * 0.3),
+                                          Text(state.currentQuestion.options[index], style: const TextStyle(fontSize: 16)),
+                                          Spacer(),
+                                          !state.isSelectAnswer && state.showResult && index == state.selectedIndex && index == state.currentQuestion.correctIndex
+                                              ? const Icon(Icons.check, color: Colors.white)
+                                              : getOptionColor(state, index) == Colors.red
+                                              ? Icon(Icons.close, color: Colors.white)
+                                              : SizedBox(),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

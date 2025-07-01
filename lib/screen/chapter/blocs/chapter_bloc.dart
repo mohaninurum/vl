@@ -17,12 +17,12 @@ class ChapterListBloc extends Bloc<ChapterListEvent, ChapterListState> {
         print("Class ID----------${event.id}");
         emit(IsLoadingChapterList());
         Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};
-        final loginresponce = await ApiRepositoryImpl().getClassDetail(body: body, id: event.id);
-        if (loginresponce["status"] == true) {
-          ClassDetailResponse loginResponse = ClassDetailResponse.fromJson(loginresponce);
-          emit(LoadedChapterList(classDetailResponse: loginResponse));
+        final responce = await ApiRepositoryImpl().getClassDetail(body: body, id: event.id);
+        if (responce["status"] == true) {
+          ClassDetailResponse Response = ClassDetailResponse.fromJson(responce);
+          emit(LoadedChapterList(classDetailResponse: Response));
         } else {
-          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
+          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
           emit(FailChapterList());
         }
       } on TimeoutException catch (e) {

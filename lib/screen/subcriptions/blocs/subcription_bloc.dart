@@ -24,7 +24,6 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
         final responce = await ApiRepositoryImpl().getSubscriptionPlan(body: body);
         if (responce["status"] == true) {
           SubscriptionPlanResponse Response = SubscriptionPlanResponse.fromJson(responce);
-
           emit(SubscriptionPlanListState(subscriptionPlanResponse: Response, selectedPlanIndex: -1));
         } else {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));

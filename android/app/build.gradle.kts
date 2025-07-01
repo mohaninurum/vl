@@ -165,6 +165,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
 
         }
+        dependencies {
+            implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+        }
+
     }
 }
 

@@ -274,7 +274,11 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
                       children: List.generate(subjects.length, (index) {
                         return BlocBuilder<SubjectTabBloc, SubjectTabState>(
                           builder: (context, subState) {
-                            return ChapterListWidget(chapterAll: subjects[index].chapters ?? [], language: widget.language, selectClassName: widget.selectClassesName.substring(0, indexget + 1));
+                            return ChapterListWidget(
+                              chapterAll: subjects[index].chapters ?? [],
+                              language: widget.language, //
+                              selectClassName: widget.selectClassesName.substring(0, indexget + 1),
+                            );
                           },
                         );
                       }),

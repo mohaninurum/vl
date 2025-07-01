@@ -15,12 +15,12 @@ class TestPaperContentBloc extends Bloc<TestPaperContentEvent, TestPaperContentS
         print("load class");
         emit(IsLoadingTestPaperContent());
         Map<String, dynamic> body = {'auth': event.token};
-        final loginresponce = await ApiRepositoryImpl().getTestPaperContentPdf(body: body, id: event.id);
-        if (loginresponce["status"] == true) {
-          TestPaperResponse Response = TestPaperResponse.fromJson(loginresponce);
+        final responce = await ApiRepositoryImpl().getTestPaperContentPdf(body: body, id: event.id);
+        if (responce["status"] == true) {
+          TestPaperResponse Response = TestPaperResponse.fromJson(responce);
           emit(LoadedTestPaperContent(testPaperResponse: Response));
         } else {
-          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
+          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
           emit(FailTestPaperContent());
         }
       } on TimeoutException catch (e) {

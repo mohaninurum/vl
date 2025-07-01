@@ -12,7 +12,6 @@ class NotesContentBloc extends Bloc<NotesContentEvent, NotesContentState> {
   NotesContentBloc() : super(InitailNotesContent()) {
     on<LoadNotesContent>((event, emit) async {
       try {
-        print("load class");
         emit(IsLoadingNotesContent());
         Map<String, dynamic> body = {'auth': event.token};
         final loginresponce = await ApiRepositoryImpl().getNotesContentPdf(body: body, id: event.id);

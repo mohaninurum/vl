@@ -1,15 +1,176 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//
+// import '../../../constant/app_colors/app_colors.dart';
+// import '../../../constant/app_string/app_string.dart';
+// import '../../../constant/app_text_colors/app_text_colors.dart';
+// import '../../home_screen/model/buttomBar_model.dart';
+// import '../../widgets/appBarWidget.dart';
+//
+// class VideoContentDetailScreen extends StatefulWidget {
+//   VideoContentDetailScreen({required this.language, required this.selectClassName, required this.selectChapterName, super.key, required this.selectTopicName, required this.videoUrl, required this.descriptions});
+//   final String language;
+//   final String selectClassName;
+//   final String selectChapterName;
+//   final String selectTopicName;
+//   final String videoUrl;
+//   final String descriptions;
+//
+//   @override
+//   State<VideoContentDetailScreen> createState() => _VideoContentDetailScreenState();
+// }
+//
+// class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
+//   final List<BottomNavItemModel> navItems = [BottomNavItemModel(icon: Icons.home_outlined, activeIcon: Icons.home, label: 'Home'), BottomNavItemModel(icon: Icons.rss_feed_outlined, activeIcon: Icons.rss_feed, label: 'Feedback'), BottomNavItemModel(icon: Icons.phone_outlined, activeIcon: Icons.phone, label: 'Contact'), BottomNavItemModel(icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile')];
+//
+//   // final List<ChapterContentModel> items = [ChapterContentModel(imageUrl: 'assets/images/motion1.png', title: '1. Motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.deepPurple), ChapterContentModel(imageUrl: 'assets/images/motion2.png', title: '2. Motion along a straight line', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade200), ChapterContentModel(imageUrl: 'assets/images/motion3.png', title: '3. Uniform and non uniform motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade300), ChapterContentModel(imageUrl: 'assets/images/motion4.png', title: '4. Basic terms use in motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade300)];
+//
+//   late YoutubePlayerController _controller;
+//   bool _isPlayerReady = false;
+//   @override
+//   void initState() {
+//     super.initState();
+//
+//     var videoUrl = widget.videoUrl;
+//     final videoId = YoutubePlayer.convertUrlToId(videoUrl);
+//
+//     if (videoId != null) {
+//       _controller = YoutubePlayerController(initialVideoId: videoId, flags: const YoutubePlayerFlags(autoPlay: false, mute: false))..addListener(() {
+//         if (_controller.value.isReady && !_isPlayerReady) {
+//           setState(() {
+//             _isPlayerReady = true;
+//           });
+//         }
+//       });
+//     } else {
+//       throw Exception("Invalid YouTube URL");
+//     }
+//   }
+//
+//   void _exitFullscreen() async {
+//     // Restore orientation to allow rotation
+//     await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+//
+//     // Restore system UI
+//     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+//   }
+//
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final media = MediaQuery.of(context).size;
+//     return Scaffold(
+//       appBar: AppBarWidget(),
+//       backgroundColor: const Color(0xFFF2F5FA),
+//       body: SafeArea(
+//         child: SingleChildScrollView(
+//           padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+//           child: Column(
+//             children: [
+//               Container(
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+//                 padding: EdgeInsets.all(media.width * 0.04),
+//                 child: Row(
+//                   children: [
+//                     Expanded(
+//                       child: Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Row(children: [Text("Class:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+//                           Row(children: [Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+//                           Row(children: [Text("Topic:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectTopicName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+//                           Row(children: [Text("Language:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+//                         ],
+//                       ),
+//                     ),
+//                     const SizedBox(width: 10),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(height: media.height * 0.03),
+//
+//               //     YoutubePlayer(controller: _controller, onEnded: (_) => _exitFullscreen(), showVideoProgressIndicator: true),
+//               ClipRRect(
+//                 borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+//                 child: Container(
+//                   decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(15)),
+//                   child: YoutubePlayer(
+//                     controller: _controller,
+//                     showVideoProgressIndicator: true,
+//                     onReady: () async {
+//                       // Lock to portrait when ready
+//                       // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+//                     },
+//                     onEnded: (_) => _exitFullscreen(),
+//                     // bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+//                   ),
+//                   // YoutubePlayerBuilder(
+//                   //   onExitFullScreen: () {
+//                   //     // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
+//                   //     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+//                   //   },
+//                   //   onEnterFullScreen: () async {
+//                   //     // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+//                   //     //
+//                   //     // // Hide status/navigation bars for immersive portrait fullscreen
+//                   //     // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+//                   //     // _controller.toggleFullScreenMode();
+//                   //   },
+//                   //   player: YoutubePlayer(
+//                   //     controller: _controller,
+//                   //     showVideoProgressIndicator: true,
+//                   //     onReady: () async {
+//                   //       // Lock to portrait when ready
+//                   //       await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+//                   //     },
+//                   //     onEnded: (_) => _exitFullscreen(),
+//                   //     bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+//                   //   ),
+//                   //   builder: (context, player) {
+//                   //     return SizedBox();
+//                   //   },
+//                   // ),
+//                 ),
+//               ),
+//               // Column(
+//               //   children: [
+//               //     SizedBox(height: media.height * 0.035),
+//               //     Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+//               //     SizedBox(height: media.height * 0.02),
+//               //     SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+//               //   ],
+//               // ),
+//               SizedBox(height: media.height * 0.035),
+//               Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+//               SizedBox(height: media.height * 0.02),
+//               SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
-import '../../home_screen/model/buttomBar_model.dart';
 import '../../widgets/appBarWidget.dart';
+import 'full_screen_video.dart';
 
 class VideoContentDetailScreen extends StatefulWidget {
-  VideoContentDetailScreen({required this.language, required this.selectClassName, required this.selectChapterName, super.key, required this.selectTopicName, required this.videoUrl, required this.descriptions});
   final String language;
   final String selectClassName;
   final String selectChapterName;
@@ -17,144 +178,233 @@ class VideoContentDetailScreen extends StatefulWidget {
   final String videoUrl;
   final String descriptions;
 
+  const VideoContentDetailScreen({super.key, required this.language, required this.selectClassName, required this.selectChapterName, required this.selectTopicName, required this.videoUrl, required this.descriptions});
+
   @override
   State<VideoContentDetailScreen> createState() => _VideoContentDetailScreenState();
 }
 
 class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
-  final List<BottomNavItemModel> navItems = [BottomNavItemModel(icon: Icons.home_outlined, activeIcon: Icons.home, label: 'Home'), BottomNavItemModel(icon: Icons.rss_feed_outlined, activeIcon: Icons.rss_feed, label: 'Feedback'), BottomNavItemModel(icon: Icons.phone_outlined, activeIcon: Icons.phone, label: 'Contact'), BottomNavItemModel(icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile')];
-
-  // final List<ChapterContentModel> items = [ChapterContentModel(imageUrl: 'assets/images/motion1.png', title: '1. Motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.deepPurple), ChapterContentModel(imageUrl: 'assets/images/motion2.png', title: '2. Motion along a straight line', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade200), ChapterContentModel(imageUrl: 'assets/images/motion3.png', title: '3. Uniform and non uniform motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade300), ChapterContentModel(imageUrl: 'assets/images/motion4.png', title: '4. Basic terms use in motion', subtitle: 'Chapter: Motion', gradeLang: '9th  English', bgColor: Colors.grey.shade300)];
-
   late YoutubePlayerController _controller;
+  VideoPlayerController? _videoController;
   bool _isPlayerReady = false;
+  bool isYouTube = false;
+  bool _isMuted = false;
   @override
   void initState() {
     super.initState();
-
-    var videoUrl = widget.videoUrl;
-    final videoId = YoutubePlayer.convertUrlToId(videoUrl);
-
-    if (videoId != null) {
-      _controller = YoutubePlayerController(initialVideoId: videoId, flags: const YoutubePlayerFlags(autoPlay: false, mute: false))..addListener(() {
-        if (_controller.value.isReady && !_isPlayerReady) {
-          setState(() {
-            _isPlayerReady = true;
-          });
+    final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
+    print("Youtube uirl");
+    print(widget.videoUrl);
+    try {
+      if (videoId != null && widget.videoUrl.contains("www.youtube.com")) {
+        isYouTube = true;
+        _controller = YoutubePlayerController(initialVideoId: videoId, flags: const YoutubePlayerFlags(autoPlay: false, mute: false))..addListener(() {
+          if (_controller.value.isReady && !_isPlayerReady) {
+            setState(() {
+              _isPlayerReady = true;
+            });
+          }
+        });
+      } else {
+        isYouTube = false;
+        //"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        if (widget.videoUrl != null) {
+          _videoController = VideoPlayerController.network("${widget.videoUrl}")
+            ..initialize().then((_) {
+              setState(() {}); // Rebuild to show video
+              _videoController?.play();
+            });
         }
-      });
-    } else {
-      throw Exception("Invalid YouTube URL");
+      }
+    } catch (e) {
+      print("Video error:-$e");
     }
-  }
-
-  void _exitFullscreen() async {
-    // Restore orientation to allow rotation
-    await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-
-    // Restore system UI
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _videoController?.dispose();
     super.dispose();
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Row(children: [Text(label, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), const SizedBox(width: 6), Expanded(child: Text(value, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis))]);
+  }
+
+  Widget _buildControls() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // Video progress slider
+        VideoProgressIndicator(_videoController!, allowScrubbing: true, colors: VideoProgressColors(playedColor: Colors.red, bufferedColor: Colors.grey, backgroundColor: Colors.black12)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Play/Pause button
+            IconButton(
+              icon: Icon(_videoController!.value.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white),
+              onPressed: () {
+                setState(() {
+                  _videoController!.value.isPlaying ? _videoController?.pause() : _videoController?.play();
+                });
+              },
+            ),
+            // Mute/Unmute button
+            IconButton(
+              icon: Icon(_isMuted ? Icons.volume_off : Icons.volume_up, color: Colors.white),
+              onPressed: () {
+                setState(() {
+                  _isMuted = !_isMuted;
+                  _videoController?.setVolume(_isMuted ? 0 : 1);
+                });
+              },
+            ),
+            // Duration display
+            Padding(padding: const EdgeInsets.only(right: 12), child: Text(_videoController!.value!.isInitialized ? "${_formatDuration(_videoController!.value.position)} / ${_formatDuration(_videoController!.value.duration)}" : '', style: const TextStyle(color: Colors.white))),
+            IconButton(
+              icon: const Icon(Icons.fullscreen_outlined, color: Colors.white),
+              onPressed: () async {
+                final currentPosition = await _videoController?.position;
+                await Navigator.of(context).push(MaterialPageRoute(builder: (_) => FullScreenVideoPlayer(controller: _videoController!, startAt: currentPosition ?? Duration.zero)));
+                setState(() {}); // refresh after returning
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$minutes:$seconds";
   }
 
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBarWidget(),
-      backgroundColor: const Color(0xFFF2F5FA),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-                padding: EdgeInsets.all(media.width * 0.04),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: [Text("Class:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                          Row(children: [Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                          Row(children: [Text("Topic:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectTopicName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                          Row(children: [Text("Language:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                  ],
-                ),
-              ),
-              SizedBox(height: media.height * 0.03),
 
-              //     YoutubePlayer(controller: _controller, onEnded: (_) => _exitFullscreen(), showVideoProgressIndicator: true),
-              ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(15)),
-                  child: YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                    onReady: () async {
-                      // Lock to portrait when ready
-                      // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                    },
-                    onEnded: (_) => _exitFullscreen(),
-                    // bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
+    return isYouTube
+        ? YoutubePlayerBuilder(
+          player: YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+            onReady: () {
+              _isPlayerReady = true;
+            },
+            onEnded: (_) {
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+            },
+          ),
+          builder: (context, player) {
+            return Scaffold(
+              appBar: AppBarWidget(),
+              backgroundColor: const Color(0xFFF2F5FA),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+                  child: Column(
+                    children: [
+                      // Info card
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                        padding: EdgeInsets.all(media.width * 0.04),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //
+                            _buildInfoRow("Class:", widget.selectClassName), //
+                            _buildInfoRow("Chapter:", widget.selectChapterName),
+                            _buildInfoRow("Topic:", widget.selectTopicName), //
+                            _buildInfoRow("Language:", widget.language),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: media.height * 0.03),
+
+                      // Video player
+                      ClipRRect(borderRadius: BorderRadius.circular(15), child: Container(decoration: BoxDecoration(color: Colors.black), child: player)),
+
+                      SizedBox(height: media.height * 0.035),
+
+                      // Description
+                      Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+                      SizedBox(height: media.height * 0.02),
+                      SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+                    ],
                   ),
-                  // YoutubePlayerBuilder(
-                  //   onExitFullScreen: () {
-                  //     // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-                  //     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-                  //   },
-                  //   onEnterFullScreen: () async {
-                  //     // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                  //     //
-                  //     // // Hide status/navigation bars for immersive portrait fullscreen
-                  //     // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                  //     // _controller.toggleFullScreenMode();
-                  //   },
-                  //   player: YoutubePlayer(
-                  //     controller: _controller,
-                  //     showVideoProgressIndicator: true,
-                  //     onReady: () async {
-                  //       // Lock to portrait when ready
-                  //       await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                  //     },
-                  //     onEnded: (_) => _exitFullscreen(),
-                  //     bottomActions: [CurrentPosition(), ProgressBar(isExpanded: true)],
-                  //   ),
-                  //   builder: (context, player) {
-                  //     return SizedBox();
-                  //   },
-                  // ),
                 ),
               ),
-              // Column(
-              //   children: [
-              //     SizedBox(height: media.height * 0.035),
-              //     Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-              //     SizedBox(height: media.height * 0.02),
-              //     SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-              //   ],
-              // ),
-              SizedBox(height: media.height * 0.035),
-              Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-              SizedBox(height: media.height * 0.02),
-              SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-            ],
+            );
+          },
+          onEnterFullScreen: () {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+          },
+          onExitFullScreen: () {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+          },
+        )
+        : Scaffold(
+          appBar: AppBarWidget(),
+          backgroundColor: const Color(0xFFF2F5FA),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+              child: Column(
+                children: [
+                  // Info card
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                    padding: EdgeInsets.all(media.width * 0.04),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //
+                        _buildInfoRow("Class:", widget.selectClassName), //
+                        _buildInfoRow("Chapter:", widget.selectChapterName),
+                        _buildInfoRow("Topic:", widget.selectTopicName), //
+                        _buildInfoRow("Language:", widget.language),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: media.height * 0.03),
+
+                  // Video player
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: //
+                          _videoController != null && _videoController!.value.isInitialized
+                              ? Stack(
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: _videoController!.value.aspectRatio, //
+                                    child: VideoPlayer(_videoController!),
+                                  ),
+                                  Positioned(bottom: 0, top: 0, left: 0, right: 0, child: Align(alignment: Alignment.bottomCenter, child: _buildControls())),
+                                ],
+                              ) //
+                              : CircularProgressIndicator(color: AppColors.pramarycolor),
+                    ),
+                  ),
+
+                  SizedBox(height: media.height * 0.035),
+
+                  // Description
+                  Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+                  SizedBox(height: media.height * 0.02),
+                  SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }

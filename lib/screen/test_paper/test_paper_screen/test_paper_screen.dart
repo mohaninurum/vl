@@ -127,18 +127,6 @@ class _TestPaperScreenState extends State<TestPaperScreen> {
                               ); // Or CircularProgressIndicator();
                             },
                           ),
-                          // DropdownButton<String>(
-                          //   underline: SizedBox(),
-                          //   value: state.selectedClass,
-                          //   isExpanded: true,
-                          //   isDense: true,
-                          //   items: classes.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                          //   onChanged: (value) {
-                          //     if (value != null) {
-                          //       context.read<TestPaperBloc>().add(SelectClass(value));
-                          //     }
-                          //   },
-                          // ),
                         ),
                       ),
                       SizedBox(width: width * 0.02),
@@ -181,18 +169,6 @@ class _TestPaperScreenState extends State<TestPaperScreen> {
                               // Or CircularProgressIndicator();
                             },
                           ),
-                          // DropdownButton<String>(
-                          //   value: state.selectedSubject,
-                          //   underline: SizedBox(),
-                          //   isDense: true,
-                          //   isExpanded: true,
-                          //   items: subjects.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                          //   onChanged: (value) {
-                          //     if (value != null) {
-                          //       context.read<TestPaperBloc>().add(SelectSubject(value));
-                          //     }
-                          //   },
-                          // ),
                         ),
                       ),
                       SizedBox(width: width * 0.02),
@@ -234,29 +210,12 @@ class _TestPaperScreenState extends State<TestPaperScreen> {
                       return SizedBox();
                     },
                   ),
-                  // ListView.builder(
-                  //   itemCount: state.filteredTestPaper.length,
-                  //   itemBuilder: (context, index) {
-                  //     final note = state.filteredTestPaper[index];
-                  //     String pdfUrl = 'https://gbihr.org/images/docs/test.pdf';
-                  //     return Padding(
-                  //       padding: const EdgeInsets.symmetric(vertical: 2.5),
-                  //       child: InkWell(
-                  //         onTap: () {
-                  //           Navigator.push(context, MaterialPageRoute(builder: (context) => NotesViewsScreen(selectName: widget.selectsName)));
-                  //         },
-                  //         child: Container(color: AppColors.lightpurplecolor, child: ListTile(dense: true, minTileHeight: height * 0.02, leading: const Icon(Icons.note_alt_outlined, color: Colors.purple), title: Text('${index + 1}. ${note.title}', style: TextStyle(fontSize: 13)), subtitle: Text('${note.className} Notes', style: TextStyle(fontSize: 12)), trailing: const Icon(Icons.visibility, color: Colors.purple))),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
                 ),
               ],
             );
           },
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(items: const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'), BottomNavigationBarItem(icon: Icon(Icons.feedback), label: 'Feedback'), BottomNavigationBarItem(icon: Icon(Icons.contact_phone), label: 'Contact'), BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')], selectedItemColor: Colors.purple, unselectedItemColor: Colors.grey, showUnselectedLabels: true),
     );
   }
 }

@@ -67,10 +67,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print("google auth login responce:-$auth");
       try {
         if (auth != null) {
-          print("full_name: ${auth.user?.displayName}");
-          print("email: ${auth.user?.email}");
-          print("providerId: ${auth.credential?.providerId}");
-          print("signInMethod: ${auth.credential?.signInMethod}");
           final body = {"full_name": "${auth.user?.displayName}", "email": "${auth.user?.email}", "provider_id": "${auth.credential?.providerId}", "signIn_method": "${auth.credential?.signInMethod}"};
           final loginresponce = await ApiRepositoryImpl().googleLogin(body: body);
           if (loginresponce["status"] == true) {
@@ -105,10 +101,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print("google auth login responce:-$auth");
       try {
         if (auth != null) {
-          print("full_name: ${auth.user?.displayName}");
-          print("email: ${auth.user?.email}");
-          print("providerId: ${auth.credential?.providerId}");
-          print("signInMethod: ${auth.credential?.signInMethod}");
           final body = {"full_name": "${auth.user?.displayName}", "email": "${auth.user?.email}", "provider_id": "${auth.credential?.providerId}", "signIn_method": "${auth.credential?.signInMethod}"};
           final loginresponce = await ApiRepositoryImpl().googleLogin(body: body);
           if (loginresponce["status"] == true) {

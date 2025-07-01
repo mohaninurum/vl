@@ -27,7 +27,6 @@ class _NotesViewsScreenState extends State<NotesViewsScreen> {
   void initState() {
     final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
     subscription = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.isSubscribe.toString() ?? '';
-    print("is active :-$subscription");
     if (widget.selectName == "Test Paper") {
       context.read<TestPaperContentBloc>().add(LoadTestPaperContent(id: widget.id, context: context, token: token));
     } else {
