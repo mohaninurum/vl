@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
-        Timer(const Duration(seconds: 3), () {
+        Timer(const Duration(seconds: 2), () {
           loginBloc.add(GoogleIsLoginEvent(context: context, displayName: "${user.displayName}", email: "${user.email}", providerId: user.providerData[0].providerId, signInMethod: user.providerData[0].providerId));
         });
       } else if (email != null) {

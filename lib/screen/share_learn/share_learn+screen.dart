@@ -5,13 +5,14 @@ import 'package:visual_learning/constant/app_colors/app_colors.dart';
 import 'package:visual_learning/screen/share_learn/widgets/helpOptionTile.dart';
 import 'package:visual_learning/screen/share_learn/widgets/share_step_widgets.dart';
 
+import '../../constant/app_string/app_string.dart';
 import '../widgets/appBarWidget.dart';
 import 'blocs/share_learn_bloc.dart';
 
 class ShareScreen extends StatelessWidget {
   const ShareScreen({super.key});
   void shareApp() {
-    Share.share('Check out this awesome app: https://play.google.com/store/apps/details?id=com.yourcompany.yourapp', subject: 'Download the Visual Learning app!');
+    Share.share('Check out this awesome app and Use ${AppString.referralCodeText}: https://play.google.com/store/apps/details?id=com.yourcompany.yourapp', subject: 'Download the Visual Learning app! ');
   }
 
   @override

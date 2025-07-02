@@ -90,7 +90,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                       SizedBox(height: size.height * 0.019),
                                       Text(state.subscriptionPlanResponse?.data?[index].planName ?? '', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                                       SizedBox(height: size.height * 0.019),
-                                      Text(state.subscriptionPlanResponse?.data?[index].createdAt ?? '', textAlign: TextAlign.center, style: TextStyle(fontSize: 14, color: Colors.black54)),
+                                      Text('Description', textAlign: TextAlign.center, style: TextStyle(fontSize: 14, color: Colors.black54)),
                                       SizedBox(height: size.height * 0.025),
                                       Text(state.subscriptionPlanResponse?.data?[index].price ?? '', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: selected ? Colors.green : Colors.black)),
                                       Text("Offer:-${state.subscriptionPlanResponse?.data?[index].offerPrice ?? ''}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: selected ? Colors.green : Colors.black)),

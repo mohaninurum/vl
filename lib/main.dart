@@ -11,6 +11,7 @@ import 'package:visual_learning/screen/classes/bloc/classes_bloc.dart';
 import 'package:visual_learning/screen/contact/blocs/contact_bloc.dart';
 import 'package:visual_learning/screen/drawer/blocs/drawer_logout/drawer_logout_bloc.dart';
 import 'package:visual_learning/screen/feedback/blocs/feedback_bloc.dart';
+import 'package:visual_learning/screen/get_plan/blocs/purchase_plan_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/BottomNav/bottom_nav_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/category/category_bloc.dart';
@@ -67,6 +68,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => NotesContentBloc()),
         BlocProvider(create: (_) => TestPaperContentBloc()),
         BlocProvider(create: (_) => TestPaperContentBloc()),
+        BlocProvider(create: (_) => PurchaseBloc()),
       ],
       child: MyApp(),
     ),
@@ -86,5 +88,3 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)), home: SplashScreen());
   }
 }
-
-//8.10.2

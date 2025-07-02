@@ -45,7 +45,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         print("submmit Pressesd");
         emit(state.copyWith(isSubmitting: true, isSuccess: false, generalError: null));
         try {
-          final body = {"full_name": state.fullName, "mobile": state.mobile, "email": state.email, "password": state.password, "referral_code": state.referralCode};
+          final body = {"full_name": state.fullName, "mobile": state.mobile, "email": state.email, "password": state.password, "referred_code": state.referralCode};
           // Future.delayed(Duration(seconds: 5));
           final loginresponce = await ApiRepositoryImpl().signUp(body: body);
           if (loginresponce["status"] == true) {

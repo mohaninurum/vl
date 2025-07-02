@@ -41,7 +41,7 @@ class GridviewListWidget extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = state.categoryResponseModel.categories[index];
-                  return CategoryItem(comingSoon: index == 1 ? true : false, language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: item.categoryName, id: item.categoryId.toString())));
+                  return CategoryItem(comingSoon: false, language: language, title: item.categoryName, image: item.categoryIcon, onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: item.categoryName, id: item.categoryId.toString())));
                 },
               )
               : Center(child: Text("No Record"));
