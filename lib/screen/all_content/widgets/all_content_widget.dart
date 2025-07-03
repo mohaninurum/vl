@@ -90,7 +90,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                   children: [
                     Row(children: [Text("Class:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassesName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
                     Row(children: [Text("Language:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                    Row(children: [Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+                    Row(children: [Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), SizedBox(width: media.width * 0.35, child: Text(widget.selectChapterName, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500)))]),
                   ],
                 ),
               ),
@@ -196,11 +196,11 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                                             SubscriptionDialog.show(context);
                                           } else if (item.isPurchase == "2") {
                                             context.read<ChapterContentBloc>().add(ChapterTapped(item));
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
                                           }
                                         } else if (item.isPaid == "2") {
                                           context.read<ChapterContentBloc>().add(ChapterTapped(item));
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
                                         }
                                       }
                                     },
@@ -264,7 +264,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         CustomButton(
                           onPressed: () {
                             print("click quiz");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
                           },
                           text: "Start Quiz",
                           color: AppColors.buttonColorBlue1,

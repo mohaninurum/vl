@@ -20,6 +20,7 @@ class AllContentScreen extends StatelessWidget {
   // ];
   @override
   Widget build(BuildContext context) {
+    print("SELECT CLASS:- $selectClassName");
     final media = MediaQuery.of(context).size;
     return Scaffold(appBar: AppBarWidget(), backgroundColor: const Color(0xFFF2F5FA), body: SafeArea(child: Padding(padding: EdgeInsets.symmetric(horizontal: media.width * 0.04), child: AllContentWidget(id: id, language: language, selectClassesName: selectClassName, selectChapterName: selectChapterName))));
   }

@@ -260,7 +260,7 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
                 SizedBox(height: media.height * 0.01),
                 Text(AppString.chooseChapterText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
                 SizedBox(height: media.height * 0.01),
-                TabBar(onTap: (index) => context.read<SubjectTabBloc>().add(SubjectChanged(index)), controller: _tabController, labelColor: Colors.purple, unselectedLabelColor: Colors.grey, indicatorColor: Colors.purple, indicatorWeight: 2.5, indicatorSize: TabBarIndicatorSize.tab, labelStyle: const TextStyle(fontWeight: FontWeight.w500), tabs: List.generate(subjects.length, (index) => Tab(text: subjects[index].subjectName ?? 'Subject'))),
+                TabBar(tabAlignment: TabAlignment.start, isScrollable: true, onTap: (index) => context.read<SubjectTabBloc>().add(SubjectChanged(index)), controller: _tabController, labelColor: Colors.purple, unselectedLabelColor: Colors.grey, indicatorColor: Colors.purple, indicatorWeight: 2.5, indicatorSize: TabBarIndicatorSize.tab, labelStyle: const TextStyle(fontWeight: FontWeight.w500), tabs: List.generate(subjects.length, (index) => Tab(text: subjects[index].subjectName ?? 'Subject'))),
                 SizedBox(height: media.height * 0.01),
                 BlocListener<CategorySelectedBloc, CategorySelectedState>(
                   listener: (context, state) {
@@ -270,6 +270,7 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
                   },
                   child: Expanded(
                     child: TabBarView(
+                      physics: AlwaysScrollableScrollPhysics(),
                       controller: _tabController,
                       children: List.generate(subjects.length, (index) {
                         return BlocBuilder<SubjectTabBloc, SubjectTabState>(

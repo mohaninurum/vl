@@ -15,6 +15,8 @@ class IsLoadingQuiz extends QuizEvent {
 
 class SuccessQuiz extends QuizEvent {}
 
+class PreviewQuiz extends QuizEvent {}
+
 class CheckAnswer extends QuizEvent {}
 
 class ShowExplanationAnswer extends QuizEvent {

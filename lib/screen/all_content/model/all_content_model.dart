@@ -10,8 +10,9 @@ class ChapterContentModel {
   final Color bgColor;
   final String? isPaid;
   final String? isPurchase;
+  final String? videoType;
 
-  ChapterContentModel({this.isPurchase, this.isPaid, required this.VideoUrl, required this.imageUrl, required this.title, required this.subtitle, required this.gradeLangEn, required this.gradeLangHi, required this.bgColor});
+  ChapterContentModel({this.videoType, this.isPurchase, this.isPaid, required this.VideoUrl, required this.imageUrl, required this.title, required this.subtitle, required this.gradeLangEn, required this.gradeLangHi, required this.bgColor});
 }
 
 class VideoListResponse {

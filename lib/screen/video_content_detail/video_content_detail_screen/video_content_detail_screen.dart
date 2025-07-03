@@ -177,8 +177,9 @@ class VideoContentDetailScreen extends StatefulWidget {
   final String selectTopicName;
   final String videoUrl;
   final String descriptions;
+  final String videoType;
 
-  const VideoContentDetailScreen({super.key, required this.language, required this.selectClassName, required this.selectChapterName, required this.selectTopicName, required this.videoUrl, required this.descriptions});
+  const VideoContentDetailScreen({super.key, required this.language, required this.selectClassName, required this.selectChapterName, required this.selectTopicName, required this.videoUrl, required this.descriptions, required this.videoType});
 
   @override
   State<VideoContentDetailScreen> createState() => _VideoContentDetailScreenState();
@@ -197,19 +198,19 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
     print("Youtube uirl");
     print(widget.videoUrl);
     try {
-      if (videoId != null && widget.videoUrl.contains("www.youtube.com")) {
-        isYouTube = true;
-        _controller = YoutubePlayerController(initialVideoId: videoId, flags: const YoutubePlayerFlags(autoPlay: false, mute: false))..addListener(() {
-          if (_controller.value.isReady && !_isPlayerReady) {
-            setState(() {
-              _isPlayerReady = true;
-            });
-          }
-        });
-      } else {
-        isYouTube = false;
-        //"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        if (widget.videoUrl != null) {
+      if (videoId != null) {
+        if (widget.videoType.toString() == "2") {
+          isYouTube = true;
+          _controller = YoutubePlayerController(initialVideoId: videoId, flags: const YoutubePlayerFlags(autoPlay: false, mute: false))..addListener(() {
+            if (_controller.value.isReady && !_isPlayerReady) {
+              setState(() {
+                _isPlayerReady = true;
+              });
+            }
+          });
+        } else {
+          isYouTube = false;
+          //"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
           _videoController = VideoPlayerController.network("${widget.videoUrl}")
             ..initialize().then((_) {
               setState(() {}); // Rebuild to show video

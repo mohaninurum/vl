@@ -118,11 +118,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 },
               ),
             ),
-            SizedBox(height: media.height * 0.035),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text(AppString.exploreCategoriesText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-            SizedBox(height: media.height * 0.025),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
               child: BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
                   print(state.selectedCategory);

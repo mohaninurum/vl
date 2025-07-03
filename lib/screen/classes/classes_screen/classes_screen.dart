@@ -38,7 +38,7 @@ class ClassesScreen extends StatefulWidget {
 class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String language = 'English';
-
+  bool isloading = true;
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
@@ -103,19 +103,22 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                     children: [
                       BlocBuilder<ClassListBloc, ClassListState>(
                         builder: (context, state) {
+                          // if (state is InitailClassList) {
+                          //   return Center(child: Text("Data Not Load"));
+                          //   // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+                          // }
+
                           if (state is InitailClassList) {
-                            return Center(child: Text("Data Not Load"));
-                            // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+                            return isloading ? SizedBox.shrink() : Center(child: CircularProgressIndicator());
                           }
-                          if (state is IsLoadingClassList) {
-                            return Center(child: CircularProgressIndicator());
-                          }
+
                           if (state is LoadedClassList) {
+                            isloading = false;
                             return state.classListResponse!.data.isNotEmpty
                                 ? GridView.builder(
                                   itemCount: state.classListResponse?.data.length,
                                   shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
+                                  physics: const AlwaysScrollableScrollPhysics(),
                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: crossAxisCount, // number of columns
                                     mainAxisSpacing: 16,
@@ -137,19 +140,22 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                       ),
                       BlocBuilder<ClassListBloc, ClassListState>(
                         builder: (context, state) {
+                          // if (state is InitailClassList) {
+                          //   return Center(child: Text("Data Not Load"));
+                          //   // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+                          // }
+
                           if (state is InitailClassList) {
-                            return Center(child: Text("Data Not Load"));
-                            // return GridView.count(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, crossAxisCount: crossAxisCount, mainAxisSpacing: 16, crossAxisSpacing: 16, children: screenName == "home" ? gridItemHome : gridItemClasses);
+                            return isloading ? SizedBox.shrink() : Center(child: CircularProgressIndicator());
                           }
-                          if (state is IsLoadingClassList) {
-                            return Center(child: CircularProgressIndicator());
-                          }
+
                           if (state is LoadedClassList) {
+                            isloading = false;
                             return state.classListResponse!.data.isNotEmpty
                                 ? GridView.builder(
                                   itemCount: state.classListResponse?.data.length,
                                   shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
+                                  physics: const AlwaysScrollableScrollPhysics(),
                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: crossAxisCount, // number of columns
                                     mainAxisSpacing: 16,

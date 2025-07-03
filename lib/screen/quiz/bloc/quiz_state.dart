@@ -20,6 +20,7 @@ import '../models/question_model.dart';
 // }
 class QuizState {
   final List<QuestionModel> questions;
+  final List<int> selectedAnswers;
   final int currentIndex;
   final int selectedIndex;
   final bool showResult;
@@ -27,14 +28,14 @@ class QuizState {
   final bool isSelectAnswer;
   final bool isLoading;
 
-  QuizState({required this.isLoading, required this.isSelectAnswer, required this.showExplanation, required this.questions, required this.currentIndex, required this.selectedIndex, required this.showResult});
+  QuizState({required this.selectedAnswers, required this.isLoading, required this.isSelectAnswer, required this.showExplanation, required this.questions, required this.currentIndex, required this.selectedIndex, required this.showResult});
 
   factory QuizState.initial() {
-    return QuizState(questions: [], currentIndex: 0, selectedIndex: -1, showResult: false, showExplanation: false, isSelectAnswer: false, isLoading: false);
+    return QuizState(questions: [], currentIndex: 0, selectedIndex: -1, showResult: false, showExplanation: false, isSelectAnswer: false, isLoading: false, selectedAnswers: []);
   }
 
-  QuizState copyWith({bool? isLoading, bool? isSelectAnswer, bool? showExplanation, List<QuestionModel>? questions, int? currentIndex, int? selectedIndex, bool? showResult}) {
-    return QuizState(isLoading: isLoading ?? this.isLoading, isSelectAnswer: isSelectAnswer ?? this.isSelectAnswer, showExplanation: showExplanation ?? this.showExplanation, questions: questions ?? this.questions, currentIndex: currentIndex ?? this.currentIndex, selectedIndex: selectedIndex ?? this.selectedIndex, showResult: showResult ?? this.showResult);
+  QuizState copyWith({bool? isLoading, bool? isSelectAnswer, bool? showExplanation, List<QuestionModel>? questions, int? currentIndex, int? selectedIndex, bool? showResult, required List<int> selectedAnswers}) {
+    return QuizState(selectedAnswers: selectedAnswers ?? this.selectedAnswers, isLoading: isLoading ?? this.isLoading, isSelectAnswer: isSelectAnswer ?? this.isSelectAnswer, showExplanation: showExplanation ?? this.showExplanation, questions: questions ?? this.questions, currentIndex: currentIndex ?? this.currentIndex, selectedIndex: selectedIndex ?? this.selectedIndex, showResult: showResult ?? this.showResult);
   }
 
   QuestionModel get currentQuestion => questions[currentIndex];

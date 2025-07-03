@@ -52,7 +52,7 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
           VideoListResponse Response = VideoListResponse.fromJson(loginresponce);
           chapters.clear();
           for (var video in Response.data) {
-            chapters.add(ChapterContentModel(isPurchase: BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.isSubscribe.toString(), isPaid: video.isPaid, VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: 'English', gradeLangHi: 'hindi', bgColor: Colors.grey.shade200));
+            chapters.add(ChapterContentModel(videoType: video.videoType.toString(), isPurchase: BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.isSubscribe.toString(), isPaid: video.isPaid, VideoUrl: video.videoUrl, imageUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description ?? '', gradeLangEn: 'English', gradeLangHi: 'hindi', bgColor: Colors.grey.shade200));
             print(chapters.length);
           }
           emit(state.copyWith(isLoading: false));

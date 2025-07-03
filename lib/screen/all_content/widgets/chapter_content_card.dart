@@ -15,7 +15,7 @@ class ChapterItemCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+        margin: const EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(12)),
         child: Row(
           children: [
@@ -30,7 +30,7 @@ class ChapterItemCard extends StatelessWidget {
                   children: [
                     Image.network(
                       "${item?.imageUrl}",
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return const Center(child: CircularProgressIndicator());
@@ -52,11 +52,11 @@ class ChapterItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start, //
                   //
                   children: [
-                    Text(item?.title ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(item?.title ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 4),
                     Text(
                       "Chapter:$selectChapterName" ?? '', //
-                      style: const TextStyle(color: Colors.black87, fontSize: 13),
+                      style: const TextStyle(color: Colors.black87, fontSize: 12),
                     ),
                     const SizedBox(height: 4),
                     Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12)),
