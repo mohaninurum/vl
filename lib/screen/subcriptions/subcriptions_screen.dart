@@ -22,13 +22,40 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   @override
   void initState() {
     var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
-    BlocProvider.of<SubscriptionBloc>(context).add(GetSubscriptions(context: context, token: token));
+    var id = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString() ?? '';
+    var isSubscribe = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.isSubscribe.toString() ?? '';
+    BlocProvider.of<SubscriptionBloc>(context).add(GetSubscriptions(context: context, token: token, id: id, isSubscribe: isSubscribe));
     super.initState();
+  }
+
+  int getDaysUntilExpiry(String endDateStr) {
+    DateTime endDate = DateTime.parse(endDateStr);
+    DateTime today = DateTime.now();
+
+    // Only compare date (ignore time)
+    DateTime cleanToday = DateTime(today.year, today.month, today.day);
+    DateTime cleanEnd = DateTime(endDate.year, endDate.month, endDate.day);
+
+    return cleanEnd.difference(cleanToday).inDays;
+  }
+
+  bool selectedPlan(state, index) {
+    bool selected = false;
+    if (state.subscriptionID.toString().isNotEmpty) {
+      selected = state.subscriptionID.toString() == "${state.subscriptionPlanResponse?.data?[index].planId.toString()}";
+      print("select already");
+    } else {
+      selected = state.selectedPlanIndex == index;
+      print("select plan");
+    }
+
+    return selected;
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var endDate = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.expiryDate ?? "2025-06-20 23:59:59";
     return Scaffold(
       appBar: AppBarWidget(appTitle: 'Subscription'),
       body: SafeArea(
@@ -74,9 +101,15 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       return state.subscriptionPlanResponse?.data?.isNotEmpty == true
                           ? Row(
                             children: List.generate(state.subscriptionPlanResponse?.data?.length ?? 0, (index) {
-                              final selected = state.selectedPlanIndex == index;
+                              bool selected = selectedPlan(state, index);
+                              // bool selected = state.selectedPlanIndex == index;
+                              // selected = state.subscriptionID.toString().isNotEmpty ? state.subscriptionID.toString() == "${state.subscriptionPlanResponse?.data?[index].planId.toString()}" : state.selectedPlanIndex == index;
                               return GestureDetector(
-                                onTap: () => context.read<SubscriptionBloc>().add(SelectPlan(index)),
+                                onTap: () {
+                                  print("${state.subscriptionID.toString()}");
+                                  //   print("Selec Plan");
+                                  context.read<SubscriptionBloc>().add(SelectPlan(index));
+                                },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: size.height * 0.019),
                                   padding: const EdgeInsets.all(16),
@@ -99,15 +132,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                       Text(state.subscriptionPlanResponse?.data?[index].durationDays.toString() ?? '', style: TextStyle(fontSize: 13, color: Colors.black45)),
                                       SizedBox(height: size.height * 0.01),
                                       Container(
+                                        alignment: Alignment.center,
                                         width: double.infinity,
                                         height: size.height * 0.032,
                                         decoration: BoxDecoration(color: selected ? Colors.green : Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
-                                        child: MaterialButton(
-                                          onPressed: () {
-                                            selected ? Navigator.push(context, MaterialPageRoute(builder: (context) => PurchaseScreen(selectedPlan: state.subscriptionPlanResponse?.data?[index]))) : null;
-                                          },
-                                          child: Text("Get", style: TextStyle(color: selected ? Colors.white : Colors.white, fontSize: 16)),
-                                        ),
+                                        child:
+                                            state.subscriptionID.toString() == state.subscriptionPlanResponse?.data?[index].planId.toString()
+                                                ? Text(getDaysUntilExpiry(endDate) == 0 ? "Today Expire" : "${getDaysUntilExpiry(endDate)} days left", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
+                                                : MaterialButton(
+                                                  onPressed: () {
+                                                    selected ? Navigator.push(context, MaterialPageRoute(builder: (context) => PurchaseScreen(selectedPlan: state.subscriptionPlanResponse?.data?[index]))) : null;
+                                                  },
+                                                  child: Text("Get", style: TextStyle(color: selected ? Colors.white : Colors.white, fontSize: 16)),
+                                                ),
                                       ),
                                     ],
                                   ),

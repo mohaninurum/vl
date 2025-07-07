@@ -115,20 +115,23 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                           if (state is LoadedClassList) {
                             isloading = false;
                             return state.classListResponse!.data.isNotEmpty
-                                ? GridView.builder(
-                                  itemCount: state.classListResponse?.data.length,
-                                  shrinkWrap: true,
-                                  physics: const AlwaysScrollableScrollPhysics(),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: crossAxisCount, // number of columns
-                                    mainAxisSpacing: 16,
-                                    crossAxisSpacing: 16,
-                                    childAspectRatio: 1, // adjust height/width ratio
+                                ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GridView.builder(
+                                    itemCount: state.classListResponse?.data.length,
+                                    shrinkWrap: true,
+                                    physics: const AlwaysScrollableScrollPhysics(),
+                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: crossAxisCount, // number of columns
+                                      mainAxisSpacing: 16,
+                                      crossAxisSpacing: 16,
+                                      childAspectRatio: 1, // adjust height/width ratio
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      final item = state.classListResponse?.data[index];
+                                      return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
+                                    },
                                   ),
-                                  itemBuilder: (context, index) {
-                                    final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
-                                  },
                                 )
                                 : Center(child: Text("No Record"));
                           }
@@ -138,6 +141,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                           return SizedBox();
                         },
                       ),
+
                       BlocBuilder<ClassListBloc, ClassListState>(
                         builder: (context, state) {
                           // if (state is InitailClassList) {
@@ -152,20 +156,23 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                           if (state is LoadedClassList) {
                             isloading = false;
                             return state.classListResponse!.data.isNotEmpty
-                                ? GridView.builder(
-                                  itemCount: state.classListResponse?.data.length,
-                                  shrinkWrap: true,
-                                  physics: const AlwaysScrollableScrollPhysics(),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: crossAxisCount, // number of columns
-                                    mainAxisSpacing: 16,
-                                    crossAxisSpacing: 16,
-                                    childAspectRatio: 1, // adjust height/width ratio
+                                ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GridView.builder(
+                                    itemCount: state.classListResponse?.data.length,
+                                    shrinkWrap: true,
+                                    physics: const AlwaysScrollableScrollPhysics(),
+                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: crossAxisCount, // number of columns
+                                      mainAxisSpacing: 16,
+                                      crossAxisSpacing: 16,
+                                      childAspectRatio: 1, // adjust height/width ratio
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      final item = state.classListResponse?.data[index];
+                                      return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
+                                    },
                                   ),
-                                  itemBuilder: (context, index) {
-                                    final item = state.classListResponse?.data[index];
-                                    return CategoryItem(language: language, title: "${item?.className}", image: item?.classIcon ?? '', onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(id: item?.classId.toString() ?? '', category: "${item?.className}" ?? '')));
-                                  },
                                 )
                                 : Center(child: Text("No Record"));
                           }

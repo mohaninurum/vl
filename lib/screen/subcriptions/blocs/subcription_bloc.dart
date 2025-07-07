@@ -6,6 +6,7 @@ import 'package:visual_learning/screen/subcriptions/blocs/subcription_event.dart
 import 'package:visual_learning/screen/subcriptions/blocs/subcription_state.dart';
 
 import '../../../repo/api_repository_lmp.dart';
+import '../../profile/models/user_subscription_details_model.dart';
 import '../models/subscription_plan_model.dart';
 
 class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
@@ -13,7 +14,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     on<SelectPlan>((event, emit) {
       final currentState = state;
       if (currentState is SubscriptionPlanListState) {
-        emit(SubscriptionPlanListState(subscriptionPlanResponse: currentState.subscriptionPlanResponse, selectedPlanIndex: event.planIndex));
+        emit(SubscriptionPlanListState(subscriptionPlanResponse: currentState.subscriptionPlanResponse, selectedPlanIndex: event.planIndex, subscriptionID: ''));
       }
     });
 
@@ -22,9 +23,20 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
         emit(IsLoadingSubscriptionState());
         Map<String, dynamic> body = {'auth': event.token};
         final responce = await ApiRepositoryImpl().getSubscriptionPlan(body: body);
+
         if (responce["status"] == true) {
           SubscriptionPlanResponse Response = SubscriptionPlanResponse.fromJson(responce);
-          emit(SubscriptionPlanListState(subscriptionPlanResponse: Response, selectedPlanIndex: -1));
+          if (event.isSubscribe.toString() == "2") {
+            final userSubscriptionDetail = await ApiRepositoryImpl().getUserSubscription(body: body, id: event.id);
+            if (userSubscriptionDetail["status"] == true) {
+              print("Use subscription detial ");
+              SubscriptionResponse subscriptionResponse = SubscriptionResponse.fromJson(userSubscriptionDetail);
+
+              emit(SubscriptionPlanListState(subscriptionPlanResponse: Response, selectedPlanIndex: -1, subscriptionID: "${subscriptionResponse.data?.subscriptionPlanIdFK ?? ''}"));
+            }
+          } else {
+            emit(SubscriptionPlanListState(subscriptionPlanResponse: Response, selectedPlanIndex: -1, subscriptionID: ''));
+          }
         } else {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
 

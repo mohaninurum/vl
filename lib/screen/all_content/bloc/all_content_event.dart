@@ -6,7 +6,8 @@ class LoadChaptersContent extends ChapterContentEvent {
   final context;
   final id;
   final token;
-  LoadChaptersContent({this.token, this.context, this.id});
+  final userID;
+  LoadChaptersContent({this.token, this.context, this.id, this.userID});
 }
 
 class ChapterTapped extends ChapterContentEvent {
@@ -15,6 +16,16 @@ class ChapterTapped extends ChapterContentEvent {
 }
 
 class ToggleLanguageEvent extends ChapterContentEvent {}
+
+class FavoriteEvent extends ChapterContentEvent {
+  final int selectIndex;
+  final String favoriteID;
+  final String userID;
+  final bool isfavorite;
+  final context;
+  final token;
+  FavoriteEvent({this.token, required this.selectIndex, required this.favoriteID, required this.isfavorite, this.context, required this.userID});
+}
 
 class SelectChapterEvent extends ChapterContentEvent {
   final ChapterContentModel chapter;

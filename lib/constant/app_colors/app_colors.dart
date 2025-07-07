@@ -4,6 +4,7 @@ class AppColors {
   static const Color appBarColor = Color(0xFF600183);
   static const Color pramarycolor = Color(0xFF600183);
   static Color pramaryLightcolor = Colors.purple.shade100;
+  static Color faveritetabbartcolor = Colors.deepPurple.shade50;
   static const Color quizebuttoncolorbluetypecolor = Color(0xFF8f65d5);
   static const Color quizeQuetionscolor = Color(0xFFd5d7d6);
   static const Color checkButtonscolor = Color(0xFFee8b61);

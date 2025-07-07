@@ -8,5 +8,7 @@ class SelectPlan extends SubscriptionEvent {
 class GetSubscriptions extends SubscriptionEvent {
   final context;
   final token;
-  GetSubscriptions({this.context, this.token});
+  final id;
+  final isSubscribe;
+  GetSubscriptions({this.isSubscribe, this.id, this.context, this.token});
 }

@@ -12,6 +12,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visual_learning/screen/all_content/widgets/video_avalable_info_diallog.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/CategorySelected/_category_selected_state.dart';
 
@@ -54,13 +55,15 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
 
     _tabController = TabController(length: 4, vsync: this);
     language = widget.language;
-
+    if (language == "Hindi") {
+      isEnglish = false;
+    }
     // Correct usage
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString();
+      var userID = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString();
       final bloc = context.read<ChapterContentBloc>();
-      print("LoadChaptersContent ;-ID ${widget.id}");
-      bloc.add(LoadChaptersContent(token: token, id: widget.id, context: context));
+      bloc.add(LoadChaptersContent(token: token, id: widget.id, context: context, userID: userID));
     });
   }
 
@@ -159,7 +162,6 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
         // TabBarView for GridView content
         BlocListener<CategorySelectedBloc, CategorySelectedState>(
           listener: (context, state) {
-            print(state.selectedCategory);
             // if (state.selectedCategory == "1") {
             //   Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesScreen(selectClassesName: AppString.animationText, id: "1")));
             // }
@@ -170,8 +172,6 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
               children: [
                 BlocBuilder<ChapterContentBloc, ChapterContentState>(
                   builder: (context, state) {
-                    print("video..list${state.chapters}");
-                    print("video..list${state.isLoading}");
                     if (state.isLoading) {
                       return Center(child: CircularProgressIndicator());
                     }
@@ -187,21 +187,39 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                                   final item = state.chapters[index];
                                   final gradeLang = state.isEnglishSelected ? item.gradeLangEn : item.gradeLangHi;
                                   return ChapterItemCard(
+                                    index: index,
                                     selectChapterName: widget.selectChapterName,
                                     item: item,
                                     onTap: () {
-                                      if (item.VideoUrl != null) {
+                                      if (language == "English" && item.videoUrlEnglish != null) {
                                         if (item.isPaid == "1") {
                                           if (item.isPurchase == '1') {
                                             SubscriptionDialog.show(context);
                                           } else if (item.isPurchase == "2") {
                                             context.read<ChapterContentBloc>().add(ChapterTapped(item));
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.videoUrlEnglish ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
                                           }
                                         } else if (item.isPaid == "2") {
                                           context.read<ChapterContentBloc>().add(ChapterTapped(item));
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.VideoUrl ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.videoUrlEnglish ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
                                         }
+                                      } else if (language == "English") {
+                                        InfoDialog.showHindiNotAvailable(context, "English");
+                                      }
+                                      if (language == "Hindi" && item.videoUrlHindi != null) {
+                                        if (item.isPaid == "1") {
+                                          if (item.isPurchase == '1') {
+                                            SubscriptionDialog.show(context);
+                                          } else if (item.isPurchase == "2") {
+                                            context.read<ChapterContentBloc>().add(ChapterTapped(item));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.videoUrlHindi ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                          }
+                                        } else if (item.isPaid == "2") {
+                                          context.read<ChapterContentBloc>().add(ChapterTapped(item));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoContentDetailScreen(videoType: item.videoType.toString(), videoUrl: item.videoUrlHindi ?? '', language: language, selectChapterName: widget.selectChapterName, selectClassName: widget.selectClassesName, selectTopicName: '${state?.chapters[index].title}', descriptions: state?.chapters[index].subtitle ?? "Descriptions...")));
+                                        }
+                                      } else if (language == "Hindi") {
+                                        InfoDialog.showHindiNotAvailable(context, "Hindi");
                                       }
                                     },
                                     gradeLang: "${widget.selectClassesName} $language",
@@ -210,6 +228,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                               ),
                             )
                             : Center(child: Text("No Record")),
+                        SizedBox(height: 10),
                       ],
                     );
                   },
@@ -226,7 +245,6 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         SizedBox(height: media.height * 0.035),
                         CustomButton(
                           onPressed: () {
-                            print("click notes");
                             Navigator.push(context, MaterialPageRoute(builder: (context) => NotesContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Notes', selectChapterName: widget.selectChapterName, language: widget.language, id: widget.id)));
                           },
                           text: "View Notes",
@@ -244,7 +262,6 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         SizedBox(height: media.height * 0.035),
                         CustomButton(
                           onPressed: () {
-                            print("click test");
                             Navigator.push(context, MaterialPageRoute(builder: (context) => TestContentDetialScreen(selectClassName: widget.selectClassesName, tabtype: 'Question Paper', selectChapterName: widget.selectChapterName, language: widget.language, id: widget.id)));
                           },
                           text: "View Question Paper",
@@ -263,7 +280,6 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                         SizedBox(height: media.height * 0.015),
                         CustomButton(
                           onPressed: () {
-                            print("click quiz");
                             Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
                           },
                           text: "Start Quiz",

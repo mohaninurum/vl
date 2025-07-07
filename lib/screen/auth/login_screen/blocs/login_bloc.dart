@@ -140,6 +140,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<GoogleLogOutEvent>((event, emit) async {
       final auth = await GoogeAuthService().signOut();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? email = prefs.getString('email');
 
       try {
         Map<String, dynamic> body = {'auth': BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.token.toString() ?? ''};

@@ -18,4 +18,7 @@ abstract class ApiRepository {
   Future<Map<String, dynamic>> getSubscriptionPlan();
   Future<Map<String, dynamic>> purchasePlan();
   Future<Map<String, dynamic>> userLogout();
+  Future<Map<String, dynamic>> favoriteVideo();
+  Future<Map<String, dynamic>> addFavoriteVideo();
+  Future<Map<String, dynamic>> removeFavoriteVideo();
 }

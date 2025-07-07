@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:visual_learning/constant/app_colors/app_colors.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 
 import '../about/about_screen.dart';
 import '../auth/login_screen/blocs/login_event.dart';
 import '../contact/contact_screen/contact_screen.dart';
+import '../favorite/favorite_screen/favorite_screen.dart';
 import '../feedback/feedback_screen/feedback_screen.dart';
 import '../language/Language_sheet_screen.dart';
 import '../profile/blocs/logout/logout_bloc.dart';
@@ -14,11 +16,20 @@ import '../profile/widgets/logout_dailog.dart';
 import '../share_learn/share_learn+screen.dart';
 import '../subcriptions/subcriptions_screen.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  AppDrawer();
+
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   bool isExpired = false;
+
   bool isafter = false;
 
-  AppDrawer();
+  String? language = "";
+
   String toClassName(String input) {
     return input.split(RegExp(r'[_\s]+')).map((word) => word[0].toUpperCase() + word.substring(1)).join();
   }
@@ -44,6 +55,19 @@ class AppDrawer extends StatelessWidget {
     DateTime cleanEnd = DateTime(endDate.year, endDate.month, endDate.day);
 
     return cleanEnd.difference(cleanToday).inDays;
+  }
+
+  getLanguage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    language = prefs.getString('language');
+    print("language");
+    print(language);
+  }
+
+  @override
+  void initState() {
+    getLanguage();
+    super.initState();
   }
 
   @override
@@ -116,6 +140,15 @@ class AppDrawer extends StatelessWidget {
                 // Navigate to profile screen
               },
             ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text('Favorite', style: TextStyle(fontWeight: FontWeight.normal)),
+              onTap: () {
+                // Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));
+                // Navigate to profile screen
+              },
+            ),
 
             ListTile(
               leading: Icon(Icons.language),
@@ -125,7 +158,7 @@ class AppDrawer extends StatelessWidget {
                 showLanguageBottomSheet(context);
                 // Navigate to profile screen
               },
-              trailing: Text("English", style: TextStyle(color: Colors.grey)),
+              trailing: Text(language.toString(), style: TextStyle(color: Colors.grey)),
             ),
             ListTile(
               leading: Icon(Icons.screen_share_outlined),
@@ -155,7 +188,7 @@ class AppDrawer extends StatelessWidget {
               title: Text('About us', style: TextStyle(fontWeight: FontWeight.normal)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsWebView())); // AboutUsScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsScreen())); // AboutUsScreen
 
                 // Navigate to support screen
               },

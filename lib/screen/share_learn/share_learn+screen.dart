@@ -6,20 +6,24 @@ import 'package:visual_learning/screen/share_learn/widgets/helpOptionTile.dart';
 import 'package:visual_learning/screen/share_learn/widgets/share_step_widgets.dart';
 
 import '../../constant/app_string/app_string.dart';
+import '../auth/login_screen/blocs/login_bloc.dart';
 import '../widgets/appBarWidget.dart';
 import 'blocs/share_learn_bloc.dart';
 
 class ShareScreen extends StatelessWidget {
-  const ShareScreen({super.key});
-  void shareApp() {
-    Share.share('Check out this awesome app and Use ${AppString.referralCodeText}: https://play.google.com/store/apps/details?id=com.yourcompany.yourapp', subject: 'Download the Visual Learning app! ');
+  ShareScreen({super.key});
+
+  String? refCode = '';
+
+  shareApp() {
+    Share.share('Check out this awesome app and Use ${AppString.referralCodeText}:- $refCode: https://play.google.com/store/apps/details?id=com.yourcompany.yourapp', subject: 'Download the Visual Learning app! ');
   }
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
-
+    refCode = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.referralCode.toString();
     return BlocProvider(
       create: (_) => ShareBloc(),
       child: Scaffold(

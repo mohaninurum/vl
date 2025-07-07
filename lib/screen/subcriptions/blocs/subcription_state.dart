@@ -13,8 +13,9 @@ class IsLoadingSubscriptionState extends SubscriptionState {}
 
 class SubscriptionPlanListState extends SubscriptionState {
   final int selectedPlanIndex;
+  final String? subscriptionID;
   final SubscriptionPlanResponse? subscriptionPlanResponse;
-  SubscriptionPlanListState({this.subscriptionPlanResponse, this.selectedPlanIndex = -1});
+  SubscriptionPlanListState({this.subscriptionID, this.subscriptionPlanResponse, this.selectedPlanIndex = -1});
 }
 
 class FailSubscriptionState extends SubscriptionState {}

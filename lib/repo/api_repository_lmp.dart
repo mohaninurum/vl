@@ -53,8 +53,8 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> getChapterVideo({id, body}) {
-    final response = ApiService().get("${ApiUrls.videoChaperUrl}$id", body);
+  Future<Map<String, dynamic>> getChapterVideo({userID, id, body}) {
+    final response = ApiService().get("${ApiUrls.videoChaperUrl}$id?user_id=$userID", body);
     return response;
   }
 
@@ -121,6 +121,24 @@ class ApiRepositoryImpl implements ApiRepository {
   @override
   Future<Map<String, dynamic>> userLogout({body}) {
     final response = ApiService().post(ApiUrls.usersLogoutUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> favoriteVideo({id, body}) {
+    final response = ApiService().get("${ApiUrls.favouriteVideoUrl}$id", body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> addFavoriteVideo({body}) {
+    final response = ApiService().post(ApiUrls.favouriteUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> removeFavoriteVideo({body}) {
+    final response = ApiService().post(ApiUrls.removeFavouriteUrl, body);
     return response;
   }
 }

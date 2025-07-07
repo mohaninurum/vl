@@ -30,6 +30,7 @@ class AllContentListWidges extends StatelessWidget {
                     final item = state.chapters[index];
                     final gradeLang = state.isEnglishSelected ? item.gradeLangEn : item.gradeLangHi;
                     return ChapterItemCard(
+                      index: index,
                       item: item,
                       gradeLang: gradeLang,
                       onTap: () {
@@ -59,6 +60,7 @@ class AllContentListWidges extends StatelessWidget {
                 // ),
               ),
             ),
+            SizedBox(height: 20),
           ],
         );
       },

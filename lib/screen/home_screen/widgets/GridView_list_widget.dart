@@ -30,13 +30,14 @@ class GridviewListWidget extends StatelessWidget {
         if (state is LoadedCategoryState) {
           return state.categoryResponseModel.categories.isNotEmpty
               ? GridView.builder(
+                padding: EdgeInsets.all(0),
                 itemCount: state.categoryResponseModel.categories.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount, // number of columns
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
                   childAspectRatio: 1, // adjust height/width ratio
                 ),
                 itemBuilder: (context, index) {

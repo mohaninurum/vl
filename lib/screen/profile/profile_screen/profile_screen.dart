@@ -20,6 +20,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  TextEditingController name = TextEditingController();
+
   @override
   void initState() {
     print("init call profile");
@@ -49,9 +51,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfileCard(Size size, ProfileState state) {
-    final username = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? 'Test User';
-    final email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? 'Test@gmail.com';
-    return Container(width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 24), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)]), child: Column(children: [Container(decoration: BoxDecoration(border: Border.all(width: 4, color: AppColors.pramarycolor), borderRadius: BorderRadius.circular(50)), child: CircleAvatar(radius: size.width * 0.06, backgroundColor: Colors.purple.shade50, child: const Icon(Icons.person_pin, size: 40, color: AppColors.pramarycolor))), const SizedBox(height: 10), Text(toClassName(username), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), Text(email, style: const TextStyle(color: Colors.grey))]));
+    final username = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
+    final email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? '';
+    final phone = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.mobile.toString() ?? '';
+    name.text = username;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)]),
+      child: Column(
+        children: [
+          Container(decoration: BoxDecoration(border: Border.all(width: 4, color: AppColors.pramarycolor), borderRadius: BorderRadius.circular(50)), child: CircleAvatar(radius: size.width * 0.06, backgroundColor: Colors.purple.shade50, child: const Icon(Icons.person_pin, size: 40, color: AppColors.pramarycolor))),
+          const SizedBox(height: 10),
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.18),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // SizedBox(width: size.width * 0.18),
+                Expanded(
+                  child: TextFormField(
+                    enabled: false,
+                    controller: name,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      isDense: true, // Reduces vertical padding
+                      filled: true,
+                      fillColor: Colors.white,
+                      // labelText: "User Name",
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13), // Reduce vertical padding
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: Colors.deepPurple, width: 2)),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      // Your action here
+                    },
+                    icon: const Icon(Icons.edit, size: 18, color: Colors.deepPurple),
+                    label: const Text("", style: TextStyle(color: Colors.deepPurple)),
+                    style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.deepPurple), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12)),
+                  ),
+                ),
+
+                // Padding(padding: const EdgeInsets.only(left: 5), child: Icon(Icons.edit)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 5),
+
+          Padding(
+            padding: EdgeInsets.only(right: size.width * 0.12),
+            child: Text(
+              toClassName(phone), //
+              style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.grey),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(right: size.width * 0.12), child: Text(email, style: const TextStyle(color: Colors.grey))),
+        ],
+      ),
+    );
   }
 
   Widget _buildSubscriptionCard(Size size, ProfileState state) {

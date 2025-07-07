@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visual_learning/screen/all_content/bloc/all_content_event.dart';
 import 'package:visual_learning/screen/all_content/model/all_content_model.dart';
+
+import '../../../constant/app_colors/app_colors.dart';
+import '../../auth/login_screen/blocs/login_bloc.dart';
+import '../bloc/all_content_bloc.dart';
+import '../bloc/all_content_state.dart';
 
 class ChapterItemCard extends StatelessWidget {
   final ChapterContentModel? item;
   final VoidCallback onTap;
   final String gradeLang;
   final selectChapterName;
-  const ChapterItemCard({required this.item, required this.onTap, super.key, required this.gradeLang, this.selectChapterName});
+  final index;
+  const ChapterItemCard({required this.item, required this.onTap, super.key, required this.gradeLang, this.selectChapterName, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +54,7 @@ class ChapterItemCard extends StatelessWidget {
             // Container(width: width * 0.3, height: width * 0.2, decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)), image: DecorationImage(image:  NetworkImage(item?.imageUrl ?? ''), fit: BoxFit.cover)), child: const Center(child: Icon(Icons.play_circle, color: Colors.white, size: 32))),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(right: 10, top: 4, left: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start, //
@@ -58,7 +66,7 @@ class ChapterItemCard extends StatelessWidget {
                       "Chapter:$selectChapterName" ?? '', //
                       style: const TextStyle(color: Colors.black87, fontSize: 12),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 10),
                     Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12)),
                   ],
                 ),
@@ -79,6 +87,52 @@ class ChapterItemCard extends StatelessWidget {
                 // : SizedBox(),
               ),
             ),
+
+            BlocBuilder<ChapterContentBloc, ChapterContentState>(
+              builder: (context, state) {
+                final item = state.chapters[index]; // Always use latest state
+                final isFavorited = item.isFavorited ?? false;
+
+                return InkWell(
+                  onTap: () {
+                    final login = BlocProvider.of<LoginBloc>(context).loginResponse?.user;
+                    final token = login?.token ?? '';
+                    final userId = login?.userId.toString() ?? '';
+                    final videoId = item.videoId;
+
+                    context.read<ChapterContentBloc>().add(FavoriteEvent(token: token, userID: userId, context: context, selectIndex: index, favoriteID: videoId, isfavorite: !isFavorited));
+                  },
+                  child: CircleAvatar(radius: width * 0.06, backgroundColor: Colors.purple.shade50, child: Icon(isFavorited ? Icons.favorite : Icons.favorite_border_outlined, size: 30, color: AppColors.pramarycolor)),
+                );
+              },
+            ),
+
+            // BlocBuilder<ChapterContentBloc, ChapterContentState>(
+            //   builder: (context, state) {
+            //     final isFavorited = item?.isFavorited == "true" ? true : state.favoriteIndexes.contains(index);
+            //     return InkWell(
+            //       onTap: () {
+            //         var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+            //         var id = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString() ?? '';
+            //         context.read<ChapterContentBloc>().add(FavoriteEvent(token: token, userID: id, context: context, selectIndex: index, favoriteID: item?.videoId ?? '', isfavorite: !isFavorited));
+            //       },
+            //       child: CircleAvatar(radius: width * 0.06, backgroundColor: Colors.purple.shade50, child: Icon(isFavorited ? Icons.favorite : Icons.favorite_border_outlined, size: 30, color: AppColors.pramarycolor)),
+            //       // Icon(isFavorited ? Icons.favorite : Icons.favorite_border_outlined, size: 30, color: AppColors.pramarycolor),
+            //     );
+            //   },
+            // ),
+            SizedBox(width: 5),
+
+            // BlocBuilder<ChapterContentBloc, ChapterContentState>(
+            //   builder: (context, state) {
+            //     return InkWell(
+            //       onTap: () {
+            //         context.read<ChapterContentBloc>().add(FavoriteEvent(selectIndex: index, favoriteID: "", isfavorite: true));
+            //       },
+            //       child: Icon(index == state.selectIndex && state.isFavorite ? Icons.favorite : Icons.favorite_border_outlined, size: 45, color: AppColors.pramarycolor),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

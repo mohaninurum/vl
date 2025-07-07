@@ -8,7 +8,8 @@ class ApiUrls {
   static const String categoryUrl = '${baseUrl}category';
   static const String classListBycategoryUrl = '${baseUrl}class';
   static const String classDetailUrl = '${baseUrl}class/class-detail/';
-  static const String videoChaperUrl = '${baseUrl}video/';
+  // static const String videoChaperUrl = '${baseUrl}video/';
+  static const String videoChaperUrl = '${baseUrl}video/video-list/';
   static const String getSubjectUrl = '${baseUrl}subject/';
   static const String getNotesPdfUrl = '${baseUrl}notes-pdf/';
   static const String getTestPaperPdfUrl = '${baseUrl}test-paper/';
@@ -20,4 +21,7 @@ class ApiUrls {
   static const String getSubscriptionPlanUrl = '${baseUrl}subscription-plan';
   static const String PurchasePlanUrl = '${baseUrl}subscription-plan/purchase-plan';
   static const String usersLogoutUrl = '${baseUrl}users/logout';
+  static const String favouriteVideoUrl = '${baseUrl}favourite/favourite-video/';
+  static const String favouriteUrl = '${baseUrl}favourite';
+  static const String removeFavouriteUrl = '${baseUrl}favourite/remove-favourite';
 }

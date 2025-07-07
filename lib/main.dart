@@ -10,6 +10,7 @@ import 'package:visual_learning/screen/chapter/blocs/subjecttab_bloc.dart';
 import 'package:visual_learning/screen/classes/bloc/classes_bloc.dart';
 import 'package:visual_learning/screen/contact/blocs/contact_bloc.dart';
 import 'package:visual_learning/screen/drawer/blocs/drawer_logout/drawer_logout_bloc.dart';
+import 'package:visual_learning/screen/favorite/blocs/favorite_bloc.dart';
 import 'package:visual_learning/screen/feedback/blocs/feedback_bloc.dart';
 import 'package:visual_learning/screen/get_plan/blocs/purchase_plan_bloc.dart';
 import 'package:visual_learning/screen/home_screen/blocs/BottomNav/bottom_nav_bloc.dart';
@@ -69,6 +70,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => TestPaperContentBloc()),
         BlocProvider(create: (_) => TestPaperContentBloc()),
         BlocProvider(create: (_) => PurchaseBloc()),
+        BlocProvider(create: (_) => FavoriteBloc()),
       ],
       child: MyApp(),
     ),

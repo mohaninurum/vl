@@ -167,25 +167,22 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
+import '../../video_content_detail/video_content_detail_screen/full_screen_video.dart';
 import '../../widgets/appBarWidget.dart';
-import 'full_screen_video.dart';
 
-class VideoContentDetailScreen extends StatefulWidget {
-  final String language;
-  final String selectClassName;
-  final String selectChapterName;
-  final String selectTopicName;
+class VideoFavoriteDetailScreen extends StatefulWidget {
   final String videoUrl;
   final String descriptions;
+
   final String videoType;
 
-  const VideoContentDetailScreen({super.key, required this.language, required this.selectClassName, required this.selectChapterName, required this.selectTopicName, required this.videoUrl, required this.descriptions, required this.videoType});
+  const VideoFavoriteDetailScreen({super.key, required this.videoUrl, required this.descriptions, required this.videoType});
 
   @override
-  State<VideoContentDetailScreen> createState() => _VideoContentDetailScreenState();
+  State<VideoFavoriteDetailScreen> createState() => _VideoFavoriteDetailScreenState();
 }
 
-class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
+class _VideoFavoriteDetailScreenState extends State<VideoFavoriteDetailScreen> {
   late YoutubePlayerController _controller;
   VideoPlayerController? _videoController;
   bool _isPlayerReady = false;
@@ -315,21 +312,7 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
                   child: Column(
                     children: [
                       // Info card
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-                        padding: EdgeInsets.all(media.width * 0.04),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //
-                            _buildInfoRow("Class:", widget.selectClassName), //
-                            _buildInfoRow("Chapter:", widget.selectChapterName),
-                            _buildInfoRow("Topic:", widget.selectTopicName), //
-                            _buildInfoRow("Language:", widget.language),
-                          ],
-                        ),
-                      ),
+                      Container(alignment: Alignment.center, width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text("Favorite Video", style: TextStyle(color: Colors.white))])),
                       SizedBox(height: media.height * 0.03),
 
                       // Video player
@@ -363,21 +346,7 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
               child: Column(
                 children: [
                   // Info card
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-                    padding: EdgeInsets.all(media.width * 0.04),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //
-                        _buildInfoRow("Class:", widget.selectClassName), //
-                        _buildInfoRow("Chapter:", widget.selectChapterName),
-                        _buildInfoRow("Topic:", widget.selectTopicName), //
-                        _buildInfoRow("Language:", widget.language),
-                      ],
-                    ),
-                  ),
+                  Container(width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [])),
                   SizedBox(height: media.height * 0.03),
                   // Video player
                   ClipRRect(

@@ -3,17 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/home_screen/widgets/GridView_list_widget.dart';
 import 'package:visual_learning/screen/home_screen/widgets/banner_slider.dart';
+import 'package:visual_learning/screen/home_screen/widgets/category_item_widget.dart';
+import 'package:visual_learning/screen/home_screen/widgets/favorite_deviver.dart';
 import 'package:visual_learning/screen/home_screen/widgets/search_bar.dart';
 
 import '../../constant/app_colors/app_colors.dart';
 import '../../constant/app_string/app_string.dart';
 import '../classes/classes_screen/classes_screen.dart';
 import '../drawer/drawer_screen.dart';
+import '../favorite/favorite_screen/favorite_screen.dart';
 import '../notes/notes_screen/notes_screen.dart';
 import '../notifications/notifications_screen/notifications_screen.dart';
 import '../quiz_screen/quiz_main_screen.dart';
 import '../test_paper/test_paper_screen/test_paper_screen.dart';
 import 'blocs/CategorySelected/_category_selected_bloc.dart';
+import 'blocs/CategorySelected/_category_selected_event.dart';
 import 'blocs/CategorySelected/_category_selected_state.dart';
 import 'blocs/category/category_bloc.dart';
 import 'blocs/category/category_state.dart';
@@ -63,6 +67,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       drawer: AppDrawer(),
       backgroundColor: const Color(0xFFF2F5FA),
       body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -120,7 +126,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text(AppString.exploreCategoriesText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
               child: BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
                   print(state.selectedCategory);
@@ -139,13 +145,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   if (state.selectedCategory == "Quiz") {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
                   }
-                  // if (state.selectedCategory == "Animation") {
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
-                  // }
+                  if (state.selectedCategory == "Favorite") {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));
+                  }
                 },
                 child: GridviewListWidget(screenName: "home", language: ''),
               ),
             ),
+            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: FavoriteDeviver()),
+            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: CategoryItem(comingSoon: false, language: "", title: "Favorite", image: "favorite", onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: "Favorite", id: "1")))),
+            SizedBox(height: media.height * 0.08),
           ],
         ),
       ),
