@@ -68,10 +68,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             if (state.filteredFavorites[index].isPurchase == '1') {
                               SubscriptionDialog.show(context);
                             } else if (state.filteredFavorites[index].isPurchase == "2") {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(screen: "Favorite Video", videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
                             }
                           } else if (state.filteredFavorites[index].isPaid == "2") {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: 'test', videoType: state.filteredFavorites[index].videoType)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(screen: "Favorite Video", videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: 'test', videoType: state.filteredFavorites[index].videoType)));
                           }
                         } else if (language == "English") {
                           InfoDialog.showHindiNotAvailable(context, "English");
@@ -81,10 +81,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             if (state.filteredFavorites[index].isPurchase == '1') {
                               SubscriptionDialog.show(context);
                             } else if (state.filteredFavorites[index].isPurchase == "2") {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(screen: "Favorite Video", videoUrl: state.filteredFavorites[index].videoUrlHindi.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
                             }
                           } else if (state.filteredFavorites[index].isPaid == "2") {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(videoUrl: state.filteredFavorites[index].videoUrlEnglish.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoFavoriteDetailScreen(screen: "Favorite Video", videoUrl: state.filteredFavorites[index].videoUrlHindi.toString(), descriptions: state.filteredFavorites[index].subtitle, videoType: state.filteredFavorites[index].videoType)));
                           }
                         } else if (language == "Hindi") {
                           InfoDialog.showHindiNotAvailable(context, "Hindi");

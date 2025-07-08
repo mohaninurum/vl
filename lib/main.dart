@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/all_content/bloc/all_content_bloc.dart';
+import 'package:visual_learning/screen/all_content/bloc/quiz_chapter/qiuz_chapter_bloc.dart';
 import 'package:visual_learning/screen/auth/login_screen/blocs/login_bloc.dart';
 import 'package:visual_learning/screen/auth/singup_screen/blocs/signup_bloc.dart';
 import 'package:visual_learning/screen/chapter/blocs/chapter_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:visual_learning/screen/notes_content/blocs/notes_content_bloc.da
 import 'package:visual_learning/screen/profile/blocs/logout/logout_bloc.dart';
 import 'package:visual_learning/screen/profile/blocs/profile_bloc.dart';
 import 'package:visual_learning/screen/quiz/bloc/quiz_bloc.dart';
+import 'package:visual_learning/screen/search_screen/blocs/search_bloc.dart';
 import 'package:visual_learning/screen/share_learn/blocs/share_learn_bloc.dart';
 import 'package:visual_learning/screen/splash/splash_screen.dart';
 import 'package:visual_learning/screen/subcriptions/blocs/subcription_bloc.dart';
@@ -34,6 +36,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setSystemUIOverlayStyle(
@@ -71,6 +74,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => TestPaperContentBloc()),
         BlocProvider(create: (_) => PurchaseBloc()),
         BlocProvider(create: (_) => FavoriteBloc()),
+        BlocProvider(create: (_) => SearchBloc()),
+        BlocProvider(create: (_) => QiuzChapterBloc()),
       ],
       child: MyApp(),
     ),

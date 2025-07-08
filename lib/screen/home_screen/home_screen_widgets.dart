@@ -5,7 +5,6 @@ import 'package:visual_learning/screen/home_screen/widgets/GridView_list_widget.
 import 'package:visual_learning/screen/home_screen/widgets/banner_slider.dart';
 import 'package:visual_learning/screen/home_screen/widgets/category_item_widget.dart';
 import 'package:visual_learning/screen/home_screen/widgets/favorite_deviver.dart';
-import 'package:visual_learning/screen/home_screen/widgets/search_bar.dart';
 
 import '../../constant/app_colors/app_colors.dart';
 import '../../constant/app_string/app_string.dart';
@@ -15,6 +14,7 @@ import '../favorite/favorite_screen/favorite_screen.dart';
 import '../notes/notes_screen/notes_screen.dart';
 import '../notifications/notifications_screen/notifications_screen.dart';
 import '../quiz_screen/quiz_main_screen.dart';
+import '../search_screen/search_screen/search_screen.dart';
 import '../test_paper/test_paper_screen/test_paper_screen.dart';
 import 'blocs/CategorySelected/_category_selected_bloc.dart';
 import 'blocs/CategorySelected/_category_selected_event.dart';
@@ -90,12 +90,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   Spacer(),
                   InkWell(
                     onTap: () {
-                      showSearch(
-                        context: context,
-
-                        // Delegate to customize the search bar
-                        delegate: CustomSearchDelegate(),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                      // showSearch(
+                      //   context: context,
+                      //
+                      //   // Delegate to customize the search bar
+                      //   delegate: CustomSearchDelegate(),
+                      // );
                     },
                     child: Container(padding: EdgeInsets.only(top: media.height * 0.01, left: media.width * 0.012, right: media.width * 0.01, bottom: media.height * 0.01), decoration: BoxDecoration(color: AppColors.pramarycolor, shape: BoxShape.circle), child: Icon(Icons.search, color: Colors.white)),
                   ),
@@ -153,7 +154,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               ),
             ),
             Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: FavoriteDeviver()),
-            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: CategoryItem(comingSoon: false, language: "", title: "Favorite", image: "favorite", onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: "Favorite", id: "1")))),
+            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: CategoryItem(comingSoon: false, language: "", title: "Favorite Video", image: "favorite", onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: "Favorite", id: "1")))),
             SizedBox(height: media.height * 0.08),
           ],
         ),

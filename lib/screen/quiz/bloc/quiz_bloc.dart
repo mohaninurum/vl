@@ -47,7 +47,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
       updatedSelected.clear();
       try {
         Map<String, dynamic> body = {'auth': event.token};
-        final loginresponce = await ApiRepositoryImpl().getQuizContent(body: body, id: event.id);
+        final loginresponce = await ApiRepositoryImpl().quizDetail(body: body, id: event.id);
         if (loginresponce["status"] == true) {
           Response = QuizResponse.fromJson(loginresponce);
           List<QuestionModel> questions = [];

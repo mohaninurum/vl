@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +46,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             await prefs.setString('password', state.password);
             loginResponse = LoginResponse.fromJson(loginresponce);
             emit(state.copyWith(isSubmitting: false, isSuccess: true));
+            tokenSave(event.context, loginResponse?.user?.userId.toString(), loginResponse?.user?.token.toString());
             Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
             ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
@@ -76,6 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             await prefs.setString('password', state.password);
             loginResponse = LoginResponse.fromJson(loginresponce);
             emit(state.copyWith(isSubmitGoogle: true, isSuccess: true));
+            tokenSave(event.context, loginResponse?.user?.userId.toString(), loginResponse?.user?.token.toString());
             Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
             ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
@@ -109,6 +112,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             isLogin = true;
 
             loginResponse = LoginResponse.fromJson(loginresponce);
+
             emit(state.copyWith(isSubmitGoogle: true, isSuccess: true));
             Navigator.pushAndRemoveUntil(event.context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
           } else {
@@ -170,5 +174,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // Navigator.push(event.context, MaterialPageRoute(builder: (context) => LoginScreen()));
       // emit(state.copyWith(isLogin: false));
     });
+  }
+
+  Future<void> tokenSave(context, userID, token) async {
+    try {
+      String? firebasetoken = await FirebaseMessaging.instance.getToken();
+      if (firebasetoken != null) {
+        print("FCM Token: $firebasetoken");
+        // Send this token to your backend server or store it securely
+      }
+      Map<String, dynamic> body = {"user_id": userID, "fcm_token": firebasetoken, 'auth': token};
+      final loginresponce = await ApiRepositoryImpl().tokenSave(body: body);
+      if (loginresponce["status"] == true) {
+        print(loginresponce["message"]);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(loginresponce["message"])));
+      }
+    } on TimeoutException catch (e) {
+      emit(state.copyWith(isSubmitting: false, isSuccess: false));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Request timed out. Please try again later.')));
+    } catch (e) {
+      emit(state.copyWith(isSubmitting: true, isSuccess: false));
+      print("error :-$e");
+      // emit(state.copyWith(isSubmitting: false, emailError: 'Something went wrong, try again.'));
+    }
   }
 }

@@ -20,7 +20,7 @@ class FavoriteDeviver extends StatelessWidget {
               Positioned.fill(child: CustomPaint(painter: DiagonalSplitPainter())),
 
               // Text and Icon Layer
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Padding(padding: EdgeInsets.only(left: 20), child: Text("Favorite", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600, letterSpacing: 1.2))), Container(alignment: Alignment.centerLeft, width: 30, height: 50, decoration: const BoxDecoration(color: AppColors.pramarycolor1), child: Icon(Icons.favorite, color: Colors.white))]),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Padding(padding: EdgeInsets.only(left: 20), child: Text("Favorite Video", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600, letterSpacing: 1.2))), Container(alignment: Alignment.centerLeft, width: 30, height: 50, decoration: const BoxDecoration(color: AppColors.pramarycolor1), child: Icon(Icons.favorite, color: Colors.white))]),
             ],
           ),
         ),

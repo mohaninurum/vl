@@ -173,10 +173,10 @@ import '../../widgets/appBarWidget.dart';
 class VideoFavoriteDetailScreen extends StatefulWidget {
   final String videoUrl;
   final String descriptions;
-
   final String videoType;
+  final String screen;
 
-  const VideoFavoriteDetailScreen({super.key, required this.videoUrl, required this.descriptions, required this.videoType});
+  const VideoFavoriteDetailScreen({super.key, required this.videoUrl, required this.descriptions, required this.videoType, required this.screen});
 
   @override
   State<VideoFavoriteDetailScreen> createState() => _VideoFavoriteDetailScreenState();
@@ -194,7 +194,7 @@ class _VideoFavoriteDetailScreenState extends State<VideoFavoriteDetailScreen> {
     final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
 
     try {
-      print("Video initial.......");
+      print("Video initial....... ${widget.videoType}");
       if (widget.videoType.toString() == "2") {
         print("Youtube uirl");
         print(widget.videoUrl);
@@ -312,7 +312,7 @@ class _VideoFavoriteDetailScreenState extends State<VideoFavoriteDetailScreen> {
                   child: Column(
                     children: [
                       // Info card
-                      Container(alignment: Alignment.center, width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text("Favorite Video", style: TextStyle(color: Colors.white))])),
+                      Container(alignment: Alignment.center, width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.screen, style: TextStyle(color: Colors.white))])),
                       SizedBox(height: media.height * 0.03),
 
                       // Video player

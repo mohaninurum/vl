@@ -24,4 +24,7 @@ class ApiUrls {
   static const String favouriteVideoUrl = '${baseUrl}favourite/favourite-video/';
   static const String favouriteUrl = '${baseUrl}favourite';
   static const String removeFavouriteUrl = '${baseUrl}favourite/remove-favourite';
+  static const String usersFcmTokenUserUrl = '${baseUrl}users/fcm-token-user';
+  static const String searchListUrl = '${baseUrl}video/search';
+  static const String quizDetailUrl = '${baseUrl}quiz/quiz-detail/';
 }

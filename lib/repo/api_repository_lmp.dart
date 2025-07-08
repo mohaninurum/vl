@@ -141,4 +141,22 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().post(ApiUrls.removeFavouriteUrl, body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> tokenSave({body}) {
+    final response = ApiService().post(ApiUrls.usersFcmTokenUserUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getSearchList({body}) {
+    final response = ApiService().post(ApiUrls.searchListUrl, body);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> quizDetail({id, body}) {
+    final response = ApiService().get("${ApiUrls.quizDetailUrl}$id", body);
+    return response;
+  }
 }
