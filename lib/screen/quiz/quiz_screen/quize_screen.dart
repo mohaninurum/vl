@@ -122,7 +122,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                       ),
                                     ),
                                     SizedBox(width: media.width * 0.015),
-                                    Image.asset('assets/appicons/icon5Asset 5.png', height: media.height * 0.12),
+                                    Image.asset('assets/appicons/quiz_icon.png', height: media.height * 0.12),
                                   ],
                                 ),
                               ),

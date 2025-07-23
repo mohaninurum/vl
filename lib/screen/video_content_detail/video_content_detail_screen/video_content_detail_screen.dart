@@ -160,13 +160,14 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
+import '../../../constant/widgets/video_file_player.dart';
+import '../../../constant/widgets/you_player.dart';
 import '../../widgets/appBarWidget.dart';
 import 'full_screen_video.dart';
 
@@ -294,65 +295,47 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
     final media = MediaQuery.of(context).size;
 
     return isYouTube
-        ? YoutubePlayerBuilder(
-          player: YoutubePlayer(
-            controller: _controller,
-            showVideoProgressIndicator: true,
-            onReady: () {
-              _isPlayerReady = true;
-            },
-            onEnded: (_) {
-              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-            },
-          ),
-          builder: (context, player) {
-            return Scaffold(
-              appBar: AppBarWidget(),
-              backgroundColor: const Color(0xFFF2F5FA),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
-                  child: Column(
-                    children: [
-                      // Info card
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-                        padding: EdgeInsets.all(media.width * 0.04),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //
-                            _buildInfoRow("Class:", widget.selectClassName), //
-                            _buildInfoRow("Chapter:", widget.selectChapterName),
-                            _buildInfoRow("Topic:", widget.selectTopicName), //
-                            _buildInfoRow("Language:", widget.language),
-                          ],
-                        ),
+        ? SafeArea(
+          child: Scaffold(
+            appBar: AppBarWidget(),
+            backgroundColor: const Color(0xFFF2F5FA),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+                child: Column(
+                  children: [
+                    // Info card
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                      padding: EdgeInsets.all(media.width * 0.04),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //
+                          _buildInfoRow("Class:", widget.selectClassName), //
+                          _buildInfoRow("Chapter:", widget.selectChapterName),
+                          _buildInfoRow("Topic:", widget.selectTopicName), //
+                          _buildInfoRow("Language:", widget.language),
+                        ],
                       ),
-                      SizedBox(height: media.height * 0.03),
+                    ),
+                    SizedBox(height: media.height * 0.03),
 
-                      // Video player
-                      ClipRRect(borderRadius: BorderRadius.circular(15), child: Container(decoration: BoxDecoration(color: Colors.black), child: player)),
+                    // Video player
+                    YouPlayer(yUrl: widget.videoUrl),
 
-                      SizedBox(height: media.height * 0.035),
+                    SizedBox(height: media.height * 0.035),
 
-                      // Description
-                      Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-                      SizedBox(height: media.height * 0.02),
-                      SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-                    ],
-                  ),
+                    // Description
+                    Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+                    SizedBox(height: media.height * 0.02),
+                    SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+                  ],
                 ),
               ),
-            );
-          },
-          onEnterFullScreen: () {
-            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-          },
-          onExitFullScreen: () {
-            SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          },
+            ),
+          ),
         )
         : Scaffold(
           appBar: AppBarWidget(),
@@ -380,25 +363,26 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
                   ),
                   SizedBox(height: media.height * 0.03),
                   // Video player
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Container(
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: //
-                          _videoController != null && _videoController!.value.isInitialized
-                              ? Stack(
-                                children: [
-                                  AspectRatio(
-                                    aspectRatio: _videoController!.value.aspectRatio, //
-                                    child: VideoPlayer(_videoController!),
-                                  ),
-                                  Positioned(bottom: 0, top: 0, left: 0, right: 0, child: Align(alignment: Alignment.bottomCenter, child: _buildControls())),
-                                ],
-                              ) //
-                              : CircularProgressIndicator(color: AppColors.pramarycolor),
-                    ),
-                  ),
+                  PlayVideoFromNetworkQualityUrls(netUrl: widget.videoUrl),
 
+                  // ClipRRect(
+                  //   borderRadius: BorderRadius.circular(15),
+                  //   child: Container(
+                  //     decoration: BoxDecoration(color: Colors.white),
+                  //     child: //
+                  //         _videoController != null && _videoController!.value.isInitialized
+                  //             ? Stack(
+                  //               children: [
+                  //                 AspectRatio(
+                  //                   aspectRatio: _videoController!.value.aspectRatio, //
+                  //                   child: VideoPlayer(_videoController!),
+                  //                 ),
+                  //                 Positioned(bottom: 0, top: 0, left: 0, right: 0, child: Align(alignment: Alignment.bottomCenter, child: _buildControls())),
+                  //               ],
+                  //             ) //
+                  //             : CircularProgressIndicator(color: AppColors.pramarycolor),
+                  //   ),
+                  // ),
                   SizedBox(height: media.height * 0.035),
 
                   // Description

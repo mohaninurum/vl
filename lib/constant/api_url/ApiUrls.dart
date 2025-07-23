@@ -27,4 +27,5 @@ class ApiUrls {
   static const String usersFcmTokenUserUrl = '${baseUrl}users/fcm-token-user';
   static const String searchListUrl = '${baseUrl}video/search';
   static const String quizDetailUrl = '${baseUrl}quiz/quiz-detail/';
+  static const String notificationListUrl = '${baseUrl}users/notification-list';
 }

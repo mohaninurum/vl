@@ -144,7 +144,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => TestPaperScreen(selectsName: "Test Paper", id: state.id)));
                   }
                   if (state.selectedCategory == "Quiz") {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen(selectsName: "Quiz", id: state.id)));
                   }
                   if (state.selectedCategory == "Favorite") {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));

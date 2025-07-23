@@ -1,4 +1,4 @@
-import '../models/notifications_model.dart';
+import '../models/notifications_responce_model.dart';
 
 abstract class NotificationState {}
 
@@ -7,9 +7,10 @@ class NotificationInitial extends NotificationState {}
 class NotificationLoading extends NotificationState {}
 
 class NotificationLoaded extends NotificationState {
-  final List<NotificationModel> notifications;
+  // final List<NotificationModel> notifications;
+  final NotificationResponse? notifications;
 
-  NotificationLoaded(this.notifications);
+  NotificationLoaded({this.notifications});
 }
 
 class NotificationEmpty extends NotificationState {}

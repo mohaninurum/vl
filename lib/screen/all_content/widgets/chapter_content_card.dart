@@ -31,22 +31,25 @@ class ChapterItemCard extends StatelessWidget {
               width: width * 0.3,
               height: width * 0.2,
               decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12))),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.network(
-                      "${item?.imageUrl}",
-                      fit: BoxFit.fitWidth,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return const Center(child: CircularProgressIndicator());
-                      },
-                      errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
-                    ),
-                    const Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 32)),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 7),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        "${item?.imageUrl}",
+                        fit: BoxFit.fitWidth,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(child: CircularProgressIndicator());
+                        },
+                        errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
+                      ),
+                      const Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 32)),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -66,8 +69,8 @@ class ChapterItemCard extends StatelessWidget {
                       "Chapter:$selectChapterName" ?? '', //
                       style: const TextStyle(color: Colors.black87, fontSize: 12),
                     ),
-                    const SizedBox(height: 10),
-                    Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                    const SizedBox(height: 5),
+                    Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(gradeLang, style: const TextStyle(color: Colors.black54, fontSize: 12))),
                   ],
                 ),
               ),
@@ -100,7 +103,7 @@ class ChapterItemCard extends StatelessWidget {
                     final userId = login?.userId.toString() ?? '';
                     final videoId = item.videoId;
 
-                    context.read<ChapterContentBloc>().add(FavoriteEvent(token: token, userID: userId, context: context, selectIndex: index, favoriteID: videoId, isfavorite: !isFavorited));
+                    context.read<ChapterContentBloc>().add(FavoriteEvent(languageType: gradeLang, token: token, userID: userId, context: context, selectIndex: index, favoriteID: videoId, isfavorite: !isFavorited));
                   },
                   child: CircleAvatar(radius: width * 0.06, backgroundColor: Colors.purple.shade50, child: Icon(isFavorited ? Icons.favorite : Icons.favorite_border_outlined, size: 30, color: AppColors.pramarycolor)),
                 );

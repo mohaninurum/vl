@@ -200,7 +200,7 @@ class _TestPaperScreenState extends State<TestPaperScreen> {
                                     onTap: () {
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => NotesViewsScreen(selectName: widget.selectsName, id: state.filteredNotes[index].id)));
                                     },
-                                    child: Container(color: AppColors.lightpurplecolor, child: ListTile(dense: true, minTileHeight: height * 0.02, leading: const Icon(Icons.note_alt_outlined, color: Colors.purple), title: Text('${index + 1}. ${note.title}', style: TextStyle(fontSize: 13)), subtitle: Text('${note.className} Notes', style: TextStyle(fontSize: 12)), trailing: const Icon(Icons.visibility, color: Colors.purple))),
+                                    child: Container(color: AppColors.lightpurplecolor, child: ListTile(dense: true, minTileHeight: height * 0.02, leading: const Icon(Icons.note_alt_outlined, color: Colors.purple), title: Text('${index + 1}. ${note.title}', style: TextStyle(fontSize: 13)), subtitle: Text('$selectClass Test Paper', style: TextStyle(fontSize: 12)), trailing: const Icon(Icons.visibility, color: Colors.purple))),
                                   ),
                                 );
                               },

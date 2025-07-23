@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repo/api_repository_lmp.dart';
-import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../models/models.dart';
 import 'favorite_event.dart';
 import 'favorite_state.dart';
@@ -19,9 +18,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     });
 
     on<LoadFavorites>((event, emit) async {
-      final FavoriteData = [
-        FavoriteItem(isPurchase: '', type: 'video', videoType: '2', title: 'testing video ', subtitle: 'Description', thumbnailUrl: 'http://157.245.100.207:3001/uploads/thumbnails/1751525928474.png', videoUrlHindi: 'https://www.youtube.com/watch?v=AHFBK0YDk3s&list=PLdb6KKzTz-by4IuO4qsG8JZokr4ouvFH4', isPaid: '1'), //
-      ];
       try {
         print("load video");
         emit(state.copyWith(isLoading: true));
@@ -30,12 +26,9 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         final responce = await ApiRepositoryImpl().favoriteVideo(body: body, id: event.userID);
 
         if (responce["status"] == true) {
-          FavoriteVideoResponse Response = FavoriteVideoResponse.fromJson(responce);
-          FavoriteData.clear();
-          for (var video in Response.data) {
-            FavoriteData.add(FavoriteItem(isPurchase: BlocProvider.of<LoginBloc>(event.context).loginResponse?.user?.isSubscribe.toString(), type: "Video", videoUrlEnglish: video.videoUrlEnglish ?? '', videoUrlHindi: video.videoUrlHindi ?? '', videoType: video.videoType.toString(), isPaid: video.isPaid.toString(), thumbnailUrl: video.thumbnailUrl, title: video.videoTitle, subtitle: video.description));
-          }
-          emit(state.copyWith(isLoading: false, allFavorites: FavoriteData));
+          FavoriteVideoListResponse Response = FavoriteVideoListResponse.fromJson(responce);
+
+          emit(state.copyWith(isLoading: false, allFavorites: Response.data));
         } else {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
           emit(state.copyWith(isLoading: false));

@@ -34,6 +34,7 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
       emit(state.copyWith(selectedChapter: event.chapter));
     });
     on<FavoriteEvent>((event, emit) async {
+      String languageType = "1";
       final newFavorites = Set<int>.from(state.favoriteIndexes);
       final updatedChapters = List<ChapterContentModel>.from(state.chapters);
 
@@ -41,19 +42,24 @@ class ChapterContentBloc extends Bloc<ChapterContentEvent, ChapterContentState> 
       final isCurrentlyFavorited = currentItem.isFavorited ?? false;
 
       emit(state.copyWith(isLoading2: true));
-
+      print(event.languageType);
+      if (event.languageType.toString().contains("Hindi")) {
+        languageType = "1";
+        print("inside if");
+      } else {
+        languageType = "2";
+        print("inside else");
+      }
       try {
-        final body = {'auth': event.token, 'user_id': event.userID, 'video_id': event.favoriteID};
-
+        final body = {'auth': event.token, 'user_id': event.userID, 'video_id': event.favoriteID, "language_type": languageType};
+        print(body);
         final response = isCurrentlyFavorited ? await ApiRepositoryImpl().removeFavoriteVideo(body: body) : await ApiRepositoryImpl().addFavoriteVideo(body: body);
 
         if (response["status"] == true) {
           ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(response["message"])));
 
-          // ✅ Toggle favorite state in model
           updatedChapters[event.selectIndex] = currentItem.copyWith(isFavorited: !isCurrentlyFavorited);
 
-          // ✅ Update Set as well if you want to track indexes (optional)
           if (isCurrentlyFavorited) {
             newFavorites.remove(event.selectIndex);
           } else {

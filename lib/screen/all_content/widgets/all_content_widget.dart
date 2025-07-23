@@ -98,12 +98,17 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                   children: [
                     Row(children: [Text("Class:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassesName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
                     Row(children: [Text("Language:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                    Row(children: [Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), SizedBox(width: media.width * 0.35, child: Text(widget.selectChapterName, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500)))]),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)),
+                        Padding(padding: const EdgeInsets.only(top: 3), child: SizedBox(width: media.width * 0.5, child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]))),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(width: 10),
-              Image.asset('assets/appicons/icon5Asset 5.png', height: media.height * 0.12),
+              Image.asset('assets/appicons/icon5Asset 5.png', height: media.height * 0.07),
             ],
           ),
         ),
@@ -283,85 +288,83 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                       return Center(child: CircularProgressIndicator());
                     }
                     if (state is LoadedQuizState) {
-                      return Expanded(
-                        child: Column(
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.questions?.data.length,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 6),
-                                  decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(12)),
-                                  // elevation: 4,
-                                  // margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                                  // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(16),
-                                    onTap: () {
-                                      if (state.questions?.data[index].isPaid.toString() == "1") {
-                                        if (isPurchase == '1') {
-                                          SubscriptionDialog.show(context);
-                                        } else if (isPurchase == "2") {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: state.questions?.data[index].quizId, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
-                                        }
-                                      } else if (state.questions?.data[index].isPaid.toString() == "2") {
+                      return Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.questions?.data.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(vertical: 6),
+                                decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(12)),
+                                // elevation: 4,
+                                // margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(16),
+                                  onTap: () {
+                                    if (state.questions?.data[index].isPaid.toString() == "1") {
+                                      if (isPurchase == '1') {
+                                        SubscriptionDialog.show(context);
+                                      } else if (isPurchase == "2") {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: state.questions?.data[index].quizId, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
                                       }
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Row(
-                                        children: [
-                                          // Quiz Icon or Initial
-                                          Container(height: 48, width: 48, decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.quiz, color: Colors.blueAccent, size: 28)),
+                                    } else if (state.questions?.data[index].isPaid.toString() == "2") {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: state.questions?.data[index].quizId, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16),
+                                    child: Row(
+                                      children: [
+                                        // Quiz Icon or Initial
+                                        Container(height: 48, width: 48, decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.quiz, color: Colors.blueAccent, size: 28)),
 
-                                          const SizedBox(width: 16),
+                                        const SizedBox(width: 16),
 
-                                          // Title and optional tag
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(state.questions?.data[index].title ?? 'Untitled Quiz', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)), const SizedBox(height: 6),
-                                                //   Text("Created on: ${state.questions?.data[index].createdAt ?? ''}", style: TextStyle(fontSize: 13, color: Colors.grey[600]))
-                                              ],
-                                            ),
+                                        // Title and optional tag
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(state.questions?.data[index].title ?? 'Untitled Quiz', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)), const SizedBox(height: 6),
+                                              //   Text("Created on: ${state.questions?.data[index].createdAt ?? ''}", style: TextStyle(fontSize: 13, color: Colors.grey[600]))
+                                            ],
                                           ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child:
-                                                (state.questions?.data[index].isPaid == 1)
-                                                    ? isPurchase == "2"
-                                                        ? SizedBox()
-                                                        : Icon(Icons.lock, color: Colors.redAccent.shade200)
-                                                    : SizedBox(), //item?.isPaid == "1"
-                                            // : item?.isPurchase == "2"
-                                            // ? Icon(Icons.lock_open, color: Colors.green)
-                                            // : SizedBox(),
-                                          ),
-                                          // Paid/Free Tag or Arrow
-                                          // Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: (state.questions?.data[index].isPaid == 1) ? Colors.red[50] : Colors.green[50], borderRadius: BorderRadius.circular(8)), child: Text(state.questions?.data[index].isPaid == 1 ? "Paid" : "Free", style: TextStyle(color: state.questions?.data[index].isPaid == 1 ? Colors.red : Colors.green, fontSize: 12, fontWeight: FontWeight.bold))),
-                                        ],
-                                      ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                          child:
+                                              (state.questions?.data[index].isPaid == 1)
+                                                  ? isPurchase == "2"
+                                                      ? SizedBox()
+                                                      : Icon(Icons.lock, color: Colors.redAccent.shade200)
+                                                  : SizedBox(), //item?.isPaid == "1"
+                                          // : item?.isPurchase == "2"
+                                          // ? Icon(Icons.lock_open, color: Colors.green)
+                                          // : SizedBox(),
+                                        ),
+                                        // Paid/Free Tag or Arrow
+                                        // Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: (state.questions?.data[index].isPaid == 1) ? Colors.red[50] : Colors.green[50], borderRadius: BorderRadius.circular(8)), child: Text(state.questions?.data[index].isPaid == 1 ? "Paid" : "Free", style: TextStyle(color: state.questions?.data[index].isPaid == 1 ? Colors.red : Colors.green, fontSize: 12, fontWeight: FontWeight.bold))),
+                                      ],
                                     ),
                                   ),
-                                );
-                              },
-                            ),
-                            // Text(AppString.quetionForPracticeText),
-                            // SizedBox(height: media.height * 0.015),
-                            // CustomButton(
-                            //   onPressed: () {
-                            //     Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
-                            //   },
-                            //   text: "Start Quiz",
-                            //   color: AppColors.buttonColorBlue1,
-                            //   textColor: AppColors.appWhiteColor,
-                            // ),
-                          ],
-                        ),
+                                ),
+                              );
+                            },
+                          ),
+                          // Text(AppString.quetionForPracticeText),
+                          // SizedBox(height: media.height * 0.015),
+                          // CustomButton(
+                          //   onPressed: () {
+                          //     Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(isPreview: false, id: widget.id, selectClassesName: widget.selectClassesName, tabtype: 'Quiz', selectChapterName: widget.selectChapterName, language: widget.language)));
+                          //   },
+                          //   text: "Start Quiz",
+                          //   color: AppColors.buttonColorBlue1,
+                          //   textColor: AppColors.appWhiteColor,
+                          // ),
+                        ],
                       );
                     }
                     return SizedBox();

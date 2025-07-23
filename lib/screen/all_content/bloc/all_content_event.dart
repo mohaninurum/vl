@@ -24,7 +24,8 @@ class FavoriteEvent extends ChapterContentEvent {
   final bool isfavorite;
   final context;
   final token;
-  FavoriteEvent({this.token, required this.selectIndex, required this.favoriteID, required this.isfavorite, this.context, required this.userID});
+  final languageType;
+  FavoriteEvent({this.token, required this.selectIndex, required this.favoriteID, required this.isfavorite, this.context, required this.userID, this.languageType});
 }
 
 class SelectChapterEvent extends ChapterContentEvent {

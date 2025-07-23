@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,11 +27,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   userCheckIsLogin() async {
     final User? currentUser = FirebaseAuth.instance.currentUser;
+
     final loginBloc = BlocProvider.of<LoginBloc>(context);
     // loginBloc.add(GoogleLogOutEvent(context));
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? email = prefs.getString('email');
     final String? password = prefs.getString('password');
+    final String? language = prefs.getString('language');
+    if (language == null) {
+      await prefs.setString('language', "English");
+    }
 
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
@@ -54,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    FirebaseMessaging.instance.subscribeToTopic("visuallearning");
     return Scaffold(
       body: Container(
         width: double.infinity,

@@ -97,7 +97,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterScreen(selectClassName: state.selectedCategory, language: language, id: state.id)));
                 },
                 child: SizedBox(
-                  height: media.height * 0.6, // Adjust based on your grid height
+                  height: media.height * 0.61, // Adjust based on your grid height
                   child: TabBarView(
                     controller: _tabController,
                     children: [

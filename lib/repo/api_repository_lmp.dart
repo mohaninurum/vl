@@ -159,4 +159,10 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().get("${ApiUrls.quizDetailUrl}$id", body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> notificationList({id, body}) {
+    final response = ApiService().get(ApiUrls.notificationListUrl, body);
+    return response;
+  }
 }
