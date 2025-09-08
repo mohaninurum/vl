@@ -78,7 +78,7 @@ class _ClassesScreenState extends State<ClassesScreen> with SingleTickerProvider
       backgroundColor: const Color(0xFFF2F5FA),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: media.width * 0.04),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

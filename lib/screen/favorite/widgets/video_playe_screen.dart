@@ -327,7 +327,7 @@ class _VideoFavoriteDetailScreenState extends State<VideoFavoriteDetailScreen> {
           backgroundColor: const Color(0xFFF2F5FA),
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: media.height * 0.01),
               child: Column(
                 children: [
                   // Info card

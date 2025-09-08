@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.visual_learning.app-mergeDebugResources-38:/values-sv/values-sv.xml",
+            "outputFile": "com.app.visuallearning.app-mergeDebugResources-38:/values-sv/values-sv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Inurum_Four\\.gradle\\caches\\transforms-3\\3dc5425999bc86d21969cd5f6cd4b55e\\transformed\\browser-1.8.0\\res\\values-sv\\values-sv.xml",

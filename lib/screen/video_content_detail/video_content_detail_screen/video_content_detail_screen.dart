@@ -313,10 +313,10 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //
-                          _buildInfoRow("Class:", widget.selectClassName), //
-                          _buildInfoRow("Chapter:", widget.selectChapterName),
-                          _buildInfoRow("Topic:", widget.selectTopicName), //
-                          _buildInfoRow("Language:", widget.language),
+                          _buildInfoRow("Class :", widget.selectClassName), //
+                          _buildInfoRow("Chapter :", widget.selectChapterName),
+                          _buildInfoRow("Topic :", widget.selectTopicName), //
+                          _buildInfoRow("Language :", widget.language),
                         ],
                       ),
                     ),
@@ -354,10 +354,10 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //
-                        _buildInfoRow("Class:", widget.selectClassName), //
-                        _buildInfoRow("Chapter:", widget.selectChapterName),
-                        _buildInfoRow("Topic:", widget.selectTopicName), //
-                        _buildInfoRow("Language:", widget.language),
+                        _buildInfoRow("Class :", widget.selectClassName), //
+                        _buildInfoRow("Chapter :", widget.selectChapterName),
+                        _buildInfoRow("Topic :", widget.selectTopicName), //
+                        _buildInfoRow("Language :", widget.language),
                       ],
                     ),
                   ),

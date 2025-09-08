@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visual_learning/screen/home_screen/widgets/GridView_list_widget.dart';
 import 'package:visual_learning/screen/home_screen/widgets/banner_slider.dart';
-import 'package:visual_learning/screen/home_screen/widgets/category_item_widget.dart';
-import 'package:visual_learning/screen/home_screen/widgets/favorite_deviver.dart';
 
 import '../../constant/app_colors/app_colors.dart';
 import '../../constant/app_string/app_string.dart';
@@ -17,7 +15,6 @@ import '../quiz_screen/quiz_main_screen.dart';
 import '../search_screen/search_screen/search_screen.dart';
 import '../test_paper/test_paper_screen/test_paper_screen.dart';
 import 'blocs/CategorySelected/_category_selected_bloc.dart';
-import 'blocs/CategorySelected/_category_selected_event.dart';
 import 'blocs/CategorySelected/_category_selected_state.dart';
 import 'blocs/category/category_bloc.dart';
 import 'blocs/category/category_state.dart';
@@ -78,7 +75,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             Container(
               color: Colors.white, // App bar background
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +112,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             // BannerWidget(categoryName: AppString.bannerLeartTodayText, screenName: ''),
             // AutoImageSliderWidget(imagePaths: ['assets/appicons/digital notesAsset 1.png', 'assets/appicons/icon4Asset 4.png', 'assets/appicons/animationAsset 2.png'], categoryName: ["Learn Today", "video learn", "subscriptions"], screenName: ["video", "all notes", "subscription"], cardColor: [Colors.brown, Colors.blueGrey, Colors.deepPurpleAccent.shade200]),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 13),
               child: BlocBuilder<CategoryBloc, CategoryState>(
                 builder: (context, state) {
                   if (state is LoadedCategoryState) {
@@ -127,7 +124,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text(AppString.exploreCategoriesText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+              padding: const EdgeInsets.only(left: 12, right: 13, bottom: 15),
               child: BlocListener<CategorySelectedBloc, CategorySelectedState>(
                 listener: (context, state) {
                   print(state.selectedCategory);
@@ -146,15 +143,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   if (state.selectedCategory == "Quiz") {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => QuizMainScreen(selectsName: "Quiz", id: state.id)));
                   }
-                  if (state.selectedCategory == "Favorite") {
+                  if (state.selectedCategory == "Favourite Videos") {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));
                   }
                 },
                 child: GridviewListWidget(screenName: "home", language: ''),
               ),
             ),
-            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: FavoriteDeviver()),
-            Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: CategoryItem(comingSoon: false, language: "", title: "Favorite Video", image: "favorite", onTap: () => context.read<CategorySelectedBloc>().add(CategorySelected(category: "Favorite", id: "1")))),
+
+            // Padding(padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20), child: CategoryItem(comingSoon: false, language: "", title: "Favorite Video", image: "favorite", onTap: () {})),
             SizedBox(height: media.height * 0.08),
           ],
         ),

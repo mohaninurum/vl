@@ -245,6 +245,7 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 10),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -258,7 +259,7 @@ class _ChapterWidgetsState extends State<ChapterWidgets> with TickerProviderStat
                   ),
                 ),
                 SizedBox(height: media.height * 0.01),
-                Text(AppString.chooseChapterText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
+                Padding(padding: const EdgeInsets.only(left: 1), child: Text(AppString.chooseChapterText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
                 SizedBox(height: media.height * 0.01),
                 TabBar(tabAlignment: TabAlignment.start, isScrollable: true, onTap: (index) => context.read<SubjectTabBloc>().add(SubjectChanged(index)), controller: _tabController, labelColor: Colors.purple, unselectedLabelColor: Colors.grey, indicatorColor: Colors.purple, indicatorWeight: 2.5, indicatorSize: TabBarIndicatorSize.tab, labelStyle: const TextStyle(fontWeight: FontWeight.w500), tabs: List.generate(subjects.length, (index) => Tab(text: subjects[index].subjectName ?? 'Subject'))),
                 SizedBox(height: media.height * 0.01),

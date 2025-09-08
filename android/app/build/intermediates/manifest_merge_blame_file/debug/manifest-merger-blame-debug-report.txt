@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.visual_learning"
+3    package="com.app.visuallearning"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -44,12 +44,12 @@
 33
 34    <permission
 34-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
-35        android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+35        android:name="com.app.visuallearning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 35-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
 36        android:protectionLevel="signature" />
 36-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
 37
-38    <uses-permission android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+38    <uses-permission android:name="com.app.visuallearning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 38-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 38-->[androidx.core:core:1.13.1] C:\Users\Inurum_Four\.gradle\caches\transforms-3\6704d6685cd5f6f1aff09169391359ca\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 39
@@ -62,7 +62,7 @@
 45        android:icon="@mipmap/ic_launcher"
 46        android:label="visual_learning" >
 47        <activity
-48            android:name="com.example.visual_learning.MainActivity"
+48            android:name="com.app.visuallearning.MainActivity"
 49            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 50            android:exported="true"
 51            android:hardwareAccelerated="true"
@@ -206,7 +206,7 @@
 138-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 139            android:name="androidx.startup.InitializationProvider"
 139-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
-140            android:authorities="com.example.visual_learning.androidx-startup"
+140            android:authorities="com.app.visuallearning.androidx-startup"
 140-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
 141            android:exported="false" >
 141-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\205be221fbb459bbe60b825a74c55d4c\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
@@ -268,7 +268,7 @@
 173-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
 174            android:name="com.google.firebase.provider.FirebaseInitProvider"
 174-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-175            android:authorities="com.example.visual_learning.firebaseinitprovider"
+175            android:authorities="com.app.visuallearning.firebaseinitprovider"
 175-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:25:13-72
 176            android:directBootAware="true"
 176-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Inurum_Four\.gradle\caches\transforms-3\28a7d2d7f3db07e0c60cf76114e9e88f\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:26:13-43

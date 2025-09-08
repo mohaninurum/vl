@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.visual_learning"
+    package="com.app.visuallearning"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -32,10 +32,10 @@
     </queries>
 
     <permission
-        android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.app.visuallearning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.visual_learning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.app.visuallearning.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="android.app.Application"
@@ -45,7 +45,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="visual_learning" >
         <activity
-            android:name="com.example.visual_learning.MainActivity"
+            android:name="com.app.visuallearning.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -137,7 +137,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.visual_learning.androidx-startup"
+            android:authorities="com.app.visuallearning.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -172,7 +172,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.visual_learning.firebaseinitprovider"
+            android:authorities="com.app.visuallearning.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />

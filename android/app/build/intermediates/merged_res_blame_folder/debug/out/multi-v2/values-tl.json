@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.visual_learning.app-mergeDebugResources-38:/values-tl/values-tl.xml",
+            "outputFile": "com.app.visuallearning.app-mergeDebugResources-38:/values-tl/values-tl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Inurum_Four\\.gradle\\caches\\transforms-3\\0c54f620ed2a43aa5cb32b5fb0d7b81f\\transformed\\jetified-play-services-basement-18.3.0\\res\\values-tl\\values.xml",

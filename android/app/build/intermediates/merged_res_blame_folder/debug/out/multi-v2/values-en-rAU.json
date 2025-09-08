@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.visual_learning.app-mergeDebugResources-38:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.app.visuallearning.app-mergeDebugResources-38:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Inurum_Four\\.gradle\\caches\\transforms-3\\0760c996c09c4a53c7de87b8d3868809\\transformed\\appcompat-1.6.1\\res\\values-en-rAU\\values-en-rAU.xml",

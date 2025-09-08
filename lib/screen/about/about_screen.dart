@@ -26,7 +26,14 @@ class AboutUsScreen extends StatelessWidget {
                 children: [
                   Text("About Us", style: TextStyle(fontSize: width * 0.08, fontWeight: FontWeight.bold, color: Colors.white)),
                   const SizedBox(height: 16),
-                  Text("VisualLearing is an Indian EdTech organization, formed at MIT, USA. The founding team is alumni from MIT (USA) and Purdue University (USA), also gold medalists from IIT Madras. At Vizuaara, we believe that if science is taught in a highly visual and immersive way, students can truly appreciate its beauty. Through the power of hyper-realistic 3D models, highly engaging virtual labs and immersive 3D videos: Vizuaara aims to transform teachers into super teachers and students into better learners. Through these high quality, state of the art virtual labs, we bring out the hidden potential in students and nurture them to be future scientists.", style: TextStyle(fontSize: width * 0.04, color: Colors.white, height: 1.5)),
+                  Text(""" Visual Learning is an innovative educational app designed for students of Classes 9 to 12. Our mission is to make learning easy, engaging, and effective through high-quality animated videos that simplify complex concepts in Physics, Chemistry, Biology, and Mathematics.
+    \nWith Visual Learning, you can:
+   \n Watch concept-based animations that bring textbooks to life.
+    \nLearn at your own pace with clear explanations and visuals.
+    \nStrengthen your fundamentals for exams and competitive tests.
+    \nAccess content anytime, anywhere with a student-friendly interface.
+    \nWe believe that visual education is the future of learning. By combining storytelling, animations, and expert-designed scripts, Visual Learning makes even the toughest topics easy to understand and remember.
+    \nStart your journey with Visual Learning today—where knowledge meets creativity!""", style: TextStyle(fontSize: width * 0.04, color: Colors.white, height: 1.5)),
                 ],
               ),
             ),

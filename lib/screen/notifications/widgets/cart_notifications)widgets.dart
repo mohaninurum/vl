@@ -11,6 +11,7 @@ class CartNotificationsWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return InkWell(
       onTap: onTap,
@@ -25,7 +26,7 @@ class CartNotificationsWidgets extends StatelessWidget {
               SizedBox(width: width * 0.02),
               Container(
                 width: width * 0.26,
-                height: width * 0.2,
+                height: height * 0.1,
                 decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12))),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),

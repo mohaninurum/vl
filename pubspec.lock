@@ -721,7 +721,7 @@ packages:
     source: hosted
     version: "1.1.4"
   media_kit_libs_video:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: media_kit_libs_video
       sha256: "958cc55e7065d9d01f52a2842dab2a0812a92add18489f1006d864fb5e42a3ef"
@@ -737,7 +737,7 @@ packages:
     source: hosted
     version: "1.0.11"
   media_kit_video:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: media_kit_video
       sha256: a656a9463298c1adc64c57f2d012874f7f2900f0c614d9545a3e7b8bb9e2137b
@@ -1509,14 +1509,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.0"
-  y_player:
-    dependency: "direct main"
-    description:
-      name: y_player
-      sha256: ee3baa91ac56ace03479fa1091d8b029262e5fceda338432a39402bfc337c23f
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5+1"
   yaml:
     dependency: transitive
     description:

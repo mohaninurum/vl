@@ -27,6 +27,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     final token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
     context.read<FeedbackBloc>().add(GetFeedbackList(context: context, token: token));
     // context.read<ClassListBloc>().add(LoadClassList(id: widget.id, context: context));
+    final username = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
+    nameController.text = username;
   }
 
   @override

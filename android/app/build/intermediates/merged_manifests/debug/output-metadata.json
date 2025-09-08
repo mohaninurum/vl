@@ -4,7 +4,7 @@
     "type": "MERGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.visual_learning",
+  "applicationId": "com.app.visuallearning",
   "variantName": "debug",
   "elements": [
     {

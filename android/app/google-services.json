@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:634661164827:android:bd9f5290361c249280a5be",
         "android_client_info": {
-          "package_name": "com.example.visual_learning"
+          "package_name": "com.app.visuallearning"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "634661164827-dulf10soiskhv581q89621li84rolsv9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.visual_learning",
+            "package_name": "com.app.visuallearning",
             "certificate_hash": "62b71f7c43a94290ad8e4cfd777bcf9ca8cb3a1a"
           }
         },

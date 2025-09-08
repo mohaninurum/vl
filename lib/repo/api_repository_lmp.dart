@@ -165,4 +165,10 @@ class ApiRepositoryImpl implements ApiRepository {
     final response = ApiService().get(ApiUrls.notificationListUrl, body);
     return response;
   }
+
+  @override
+  Future<Map<String, dynamic>> cancelPlan({id, body}) {
+    final response = ApiService().get("${ApiUrls.subscriptionPlanCancelUrl}$id", body);
+    return response;
+  }
 }

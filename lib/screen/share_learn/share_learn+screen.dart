@@ -57,8 +57,8 @@ class ShareScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  "• The person you refer must be a new user with no existing account on iPrep.\n\n"
-                  "• You will receive an extension on your iPrep based on the plan your friend purchases: 15 days free for quarterly plan & 1 month free for annual plan.\n\n"
+                  "• The person you refer must be a new user with no existing account on visuallearning.\n\n"
+                  "• You will receive an extension on your visuallearning based on the plan your friend purchases: 15 days free for quarterly plan & 1 month free for annual plan.\n\n"
                   "• No reward will be given if your friend purchases the 1-day or 7-day plan.",
                   style: TextStyle(fontSize: 13),
                 ),

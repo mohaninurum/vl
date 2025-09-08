@@ -53,7 +53,7 @@ class _NotesScreenState extends State<NotesScreen> {
       appBar: AppBarWidget(appTitle: widget.selectsName),
       backgroundColor: const Color(0xFFF2F5FA),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 2, horizontal: width * 0.02),
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
         child: BlocBuilder<NotesBloc, NotesState>(
           builder: (context, state) {
             if (state is IsLoadigNotesClass) {
@@ -63,7 +63,7 @@ class _NotesScreenState extends State<NotesScreen> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -79,7 +79,7 @@ class _NotesScreenState extends State<NotesScreen> {
                 ),
 
                 SizedBox(height: height * 0.015),
-                Text(AppString.AllContentText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
+                Padding(padding: const EdgeInsets.only(left: 2), child: Text(AppString.AllContentText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 0.05),

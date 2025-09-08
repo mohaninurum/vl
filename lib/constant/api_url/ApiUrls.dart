@@ -1,6 +1,6 @@
 class ApiUrls {
-  static const String baseUrl = 'http://157.245.100.207:3001/api/';
-  static const String ImagebaseUrl = 'http://157.245.100.207:3001';
+  static const String baseUrl = 'https://api.visuallearning.in/api/';
+  static const String ImagebaseUrl = 'https://api.visuallearning.in';
   static const String loginUrl = '${baseUrl}users/login';
   static const String googleLoginUrl = '${baseUrl}users/google-login';
   static const String registerUrl = '${baseUrl}users/register';
@@ -28,4 +28,5 @@ class ApiUrls {
   static const String searchListUrl = '${baseUrl}video/search';
   static const String quizDetailUrl = '${baseUrl}quiz/quiz-detail/';
   static const String notificationListUrl = '${baseUrl}users/notification-list';
+  static const String subscriptionPlanCancelUrl = '${baseUrl}subscription-plan/cancel-plan/';
 }

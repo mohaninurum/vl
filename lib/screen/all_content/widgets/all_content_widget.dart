@@ -85,7 +85,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 5),
+        const SizedBox(height: 13),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -96,12 +96,12 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(children: [Text("Class:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassesName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
-                    Row(children: [Text("Language:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+                    Row(children: [Text("Class : ", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(widget.selectClassesName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
+                    Row(children: [Text("Language : ", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)), Text(language, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Chapter:", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)),
+                        Text("Chapter : ", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)),
                         Padding(padding: const EdgeInsets.only(top: 3), child: SizedBox(width: media.width * 0.5, child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]))),
                       ],
                     ),
@@ -113,43 +113,46 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
           ),
         ),
         SizedBox(height: media.height * 0.035),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(AppString.AllContentText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
-            BlocBuilder<ChapterContentBloc, ChapterContentState>(
-              builder: (context, state) {
-                return Align(
-                  alignment: Alignment.centerRight,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: width * 0.35,
-                    height: media.height * 0.043,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), gradient: isEnglish ? const LinearGradient(colors: [Color(0xFF5B0D9A), Color(0xFFE180FF)]) : const LinearGradient(colors: [Color(0xFF5B0D9A), Color(0xFFE180FF)])),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(isEnglish ? "English" : "Hindi", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-                        Switch(
-                          // activeColor: Colors.white,
-                          value: isEnglish,
-                          onChanged: (value) {
-                            context.read<ChapterContentBloc>().add(ToggleLanguageEvent());
-                            setState(() {
-                              isEnglish = !isEnglish;
-                              language = isEnglish ? "English" : "Hindi";
-                              print(language);
-                            });
-                          },
-                        ),
-                      ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(AppString.AllContentText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color)),
+              BlocBuilder<ChapterContentBloc, ChapterContentState>(
+                builder: (context, state) {
+                  return Align(
+                    alignment: Alignment.centerRight,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      width: width * 0.35,
+                      height: media.height * 0.043,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), gradient: isEnglish ? const LinearGradient(colors: [Color(0xFF5B0D9A), Color(0xFFE180FF)]) : const LinearGradient(colors: [Color(0xFF5B0D9A), Color(0xFFE180FF)])),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isEnglish ? "English" : "Hindi", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+                          Switch(
+                            // activeColor: Colors.white,
+                            value: isEnglish,
+                            onChanged: (value) {
+                              context.read<ChapterContentBloc>().add(ToggleLanguageEvent());
+                              setState(() {
+                                isEnglish = !isEnglish;
+                                language = isEnglish ? "English" : "Hindi";
+                                print(language);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
         SizedBox(height: media.height * 0.015),
 

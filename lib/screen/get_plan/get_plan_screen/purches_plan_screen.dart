@@ -66,6 +66,16 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
     super.dispose();
   }
 
+  String validityCheck(value) {
+    String validity = "days";
+    if (value == 2) {
+      validity = "month";
+    } else if (value == 3) {
+      validity = "year";
+    }
+    return validity;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -91,25 +101,31 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     width: size.width * 0.6,
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: Colors.green, width: 2), borderRadius: BorderRadius.circular(16), boxShadow: [BoxShadow(color: Colors.green.withOpacity(0.2), blurRadius: 10)]),
+                    decoration: BoxDecoration(gradient: LinearGradient(stops: [0.0, 0.6], colors: [Color(0xffC1DDFF), Color(0xffF8F1FF)], begin: Alignment.topLeft, end: Alignment.bottomRight), color: Colors.white, border: Border.all(color: Colors.purple, width: 1), borderRadius: BorderRadius.circular(16), boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 1, offset: const Offset(0, 1))]),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.network('https://img.freepik.com/free-vector/accounting-app-illustration_74855-4359.jpg', height: 100),
-                        const SizedBox(height: 10),
-                        Text(widget.selectedPlan?.planName ?? '', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text('Description', style: TextStyle(color: Colors.black54)),
-                        const SizedBox(height: 10),
-                        Text("${widget.selectedPlan?.price ?? ''}", style: TextStyle(color: Colors.green, fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text("Offer:- ${widget.selectedPlan?.offerPrice ?? ''}", style: TextStyle(color: Colors.green, fontSize: 16)),
-                        const SizedBox(height: 10),
-                        Text("Billed every year", style: TextStyle(color: Colors.black54)),
-                        Text("${widget.selectedPlan?.durationDays ?? ''} days", style: TextStyle(color: Colors.black45)),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 15),
+                        Text(widget.selectedPlan?.planName ?? '', textAlign: TextAlign.center, style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900, color: Colors.black)),
+                        SizedBox(height: 25),
+                        // Text("Price: ₹ ${widget.selectedPlan?.price ?? ''}", textAlign: TextAlign.center, style: TextStyle(fontSize: 14, color: Colors.grey.shade700, decoration: TextDecoration.lineThrough, decorationColor: Colors.grey.shade800)),
+                        // SizedBox(height: 14),
+                        // Text("Offer Price: ₹ ${widget.selectedPlan?.offerPrice ?? '0'}", textAlign: TextAlign.center, style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: Colors.black)),
+                        Offstage(offstage: widget.selectedPlan?.offerPrice == null || widget.selectedPlan?.offerPrice == "0", child: Text('Price: ₹${widget.selectedPlan?.price ?? ''}', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: Colors.grey.shade700, decoration: TextDecoration.lineThrough, decorationColor: Colors.grey.shade800))),
+                        SizedBox(height: 14),
+
+                        // Offer Price (prominent)
+                        Offstage(offstage: widget.selectedPlan?.offerPrice == null || widget.selectedPlan?.offerPrice == "0", child: Text('Offer Price: ₹${widget.selectedPlan?.offerPrice ?? '0'}', textAlign: TextAlign.center, style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: Colors.black))),
+                        Offstage(offstage: widget.selectedPlan?.offerPrice != null || widget.selectedPlan?.offerPrice == "0", child: Text('Price: ₹${widget.selectedPlan?.price ?? ''}', textAlign: TextAlign.center, style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: Colors.black))),
+                        Offstage(offstage: widget.selectedPlan?.offerPrice != "0", child: Text('Price: ₹${widget.selectedPlan?.price ?? ''}', textAlign: TextAlign.center, style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: Colors.black))),
+
+                        SizedBox(height: 14),
+                        Text("Validity: ${widget.selectedPlan?.validityCount ?? ''} ${validityCheck(widget.selectedPlan?.validityUnit)}", textAlign: TextAlign.center, style: TextStyle(fontSize: 14, color: Colors.grey.shade800, fontWeight: FontWeight.w700)),
+                        SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: Colors.green, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.purple.shade600, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                             onPressed:
                                 state is PurchaseLoading
                                     ? null
@@ -117,13 +133,13 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                                       var name = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
                                       var contact = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.mobile.toString() ?? '';
                                       var email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? '';
+                                      double price = double.parse("${widget.selectedPlan?.offerPrice ?? widget.selectedPlan?.price}");
                                       var options = {
                                         'key': PaymentKeyID.keyID,
-                                        'amount': int.parse("${widget.selectedPlan?.price}") * 100,
+                                        'amount': price * 100,
                                         'currency': 'INR',
                                         'name': name,
                                         'description': widget.selectedPlan?.planName ?? '',
-
                                         'prefill': {'contact': contact, 'email': email},
                                       };
                                       // 'timeout': 60, // in seconds

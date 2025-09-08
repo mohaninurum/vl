@@ -31,10 +31,15 @@ class _AppDrawerState extends State<AppDrawer> {
   String? language = "";
 
   String toClassName(String input) {
-    return input.split(RegExp(r'[_\s]+')).map((word) => word[0].toUpperCase() + word.substring(1)).join();
+    if (input.isNotEmpty) {
+      return input.split(RegExp(r'[_\s]+')).where((word) => word.isNotEmpty).map((word) => word[0].toUpperCase() + word.substring(1)).join();
+    } else {
+      return "";
+    }
   }
 
   isDateExpired(String inputDate) {
+    print(">>>>>>>>>$inputDate");
     // Parse the input date string (ensure it's in a valid format)
     DateTime expiryDate = DateTime.parse(inputDate);
 
@@ -213,7 +218,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            TextButton(onPressed: () {}, child: Text("Want to become an iPrep Affiliate?", style: TextStyle(color: Colors.blue))),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ShareScreen()));
+              },
+              child: Text("Want to become an VL Affiliate?", style: TextStyle(color: Colors.blue)),
+            ),
             Text(" Version: 1.0.0", style: TextStyle(color: Colors.grey)),
           ],
         ),

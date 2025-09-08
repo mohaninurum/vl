@@ -112,7 +112,7 @@ class _AdvancedAutoBannerSliderState extends State<AdvancedAutoBannerSlider> {
                         // Gradient Overlay
                         Container(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.black.withOpacity(0.7)]))),
                         // Text Content
-                        Positioned(bottom: 20, left: 20, right: 20, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.banners[index].title, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)), SizedBox(height: 4), Text(widget.banners[index].title, style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 16))])),
+                        // Positioned(bottom: 20, left: 20, right: 20, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.banners[index].title, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)), SizedBox(height: 4), Text(widget.banners[index].title, style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 16))])),
                         // Pause Indicator
                         if (_isPaused) Positioned(top: 10, right: 10, child: Container(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: Colors.black.withOpacity(0.7), borderRadius: BorderRadius.circular(12)), child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.pause, color: Colors.white, size: 16), SizedBox(width: 4), Text('Paused', style: TextStyle(color: Colors.white, fontSize: 12))]))),
                       ],
