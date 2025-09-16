@@ -29,4 +29,5 @@ class ApiUrls {
   static const String quizDetailUrl = '${baseUrl}quiz/quiz-detail/';
   static const String notificationListUrl = '${baseUrl}users/notification-list';
   static const String subscriptionPlanCancelUrl = '${baseUrl}subscription-plan/cancel-plan/';
+  static const String generateOrderIdUrl = '${baseUrl}subscription-plan/generate-order-id';
 }

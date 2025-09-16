@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.app.visuallearning"
+    namespace = "com.mycompany.vizuaraapp"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
 
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.app.visuallearning"
+        applicationId = "com.mycompany.vizuaraapp"
         minSdk = 23
         targetSdk = 35
         versionCode = flutter.versionCode
@@ -30,10 +30,10 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = "key0"
-            keyPassword = "123456"
+            keyAlias = "upload"
+            keyPassword = "vl2025"
             storeFile = file("key.jks")
-            storePassword = "123456"
+            storePassword = "vl2025"
         }
     }
 

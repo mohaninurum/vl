@@ -119,6 +119,12 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
+  Future<Map<String, dynamic>> getOrderID({body}) {
+    final response = ApiService().post(ApiUrls.generateOrderIdUrl, body);
+    return response;
+  }
+
+  @override
   Future<Map<String, dynamic>> userLogout({body}) {
     final response = ApiService().post(ApiUrls.usersLogoutUrl, body);
     return response;

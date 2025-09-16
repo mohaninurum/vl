@@ -90,7 +90,7 @@ class _AdvancedAutoBannerSliderState extends State<AdvancedAutoBannerSlider> {
               itemBuilder: (context, index) {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 4),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4))]),
+                  // decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4))]),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Stack(
@@ -110,7 +110,7 @@ class _AdvancedAutoBannerSliderState extends State<AdvancedAutoBannerSlider> {
                         //   },
                         // ),
                         // Gradient Overlay
-                        Container(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.black.withOpacity(0.7)]))),
+                        // Container(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.black.withOpacity(0.7)]))),
                         // Text Content
                         // Positioned(bottom: 20, left: 20, right: 20, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.banners[index].title, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)), SizedBox(height: 4), Text(widget.banners[index].title, style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 16))])),
                         // Pause Indicator

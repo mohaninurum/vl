@@ -1,4 +1,4 @@
-package com.app.visuallearning
+package com.mycompany.vizuaraapp
 
 import io.flutter.embedding.android.FlutterActivity
 

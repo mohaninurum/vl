@@ -43,7 +43,7 @@ class YPlayerController {
   String? _currentVideoId;
 
   /// Current selected quality (resolution height) - Default to 360p
-  int _currentQuality = 360;
+  int _currentQuality = 144;
 
   /// Whether to force the original audio track
   bool _forceOriginalAudio = false;
@@ -116,7 +116,7 @@ class YPlayerController {
 
     // Start network monitoring if auto quality is enabled
     if (_autoQualityEnabled) {
-      _startNetworkMonitoring();
+      // _startNetworkMonitoring();
     }
   }
 
@@ -138,9 +138,9 @@ class YPlayerController {
   set autoQualityEnabled(bool enabled) {
     _autoQualityEnabled = enabled;
     if (enabled) {
-      _startNetworkMonitoring();
+      // _startNetworkMonitoring();
     } else {
-      _stopNetworkMonitoring();
+      // _stopNetworkMonitoring();
     }
   }
 
@@ -399,14 +399,14 @@ class YPlayerController {
   /// Select the best quality for the estimated network speed.
   Future<int> chooseBestQualityForInternet(exp.StreamManifest manifest) async {
     final videoStreams = manifest.videoOnly.toList();
-    if (videoStreams.isEmpty) return 360; // Default to 360p
+    if (videoStreams.isEmpty) return 144; // Default to 360p
 
     // Pick a mid-quality stream for speed test
     final testStream = videoStreams[videoStreams.length ~/ 2];
     final testUrl = testStream.url.toString();
     final estimatedBps = await _estimateNetworkSpeed(testUrl);
 
-    if (estimatedBps == null) return 360; // fallback to 360p
+    if (estimatedBps == null) return 144; // fallback to 360p
 
     // Convert to Mbps for easier calculation
     final estimatedMbps = estimatedBps / (1024 * 1024);
@@ -576,7 +576,7 @@ class YPlayerController {
 
       // Start network monitoring if enabled
       if (_autoQualityEnabled) {
-        _startNetworkMonitoring();
+        // _startNetworkMonitoring();
       }
 
       if (!kReleaseMode) {
@@ -601,7 +601,7 @@ class YPlayerController {
       debugPrint('YPlayerController: Playback completed: $completed');
       if (completed) {
         _setStatus(YPlayerStatus.stopped);
-        _stopNetworkMonitoring(); // Stop monitoring when playback completes
+        // _stopNetworkMonitoring(); // Stop monitoring when playback completes
       }
     });
 
@@ -646,7 +646,7 @@ class YPlayerController {
 
     // Resume network monitoring if auto quality is enabled
     if (_autoQualityEnabled && (_networkMonitorTimer == null || !_networkMonitorTimer!.isActive)) {
-      _startNetworkMonitoring();
+      // _startNetworkMonitoring();
     }
   }
 
@@ -665,7 +665,7 @@ class YPlayerController {
   /// Stops video playback and resets to the beginning.
   Future<void> stop() async {
     await _player.stop();
-    _stopNetworkMonitoring(); // Stop monitoring when manually stopped
+    // _stopNetworkMonitoring(); // Stop monitoring when manually stopped
   }
 
   /// Gets the current playback position.
@@ -690,7 +690,7 @@ class YPlayerController {
   /// Disposes of all resources used by the controller.
   void dispose() {
     debugPrint('YPlayerController: Disposing');
-    _stopNetworkMonitoring();
+    // _stopNetworkMonitoring();
     _player.dispose();
     _yt.close();
     statusNotifier.dispose();
@@ -699,6 +699,7 @@ class YPlayerController {
   }
 }
 
+////////////////////////////////////////////////////
 // import 'dart:io'; // Add for HTTP requests
 // import 'dart:math'; // For min/max
 //

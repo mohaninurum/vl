@@ -12,6 +12,7 @@ import '../../auth/login_screen/blocs/login_bloc.dart';
 import '../../auth/login_screen/blocs/login_event.dart';
 
 class PurchaseBloc extends Bloc<PurchaseEvent, PurchaseState> {
+  var orderID = '';
   PurchaseBloc() : super(PurchaseInitial()) {
     on<StartPurchase>((event, emit) async {
       emit(PurchaseLoading());
@@ -32,6 +33,26 @@ class PurchaseBloc extends Bloc<PurchaseEvent, PurchaseState> {
         emit(PurchaseFailure(error: 'Something went wrong!'));
       } catch (e) {
         emit(PurchaseFailure(error: 'Something went wrong!'));
+      }
+    });
+
+    on<GetOrderID>((event, emit) async {
+      try {
+        Map<String, dynamic> body = {"amount": event.amount, 'auth': event.token};
+        final responce = await ApiRepositoryImpl().getOrderID(body: body);
+
+        // OrderResponse responseOderID = OrderResponse.fromJson(responce);
+        if (responce["status"] == true) {
+          print("oderId generate");
+          print(responce["data"]["id"]);
+          emit(GetOrderIDSuccess(orderID: responce["data"]["id"]));
+        } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(responce["message"])));
+        }
+      } on TimeoutException catch (e) {
+        ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Request timed out. Please try again later.')));
+      } catch (e) {
+        ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Something went wrong!')));
       }
     });
   }

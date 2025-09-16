@@ -169,3 +169,5 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)), home: SplashScreen());
   }
 }
+
+//com.app.visuallearning

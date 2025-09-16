@@ -24,9 +24,12 @@ class PurchaseScreen extends StatefulWidget {
 
 class _PurchaseScreenState extends State<PurchaseScreen> {
   final _razorpay = Razorpay();
-
+  var token = '';
+  var id = '';
   @override
   void initState() {
+    token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
+    id = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString() ?? '';
     initializingRazorpay();
     super.initState();
   }
@@ -42,8 +45,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
     print("orderId: ${response.orderId}");
     print("paymentId: ${response.paymentId}");
     print("signature: ${response.signature.toString()}");
-    var token = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.token.toString() ?? '';
-    var id = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.userId.toString() ?? '';
+
     BlocProvider.of<PurchaseBloc>(context).add(StartPurchase(planId: "${widget.selectedPlan?.planId}", userId: id, token: token, context: context));
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.orderId ?? '')));
   }
@@ -88,6 +90,32 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen())); // or go to another screen
           } else if (state is PurchaseFailure) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+          } else if (state is GetOrderIDSuccess) {
+            var name = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
+            var contact = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.mobile.toString() ?? '';
+            var email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? '';
+            double price = double.parse("${widget.selectedPlan?.offerPrice ?? widget.selectedPlan?.price}");
+            var orderid = BlocProvider.of<PurchaseBloc>(context).orderID;
+            var options = {
+              'key': PaymentKeyID.keyID,
+              'amount': price * 100,
+              'currency': 'INR',
+              'name': name,
+              'order_id': state.orderID,
+              'description': widget.selectedPlan?.planName ?? '',
+              'prefill': {'contact': contact, 'email': email},
+            };
+            // 'timeout': 60, // in seconds
+            // 'order_id': 'order_N1x4gRm8shFKdp', // Generate order_id using Orders API
+            log(options.toString());
+            if (state.orderID.toString().isNotEmpty) {
+              try {
+                _razorpay.open(options);
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Something went wrong!')));
+                debugPrint('Error Payment failed: $e');
+              }
+            }
           }
         },
         builder: (context, state) {
@@ -130,26 +158,16 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                                 state is PurchaseLoading
                                     ? null
                                     : () {
-                                      var name = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.fullName.toString() ?? '';
-                                      var contact = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.mobile.toString() ?? '';
-                                      var email = BlocProvider.of<LoginBloc>(context).loginResponse?.user?.email.toString() ?? '';
-                                      double price = double.parse("${widget.selectedPlan?.offerPrice ?? widget.selectedPlan?.price}");
-                                      var options = {
-                                        'key': PaymentKeyID.keyID,
-                                        'amount': price * 100,
-                                        'currency': 'INR',
-                                        'name': name,
-                                        'description': widget.selectedPlan?.planName ?? '',
-                                        'prefill': {'contact': contact, 'email': email},
-                                      };
-                                      // 'timeout': 60, // in seconds
-                                      // 'order_id': 'order_N1x4gRm8shFKdp', // Generate order_id using Orders API
-                                      log(options.toString());
-                                      try {
-                                        _razorpay.open(options);
-                                      } catch (e) {
-                                        debugPrint('Error Payment failed: $e');
+                                      int price = 0;
+                                      if (widget.selectedPlan?.offerPrice == '0' || widget.selectedPlan?.offerPrice == null) {
+                                        price = int.parse("${widget.selectedPlan?.price}");
+                                      } else {
+                                        price = int.parse("${widget.selectedPlan?.offerPrice}");
                                       }
+
+                                      print(price);
+
+                                      BlocProvider.of<PurchaseBloc>(context).add(GetOrderID(amount: price.toString(), token: token, context: context));
                                     },
                             child: state is PurchaseLoading ? CircularProgressIndicator(color: Colors.white) : Text("Get", style: TextStyle(fontSize: 16, color: Colors.white)),
                           ),
