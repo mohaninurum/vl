@@ -168,6 +168,7 @@ import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
 import '../../../constant/widgets/video_file_player.dart';
+import '../../flutter_flow_youtube_player.dart';
 import '../../video_content_detail/video_content_detail_screen/full_screen_video.dart';
 import '../../widgets/appBarWidget.dart';
 
@@ -322,47 +323,67 @@ class _VideoFavoriteDetailScreenState extends State<VideoFavoriteDetailScreen> {
     final media = MediaQuery.of(context).size;
 
     return isYouTube
-        ? Scaffold(
-          appBar: AppBarWidget(),
-          backgroundColor: const Color(0xFFF2F5FA),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: media.height * 0.01),
-              child: Column(
-                children: [
-                  // Info card
-                  Container(alignment: Alignment.center, width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.screen, style: TextStyle(color: Colors.white))])),
-                  SizedBox(height: media.height * 0.03),
-
-                  // Video player
-                  YouPlayer(yUrl: widget.videoUrl),
-                  // Row(
-                  //   children: [
-                  //     const Text("Player Size:"),
-                  //     const SizedBox(width: 10),
-                  //     DropdownButton<String>(
-                  //       value: _selectedSize,
-                  //       items:
-                  //           sizeOptions.keys.map((label) {
-                  //             return DropdownMenuItem(value: label, child: Text(label));
-                  //           }).toList(),
-                  //       onChanged: (val) {
-                  //         if (val != null) {
-                  //           setState(() => _selectedSize = val);
-                  //           _setPlayerSize(val);
-                  //           print(_selectedSize);
-                  //         }
-                  //       },
-                  //     ),
-                  //   ],
-                  // ),
-                  SizedBox(height: media.height * 0.035),
-
-                  // Description
-                  Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-                  SizedBox(height: media.height * 0.02),
-                  SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-                ],
+        ? YoutubeFullScreenWrapper(//YoutubeFullScreenWrapper
+          child: Scaffold(
+            appBar: AppBarWidget(),
+            backgroundColor: const Color(0xFFF2F5FA),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: media.height * 0.01),
+                child: Column(
+                  children: [
+                    // Info card
+                    Container(alignment: Alignment.center, width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)), padding: EdgeInsets.all(media.width * 0.04), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.screen, style: TextStyle(color: Colors.white))])),
+                    SizedBox(height: media.height * 0.03),
+          
+                    // Video player
+                    // YouPlayer(yUrl: widget.videoUrl),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 20.0, 0.0, 20.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        clipBehavior: Clip.antiAlias,
+                        child: FlutterFlowYoutubePlayer(
+                          url: widget.videoUrl,
+                          autoPlay: true,
+                          looping: true,
+                          mute: false,
+                          showControls: true,
+                          showFullScreen: true,
+                          strictRelatedVideos: true,
+          
+                        ),
+                      ),
+                    ),
+                    // Row(
+                    //   children: [
+                    //     const Text("Player Size:"),
+                    //     const SizedBox(width: 10),
+                    //     DropdownButton<String>(
+                    //       value: _selectedSize,
+                    //       items:
+                    //           sizeOptions.keys.map((label) {
+                    //             return DropdownMenuItem(value: label, child: Text(label));
+                    //           }).toList(),
+                    //       onChanged: (val) {
+                    //         if (val != null) {
+                    //           setState(() => _selectedSize = val);
+                    //           _setPlayerSize(val);
+                    //           print(_selectedSize);
+                    //         }
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
+                    SizedBox(height: media.height * 0.035),
+          
+                    // Description
+                    Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+                    SizedBox(height: media.height * 0.02),
+                    SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+                  ],
+                ),
               ),
             ),
           ),

@@ -43,7 +43,7 @@ class YPlayerController {
   String? _currentVideoId;
 
   /// Current selected quality (resolution height) - Default to 360p
-  int _currentQuality = 144;
+  int _currentQuality = 720;
 
   /// Whether to force the original audio track
   bool _forceOriginalAudio = false;
@@ -399,14 +399,14 @@ class YPlayerController {
   /// Select the best quality for the estimated network speed.
   Future<int> chooseBestQualityForInternet(exp.StreamManifest manifest) async {
     final videoStreams = manifest.videoOnly.toList();
-    if (videoStreams.isEmpty) return 144; // Default to 360p
+    if (videoStreams.isEmpty) return 720; // Default to 360p
 
     // Pick a mid-quality stream for speed test
     final testStream = videoStreams[videoStreams.length ~/ 2];
     final testUrl = testStream.url.toString();
     final estimatedBps = await _estimateNetworkSpeed(testUrl);
 
-    if (estimatedBps == null) return 144; // fallback to 360p
+    if (estimatedBps == null) return 720; // fallback to 360p
 
     // Convert to Mbps for easier calculation
     final estimatedMbps = estimatedBps / (1024 * 1024);

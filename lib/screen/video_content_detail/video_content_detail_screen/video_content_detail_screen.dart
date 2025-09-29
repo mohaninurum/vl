@@ -6,7 +6,10 @@ import '../../../constant/app_colors/app_colors.dart';
 import '../../../constant/app_string/app_string.dart';
 import '../../../constant/app_text_colors/app_text_colors.dart';
 import '../../../constant/widgets/video_file_player.dart';
+// import '../../../constant/widgets/you_player.dart';
 import '../../../constant/widgets/you_player.dart';
+import '../../../youtube_player.dart';
+import '../../flutter_flow_youtube_player.dart';
 import '../../widgets/appBarWidget.dart';
 import 'full_screen_video.dart';
 
@@ -26,7 +29,7 @@ class VideoContentDetailScreen extends StatefulWidget {
 }
 
 class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
-  late YoutubePlayerController _controller;
+  // late YoutubePlayerController _controller;
   VideoPlayerController? _videoController;
   bool _isPlayerReady = false;
   bool isYouTube = false;
@@ -48,7 +51,7 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     _videoController?.dispose();
     super.dispose();
   }
@@ -111,50 +114,158 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-
+ print("youuuuuuuuuuuuuuuuuu${widget.videoUrl}");
     return isYouTube
-        ? SafeArea(
-          child: Scaffold(
-            appBar: AppBarWidget(),
-            backgroundColor: const Color(0xFFF2F5FA),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
-                child: Column(
-                  children: [
-                    // Info card
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-                      padding: EdgeInsets.all(media.width * 0.04),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //
-                          _buildInfoRow("Class :", widget.selectClassName), //
-                          _buildInfoRow("Chapter :", widget.selectChapterName),
-                          _buildInfoRow("Topic :", widget.selectTopicName), //
-                          _buildInfoRow("Language :", widget.language),
-                        ],
+        ?    YoutubeFullScreenWrapper(   // <-- ADD THIS WRAPPER YoutubeFullScreenWrapper
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBarWidget(),
+          backgroundColor: const Color(0xFFF2F5FA),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: media.width * 0.04,
+                vertical: media.height * 0.01,
+              ),
+              child: Column(
+                children: [
+                  // Info card
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: LinearGradient(
+                        colors: [AppColors.pramarycolor, AppColors.pramarycolor1],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
                     ),
-                    SizedBox(height: media.height * 0.03),
+                    padding: EdgeInsets.all(media.width * 0.04),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildInfoRow("Class :", widget.selectClassName),
+                        _buildInfoRow("Chapter :", widget.selectChapterName),
+                        _buildInfoRow("Topic :", widget.selectTopicName),
+                        _buildInfoRow("Language :", widget.language),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: media.height * 0.03),
 
-                    // Video player
-                    YouPlayer(yUrl: widget.videoUrl),
+                  // Video player
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                       clipBehavior: Clip.antiAlias,
+                      child: FlutterFlowYoutubePlayer(
+                        url: widget.videoUrl,
+                        autoPlay: true,
+                        looping: true,
+                        mute: false,
+                        showControls: true,
+                        showFullScreen: true,
+                        strictRelatedVideos: true,
+                      ),
+                    ),
+                  ),
 
-                    SizedBox(height: media.height * 0.035),
+                  SizedBox(height: media.height * 0.035),
 
-                    // Description
-                    Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
-                    SizedBox(height: media.height * 0.02),
-                    SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
-                  ],
-                ),
+                  // Description
+                  Row(
+                    children: [
+                      Text(
+                        AppString.descriptionText,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.appBlack54Color,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: media.height * 0.02),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      widget.descriptions,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.appBlack54Color,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        )
+        ),
+      ),
+    )
+    // SafeArea(
+    //       child: Scaffold(
+    //         appBar: AppBarWidget(),
+    //         backgroundColor: const Color(0xFFF2F5FA),
+    //         body: SafeArea(
+    //           child: SingleChildScrollView(
+    //             padding: EdgeInsets.symmetric(horizontal: media.width * 0.04, vertical: media.height * 0.01),
+    //             child: Column(
+    //               children: [
+    //                 // Info card
+    //                 Container(
+    //                   width: double.infinity,
+    //                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: [AppColors.pramarycolor, AppColors.pramarycolor1], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+    //                   padding: EdgeInsets.all(media.width * 0.04),
+    //                   child: Column(
+    //                     crossAxisAlignment: CrossAxisAlignment.start,
+    //                     children: [
+    //                       //
+    //                       _buildInfoRow("Class :", widget.selectClassName), //
+    //                       _buildInfoRow("Chapter :", widget.selectChapterName),
+    //                       _buildInfoRow("Topic :", widget.selectTopicName), //
+    //                       _buildInfoRow("Language :", widget.language),
+    //                     ],
+    //                   ),
+    //                 ),
+    //                 SizedBox(height: media.height * 0.03),
+    //
+    //                 // Video player
+    //                 Padding(
+    //                   padding: EdgeInsetsDirectional.fromSTEB(
+    //                       0.0, 20.0, 0.0, 20.0),
+    //                   child:  ClipRRect(
+    //                     borderRadius: BorderRadius.circular(10),
+    //                     clipBehavior: Clip.antiAlias,
+    //                     child: FlutterFlowYoutubePlayer(
+    //                       url: widget.videoUrl,
+    //                       autoPlay: true,
+    //                       looping: true,
+    //                       mute: false,
+    //                       showControls: true,
+    //                       showFullScreen: true,
+    //                       strictRelatedVideos: true,
+    //
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 // YouPlayer(yUrl: widget.videoUrl),
+    //
+    //                 SizedBox(height: media.height * 0.035),
+    //
+    //                 // Description
+    //                 Row(children: [Text(AppString.descriptionText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))]),
+    //                 SizedBox(height: media.height * 0.02),
+    //                 SizedBox(width: double.infinity, child: Text(widget.descriptions, overflow: TextOverflow.clip, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.appBlack54Color))),
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //     )
         : Scaffold(
           appBar: AppBarWidget(),
           backgroundColor: const Color(0xFFF2F5FA),
@@ -214,3 +325,11 @@ class _VideoContentDetailScreenState extends State<VideoContentDetailScreen> {
         );
   }
 }
+
+
+//
+// SystemChrome.setPreferredOrientations([
+// DeviceOrientation.landscapeLeft,
+// DeviceOrientation.landscapeRight,
+// ]);
+// SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

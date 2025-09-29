@@ -118,9 +118,9 @@ class YPlayerState extends State<YPlayer> with SingleTickerProviderStateMixin {
 
   /// Initializes the video player with the provided YouTube URL and settings.
   void _initializePlayer() async {
-    try {
+    try {//aspectRatio: widget.aspectRatio,
       // Attempt to initialize the player with the given YouTube URL and settings
-      await _controller.initialize(widget.youtubeUrl, autoPlay: widget.autoPlay, aspectRatio: widget.aspectRatio, chooseBestQuality: widget.chooseBestQuality, forceOriginalAudio: widget.forceOriginalAudio);
+      await _controller.initialize(widget.youtubeUrl, autoPlay: widget.autoPlay, chooseBestQuality: widget.chooseBestQuality, forceOriginalAudio: widget.forceOriginalAudio);
       if (mounted) {
         // If the widget is still in the tree, update the state
         setState(() {
