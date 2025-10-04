@@ -24,22 +24,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -795,10 +781,8 @@ class _FlutterFlowYoutubePlayerState extends State<FlutterFlowYoutubePlayer>
       _controller = _youtubeFullScreenControllerMap[_videoId]!;
       _youtubeFullScreenControllerMap.clear();
     } else {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
+      // Don't set orientations here - keep device in portrait for normal playback
+      // Orientations will only be set when fullscreen button is tapped
       _controller = YoutubePlayerController.fromVideoId(
         videoId: videoId,
         autoPlay: widget.autoPlay,
@@ -806,7 +790,7 @@ class _FlutterFlowYoutubePlayerState extends State<FlutterFlowYoutubePlayer>
           mute: widget.mute,
           loop: widget.looping,
           showControls: widget.showControls,
-          showFullscreenButton: widget.showFullScreen,
+          showFullscreenButton: false, // Always hide native fullscreen button since we have our own
           strictRelatedVideos: widget.strictRelatedVideos,
         ),
       );
@@ -852,17 +836,75 @@ class _FlutterFlowYoutubePlayerState extends State<FlutterFlowYoutubePlayer>
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: height,
-    width: width,
-    child:  YoutubePlayerScaffold(
-      controller: _controller!,
-      builder: (_, player) => player,
-      autoFullScreen: false,
-      gestureRecognizers: const <Factory<TapGestureRecognizer>>{},
-      enableFullScreenOnVerticalDrag: false,
-    )
-  );
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Video Player
+        SizedBox(
+          height: height,
+          width: width,
+          child: YoutubePlayerScaffold(
+            controller: _controller!,
+            builder: (_, player) => player,
+            autoFullScreen: false,
+            gestureRecognizers: const <Factory<TapGestureRecognizer>>{},
+            enableFullScreenOnVerticalDrag: false,
+          ),
+        ),
+        
+        // Fullscreen Button below video - only show if showFullScreen is true
+        if (widget.showFullScreen)
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: GestureDetector(
+              onTap: () {
+                _launchLandscapeFullscreen(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey.withOpacity(0.5), width: 1),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.fullscreen,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'Fullscreen',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  void _launchLandscapeFullscreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (newContext) => LandscapeFullscreenPage(
+          videoId: _videoId!,
+          videoUrl: widget.url,
+        ),
+      ),
+    );
+  }
 }
 
 class YoutubeFullScreenWrapper extends StatefulWidget {
@@ -916,11 +958,12 @@ class _YoutubeFullScreenWrapperState extends State<YoutubeFullScreenWrapper> {
   @override
   Widget build(BuildContext context) => _controller != null
       ? YoutubePlayerScaffold(
-    controller: _controller!,
-    builder: (_, player) => player,
-    enableFullScreenOnVerticalDrag: false,
-  )
+          controller: _controller!,
+          builder: (_, player) => player,
+          enableFullScreenOnVerticalDrag: false,
+        )
       : widget.child;
+
 }
 
 String? _convertUrlToId(String url, {bool trimWhitespaces = true}) {
@@ -940,6 +983,85 @@ String? _convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (match != null && match.groupCount >= 1) return match.group(1);
   }
   return null;
+}
+
+/// Simple landscape fullscreen YouTube player
+class LandscapeFullscreenPage extends StatefulWidget {
+  final String videoId;
+  final String videoUrl;
+  
+  const LandscapeFullscreenPage({
+    super.key,
+    required this.videoId,
+    required this.videoUrl,
+  });
+  
+  @override
+  State<LandscapeFullscreenPage> createState() => _LandscapeFullscreenPageState();
+}
+
+class _LandscapeFullscreenPageState extends State<LandscapeFullscreenPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Force landscape left orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+    ]);
+  }
+  
+  @override
+  void dispose() {
+    // Return to portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          'Fullscreen Video',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: YoutubePlayerScaffold(
+            controller: YoutubePlayerController.fromVideoId(
+              videoId: widget.videoId,
+              autoPlay: true,
+              params: const YoutubePlayerParams(
+                showControls: true,
+                showFullscreenButton: false,
+                strictRelatedVideos: true,
+              ),
+            ),
+            builder: (_, player) => player,
+            enableFullScreenOnVerticalDrag: false,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 
