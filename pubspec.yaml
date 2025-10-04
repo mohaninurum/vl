@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.3.3+23
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.7.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  youtube_player_iframe:
+    path: packages/youtube_player_iframe
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -51,7 +54,7 @@ dependencies:
   flutter_native_splash: ^2.4.6
   firebase_messaging: ^15.2.9
   flutter_local_notifications: ^19.0.0
-  youtube_player_iframe: ^5.2.1
+  #youtube_player_iframe: ^5.2.1
   youtube_explode_dart: ^2.5.1
   youtube_player_embed: ^1.6.4
   last_pod_player: ^0.0.8
