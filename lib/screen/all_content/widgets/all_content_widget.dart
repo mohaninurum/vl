@@ -102,9 +102,7 @@ class _ClassesScreenState extends State<AllContentWidget> with SingleTickerProvi
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Chapter : ", style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 15, fontWeight: FontWeight.w600)),
-                        Padding(padding: const EdgeInsets.only(top: 3), child: SizedBox(width:
-                        media.width * 0.48, child: Column(mainAxisAlignment: MainAxisAlignment
-                            .end, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]))),
+                        Padding(padding: const EdgeInsets.only(top: 3), child: SizedBox(width: media.width * 0.5, child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [Text(widget.selectChapterName, style: TextStyle(color: AppTextColors.appTextColorWhite, fontSize: 11, fontWeight: FontWeight.w500))]))),
                       ],
                     ),
                   ],
