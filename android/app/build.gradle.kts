@@ -32,7 +32,7 @@ android {
         create("release") {
             keyAlias = "upload"
             keyPassword = "vl2025"
-            storeFile = file("key.jks")
+            storeFile = file("upload-keystore.jks")
             storePassword = "vl2025"
         }
     }
